@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Joueurs</title>
+    <meta
+      name="description"
+      content="Dashboard joueurs avec classement par stats et comparaison radar."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="assets/players.js"></script>
+  </head>
+  <body>
+    <div class="noise-layer" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="top-nav card">
+        <a class="brand" href="index.html">Pastel Football Data</a>
+        <nav class="top-nav-links" aria-label="Navigation">
+          <a class="is-active" href="players.html">Joueurs</a>
+          <a href="teams.html">Equipes</a>
+        </nav>
+      </header>
+
+      <section class="page-title card reveal">
+        <p class="chip">Page Joueurs</p>
+        <h1>Classements et comparaison radar</h1>
+        <p id="playersMetaText">
+          Chargement des donnees joueurs...
+        </p>
+      </section>
+
+      <main class="dashboard-layout">
+        <aside class="panel card reveal delay-1">
+          <h2>Filtres</h2>
+          <label class="field">
+            <span>Recherche</span>
+            <input
+              id="playerSearch"
+              type="search"
+              placeholder="Nom, club, poste"
+              autocomplete="off"
+            />
+          </label>
+
+          <label class="field">
+            <span>Poste</span>
+            <select id="positionFilter"></select>
+          </label>
+
+          <label class="field">
+            <span>Club</span>
+            <select id="clubFilter"></select>
+          </label>
+
+          <label class="field">
+            <span>Minutes minimum</span>
+            <input id="minMinutes" type="number" min="0" step="30" value="180" />
+          </label>
+
+          <label class="field">
+            <span>Tri classement</span>
+            <select id="rankingMetric"></select>
+          </label>
+
+          <label class="field">
+            <span>Lignes du tableau</span>
+            <select id="tableLimit">
+              <option value="25">Top 25</option>
+              <option value="50" selected>Top 50</option>
+              <option value="100">Top 100</option>
+            </select>
+          </label>
+        </aside>
+
+        <section class="stacked">
+          <article class="card reveal delay-1">
+            <div class="card-head">
+              <h2>Classement Joueurs</h2>
+              <p id="playersCountText">0 joueurs affiches</p>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Joueur</th>
+                    <th>Poste</th>
+                    <th>Club</th>
+                    <th>Min</th>
+                    <th>Matchs</th>
+                    <th id="rankingMetricHead">Metrique</th>
+                  </tr>
+                </thead>
+                <tbody id="playersTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card reveal delay-2">
+            <div class="card-head">
+              <h2>Comparer deux joueurs</h2>
+              <p>Radar sur metriques /90</p>
+            </div>
+            <div class="compare-controls">
+              <label class="field">
+                <span>Joueur A</span>
+                <select id="comparePlayerA"></select>
+              </label>
+              <label class="field">
+                <span>Joueur B</span>
+                <select id="comparePlayerB"></select>
+              </label>
+            </div>
+            <div class="radar-panel">
+              <canvas id="playersRadar"></canvas>
+            </div>
+            <div class="legend-list" id="playersLegend"></div>
+            <div class="metric-grid" id="playersMetricGrid"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

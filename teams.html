@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Equipes</title>
+    <meta
+      name="description"
+      content="Dashboard equipes par championnat avec classements et comparaison radar."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="assets/teams.js"></script>
+  </head>
+  <body>
+    <div class="noise-layer" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="top-nav card">
+        <a class="brand" href="index.html">Pastel Football Data</a>
+        <nav class="top-nav-links" aria-label="Navigation">
+          <a href="players.html">Joueurs</a>
+          <a class="is-active" href="teams.html">Equipes</a>
+        </nav>
+      </header>
+
+      <section class="page-title card reveal">
+        <p class="chip">Page Equipes</p>
+        <h1>Dashboard par championnat</h1>
+        <p id="teamsMetaText">
+          Chargement des donnees equipes...
+        </p>
+      </section>
+
+      <main class="dashboard-layout">
+        <aside class="panel card reveal delay-1">
+          <h2>Configuration</h2>
+          <label class="field">
+            <span>Championnat</span>
+            <select id="competitionFilter"></select>
+          </label>
+
+          <label class="field">
+            <span>Tri classement</span>
+            <select id="teamSortMetric"></select>
+          </label>
+
+          <label class="field">
+            <span>Lignes du tableau</span>
+            <select id="teamsTableLimit">
+              <option value="10">Top 10</option>
+              <option value="20" selected>Top 20</option>
+              <option value="40">Top 40</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Equipe A</span>
+            <select id="compareTeamA"></select>
+          </label>
+
+          <label class="field">
+            <span>Equipe B</span>
+            <select id="compareTeamB"></select>
+          </label>
+        </aside>
+
+        <section class="stacked">
+          <article class="card reveal delay-1">
+            <div class="card-head">
+              <h2>Vue Championnat</h2>
+              <p id="teamsCountText">0 equipes</p>
+            </div>
+            <div class="kpi-grid">
+              <div class="kpi-card" id="leaderCard"></div>
+              <div class="kpi-card" id="attackCard"></div>
+              <div class="kpi-card" id="defenseCard"></div>
+              <div class="kpi-card" id="cleanSheetCard"></div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Equipe</th>
+                    <th>Pts</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GF</th>
+                    <th>GA</th>
+                    <th>GD</th>
+                    <th>CS%</th>
+                  </tr>
+                </thead>
+                <tbody id="teamsTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card reveal delay-2">
+            <div class="card-head">
+              <h2>Comparer deux equipes</h2>
+              <p>Radar forme recente</p>
+            </div>
+            <div class="radar-panel">
+              <canvas id="teamsRadar"></canvas>
+            </div>
+            <div class="legend-list" id="teamsLegend"></div>
+            <div class="metric-grid" id="teamsMetricGrid"></div>
+            <div class="duel-cards" id="teamsDuelCards"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

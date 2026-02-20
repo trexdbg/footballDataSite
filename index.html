@@ -3,147 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pastel Pitch Lab</title>
+    <title>Pastel Football Dashboard</title>
     <meta
       name="description"
-      content="Comparateur de joueurs de football base sur des fichiers parquet, avec radars multi-modes."
+      content="Dashboard football en 2 pages: joueurs et equipes, avec classements et comparaison radar."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Sora:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
-    <script defer src="assets/app.js"></script>
   </head>
-  <body>
-    <div class="ambient" aria-hidden="true">
-      <span class="blob blob-a"></span>
-      <span class="blob blob-b"></span>
-      <span class="blob blob-c"></span>
+  <body class="landing-page">
+    <div class="noise-layer" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="top-nav card">
+        <a class="brand" href="index.html">Pastel Football Data</a>
+        <nav class="top-nav-links" aria-label="Navigation">
+          <a href="players.html">Joueurs</a>
+          <a href="teams.html">Equipes</a>
+        </nav>
+      </header>
+
+      <main class="landing-layout">
+        <section class="hero-panel card reveal">
+          <p class="chip">Dashboard statique</p>
+          <h1>Analyse joueurs et equipes depuis deux JSON</h1>
+          <p>
+            Explore les performances, trie les classements, compare les profils
+            avec des radars et navigue par championnat.
+          </p>
+          <div class="hero-tags">
+            <span>players_stats.json</span>
+            <span>teams_stats.json</span>
+            <span>HTML + JavaScript</span>
+          </div>
+        </section>
+
+        <section class="entry-grid">
+          <a class="entry-card card reveal delay-1" href="players.html">
+            <h2>Page Joueurs</h2>
+            <p>
+              Classements par metrique, filtres avances, comparaison de deux
+              joueurs et radar de profil.
+            </p>
+            <span>Ouvrir le dashboard joueurs</span>
+          </a>
+
+          <a class="entry-card card reveal delay-2" href="teams.html">
+            <h2>Page Equipes</h2>
+            <p>
+              Dashboard par championnat, top equipes, table complete et duel
+              equipe vs equipe.
+            </p>
+            <span>Ouvrir le dashboard equipes</span>
+          </a>
+        </section>
+      </main>
     </div>
-
-    <header class="hero">
-      <div>
-        <p class="eyebrow">GitHub Pages Football Analytics</p>
-        <h1>Pastel Pitch Lab</h1>
-        <p class="hero-subtitle">
-          Compare deux joueurs et explore leur profil avec des radars creatifs,
-          des tendances de forme et une lecture rapide des points forts.
-        </p>
-      </div>
-      <div class="hero-meta">
-        <div class="meta-pill">
-          <span id="playerCount">-</span>
-          <small>joueurs</small>
-        </div>
-        <div class="meta-pill">
-          <span id="generatedAt">-</span>
-          <small>mise a jour</small>
-        </div>
-      </div>
-    </header>
-
-    <main class="layout">
-      <aside class="card controls-panel">
-        <h2 class="panel-title">Selection</h2>
-
-        <label class="field">
-          <span>Recherche</span>
-          <input
-            id="searchInput"
-            type="search"
-            placeholder="Nom, club, poste..."
-            autocomplete="off"
-          />
-        </label>
-
-        <div class="field-grid">
-          <label class="field">
-            <span>Poste</span>
-            <select id="positionFilter"></select>
-          </label>
-          <label class="field">
-            <span>Club</span>
-            <select id="clubFilter"></select>
-          </label>
-        </div>
-
-        <label class="field">
-          <span>Joueur A</span>
-          <select id="playerASelect"></select>
-        </label>
-
-        <label class="field">
-          <span>Joueur B</span>
-          <select id="playerBSelect"></select>
-        </label>
-
-        <div class="control-block">
-          <p class="block-title">Mode radar</p>
-          <div id="radarModes" class="segmented-control">
-            <button type="button" data-mode="polygon">Polygon</button>
-            <button type="button" data-mode="bloom">Bloom</button>
-            <button type="button" data-mode="petals">Petals</button>
-          </div>
-        </div>
-
-        <div class="control-block">
-          <p class="block-title">Preset metriques</p>
-          <div id="presetModes" class="segmented-control"></div>
-        </div>
-      </aside>
-
-      <section class="visuals">
-        <article class="card">
-          <div class="card-head">
-            <h2>Radar comparatif</h2>
-            <p id="radarMetricInfo"></p>
-          </div>
-          <div class="canvas-wrap radar-wrap">
-            <canvas id="radarCanvas"></canvas>
-          </div>
-          <div id="radarLegend" class="legend"></div>
-        </article>
-
-        <article class="card">
-          <div class="card-head">
-            <h2>Forme recente</h2>
-            <p>Score sur les 10 derniers matchs connus</p>
-          </div>
-          <div class="canvas-wrap trend-wrap">
-            <canvas id="trendCanvas"></canvas>
-          </div>
-        </article>
-      </section>
-    </main>
-
-    <section class="comparison-grid">
-      <article class="card player-card" id="playerCardA"></article>
-      <article class="card player-card" id="playerCardB"></article>
-
-      <article class="card">
-        <div class="card-head">
-          <h2>Duel de metriques</h2>
-        </div>
-        <div id="metricRows" class="metric-rows"></div>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <h2>Analyse automatique</h2>
-        </div>
-        <ul id="insightList" class="insight-list"></ul>
-      </article>
-    </section>
-
-    <footer class="page-footer">
-      <p>
-        Source: <code>players_kpi.parquet</code> et
-        <code>player_rankings.parquet</code>. Site statique compatible GitHub
-        Pages.
-      </p>
-    </footer>
   </body>
 </html>
