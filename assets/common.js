@@ -159,6 +159,11 @@
       playersByCompetition.get(player.competitionSlug).push(player);
     }
 
+    for (const club of clubs) {
+      const clubPlayers = playersByClub.get(club.slug) || [];
+      club.nextMatchAvailability = buildNextMatchAvailability(club, clubPlayers);
+    }
+
     return {
       generatedAt: String(teamsPayload?.meta?.generated_at || playersPayload?.meta?.generated_at || ""),
       competitions,
@@ -194,6 +199,7 @@
     const club = clubsBySlug.get(clubSlug) || null;
     const competition = clubToCompetition.get(clubSlug) || { slug: "unknown", name: "Hors competition", seasonName: "" };
     const cleanSheets = numberOr(recent.totals.clean_sheet_60, 0);
+    const status = normalizePlayerStatus(row?.status);
 
     return {
       slug: String(row?.slug || ""),
@@ -226,6 +232,7 @@
       },
       recent,
       recentTrend: recent.timeline,
+      status,
       searchText: normalizeText(`${row?.name || ""} ${row?.position || ""} ${club?.name || clubSlug} ${competition.name || ""}`),
     };
   }
@@ -334,11 +341,186 @@
       return null;
     }
     return {
-      date: String(fixture.date || ""),
-      opponentSlug: String(fixture.opponent_slug || ""),
-      homeAway: String(fixture.home_away || ""),
-      score: String(fixture.score || ""),
+      date: String(fixture.date || fixture.match_date || fixture.kickoff_at || fixture.kickoff || ""),
+      opponentSlug: String(fixture.opponent_slug || fixture.opponentSlug || fixture?.opponent?.slug || ""),
+      homeAway: String(fixture.home_away || fixture.homeAway || fixture.venue || ""),
+      score: String(fixture.score || fixture.result || ""),
     };
+  }
+
+  function normalizePlayerStatus(status) {
+    const injuries = Array.isArray(status?.active_injuries) ? status.active_injuries.map((entry) => normalizeInjury(entry)).filter(Boolean) : [];
+    const suspensions = Array.isArray(status?.active_suspensions)
+      ? status.active_suspensions.map((entry) => normalizeSuspension(entry)).filter(Boolean)
+      : [];
+
+    const current = String(status?.current || "").toLowerCase();
+    const isInjured = toBoolean(status?.is_injured) || current === "injured";
+    const isSuspended = toBoolean(status?.is_suspended) || current === "suspended";
+
+    return {
+      current: current || (isInjured ? "injured" : isSuspended ? "suspended" : "available"),
+      isInjured,
+      isSuspended,
+      isRedCardSuspension: toBoolean(status?.is_red_card_suspension),
+      activeInjuries: injuries,
+      activeSuspensions: suspensions,
+    };
+  }
+
+  function normalizeInjury(injury) {
+    if (!injury) {
+      return null;
+    }
+    return {
+      id: String(injury.id || ""),
+      kind: repairText(injury.kind || injury.type || ""),
+      status: repairText(injury.status || ""),
+      details: repairText(injury.details || ""),
+      startDate: String(injury.start_date || injury.startDate || ""),
+      expectedEndDate: String(injury.expected_end_date || injury.end_date || injury.expectedEndDate || ""),
+    };
+  }
+
+  function normalizeSuspension(suspension) {
+    if (!suspension) {
+      return null;
+    }
+    return {
+      id: String(suspension.id || ""),
+      reason: repairText(suspension.reason || ""),
+      kind: repairText(suspension.kind || ""),
+      matches: toNumber(suspension.matches),
+      startDate: String(suspension.start_date || suspension.startDate || ""),
+      endDate: String(suspension.end_date || suspension.endDate || ""),
+      competitionSlug: String(suspension.competition_slug || suspension.competitionSlug || ""),
+      competitionName: repairText(suspension.competition_name || suspension.competitionName || ""),
+    };
+  }
+
+  function buildNextMatchAvailability(club, players) {
+    const fixtureDate = String(club?.nextFixture?.date || "");
+    const competitionSlug = String(club?.competitionSlug || "");
+
+    if (!fixtureDate) {
+      return { injured: [], suspended: [], total: 0 };
+    }
+
+    const injured = [];
+    const suspended = [];
+
+    for (const player of players || []) {
+      const status = player?.status || null;
+      if (!status) {
+        continue;
+      }
+
+      if (status.isInjured) {
+        const injury = selectInjuryForFixture(status.activeInjuries, fixtureDate);
+        if (injury) {
+          injured.push({
+            slug: player.slug,
+            name: player.name,
+            position: player.position,
+            reason: injury.kind || injury.details || "",
+            returnDate: injury.expectedEndDate || "",
+          });
+        }
+      }
+
+      if (status.isSuspended) {
+        const suspension = selectSuspensionForFixture(status.activeSuspensions, fixtureDate, competitionSlug);
+        if (suspension) {
+          suspended.push({
+            slug: player.slug,
+            name: player.name,
+            position: player.position,
+            reason: suspension.reason || suspension.kind || "",
+            matches: suspension.matches,
+            endDate: suspension.endDate || "",
+          });
+        }
+      }
+    }
+
+    injured.sort((a, b) => a.name.localeCompare(b.name));
+    suspended.sort((a, b) => a.name.localeCompare(b.name));
+
+    return {
+      injured,
+      suspended,
+      total: injured.length + suspended.length,
+    };
+  }
+
+  function selectInjuryForFixture(injuries, fixtureDate) {
+    if (!Array.isArray(injuries) || !injuries.length) {
+      return {};
+    }
+
+    const dated = injuries.find((entry) => isDateInRange(fixtureDate, entry.startDate, entry.expectedEndDate));
+    if (dated) {
+      return dated;
+    }
+
+    if (!fixtureDate) {
+      return injuries[0];
+    }
+
+    const withoutDates = injuries.find((entry) => !entry.startDate && !entry.expectedEndDate);
+    return withoutDates || null;
+  }
+
+  function selectSuspensionForFixture(suspensions, fixtureDate, competitionSlug) {
+    if (!Array.isArray(suspensions) || !suspensions.length) {
+      return {};
+    }
+
+    const competitionScoped = suspensions.filter((entry) => !entry.competitionSlug || !competitionSlug || entry.competitionSlug === competitionSlug);
+    const pool = competitionScoped.length ? competitionScoped : suspensions;
+
+    const dated = pool.find((entry) => isDateInRange(fixtureDate, entry.startDate, entry.endDate));
+    if (dated) {
+      return dated;
+    }
+
+    if (!fixtureDate) {
+      return pool[0];
+    }
+
+    const withoutDates = pool.find((entry) => !entry.startDate && !entry.endDate);
+    return withoutDates || null;
+  }
+
+  function isDateInRange(targetDate, startDate, endDate) {
+    if (!targetDate) {
+      return true;
+    }
+
+    const target = toTimestamp(targetDate);
+    if (target === null) {
+      return true;
+    }
+
+    const start = toTimestamp(startDate);
+    if (start !== null && target < start) {
+      return false;
+    }
+
+    const end = toTimestamp(endDate);
+    if (end !== null && target > end) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function toTimestamp(value) {
+    if (!value) {
+      return null;
+    }
+    const parsed = Date.parse(String(value));
+    return Number.isNaN(parsed) ? null : parsed;
   }
 
   function normalizePosition(position) {
@@ -724,6 +906,20 @@
   function toNumber(value) {
     const numeric = Number(value);
     return Number.isFinite(numeric) ? numeric : 0;
+  }
+
+  function toBoolean(value) {
+    if (typeof value === "boolean") {
+      return value;
+    }
+    if (typeof value === "number") {
+      return value !== 0;
+    }
+
+    const normalized = String(value || "")
+      .trim()
+      .toLowerCase();
+    return normalized === "true" || normalized === "1" || normalized === "yes";
   }
 
   function numberOr(...values) {

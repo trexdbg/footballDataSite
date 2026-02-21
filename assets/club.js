@@ -198,6 +198,10 @@ function runSummary() {
 
   const competition = state.data.competitions.find((item) => item.slug === club.competitionSlug);
   const compareClub = state.compareSlug ? state.data.clubsBySlug.get(state.compareSlug) : null;
+  const availability = club.nextMatchAvailability || { injured: [], suspended: [], total: 0 };
+  const fixtureDetail = app.formatFixture(club.nextFixture, state.data.clubsBySlug);
+  const availabilitySummary = club.nextFixture ? formatAvailabilitySummary(availability) : "";
+  const nextMatchDetail = [fixtureDetail, availabilitySummary].filter(Boolean).join(" | ");
 
   elements.clubTitle.textContent = club.name;
   elements.clubMeta.textContent = `${club.competitionName} | Saison ${club.seasonName || "en cours"}`;
@@ -210,7 +214,7 @@ function runSummary() {
     { label: "Defense", value: String(club.goalsAgainst), detail: "Buts encaisses" },
     { label: "Clean sheets", value: `${app.formatNumber(club.cleanSheetRate, 1)}%`, detail: "Sur la saison" },
     { label: "Forme (5)", value: `${club.recent.points}/15`, detail: `${club.recent.wins}W ${club.recent.draws}D ${club.recent.losses}L` },
-    { label: "Prochain match", value: app.formatDate(club.nextFixture?.date), detail: app.formatFixture(club.nextFixture, state.data.clubsBySlug) },
+    { label: "Prochain match", value: app.formatDate(club.nextFixture?.date), detail: nextMatchDetail },
   ]
     .map((kpi) => `<article class="kpi"><small>${app.escapeHtml(kpi.label)}</small><strong>${app.escapeHtml(kpi.value)}</strong><span>${app.escapeHtml(kpi.detail)}</span></article>`)
     .join("");
@@ -226,6 +230,8 @@ function runSummary() {
   elements.clubHighlights.innerHTML = [
     `Dernier match: ${app.formatFixture(club.lastMatch, state.data.clubsBySlug)}`,
     `Prochain match: ${app.formatFixture(club.nextFixture, state.data.clubsBySlug)}`,
+    `Blesses pour le prochain match: ${formatUnavailableList(availability.injured, formatInjuryEntry, "Aucun")}`,
+    `Suspendus pour le prochain match: ${formatUnavailableList(availability.suspended, formatSuspensionEntry, "Aucun")}`,
     `Effectif detecte: ${clubPlayers().length} joueurs`,
   ]
     .map((text) => `<article class="metric"><p>${app.escapeHtml(text)}</p></article>`)
@@ -319,6 +325,68 @@ function buildAverageTeam(rows, metricIds) {
     output[metricId] = rows.length ? total / rows.length : 0;
   }
   return output;
+}
+
+function formatAvailabilitySummary(availability) {
+  const injuredCount = availability?.injured?.length || 0;
+  const suspendedCount = availability?.suspended?.length || 0;
+
+  if (!injuredCount && !suspendedCount) {
+    return "Absents: aucun signale";
+  }
+
+  const parts = [];
+  if (injuredCount) {
+    parts.push(`${injuredCount} blesse${injuredCount > 1 ? "s" : ""}`);
+  }
+  if (suspendedCount) {
+    parts.push(`${suspendedCount} suspendu${suspendedCount > 1 ? "s" : ""}`);
+  }
+  return `Absents: ${parts.join(", ")}`;
+}
+
+function formatUnavailableList(entries, formatter, emptyLabel) {
+  if (!entries?.length) {
+    return emptyLabel;
+  }
+
+  const preview = entries.slice(0, 4).map((entry) => formatter(entry)).filter(Boolean);
+  const remaining = entries.length - preview.length;
+  if (remaining > 0) {
+    preview.push(`+${remaining} autre${remaining > 1 ? "s" : ""}`);
+  }
+  return preview.join(", ");
+}
+
+function formatInjuryEntry(entry) {
+  return formatUnavailableEntry(entry, {
+    reason: entry.reason,
+    dateLabel: "retour estime",
+    dateValue: entry.returnDate,
+  });
+}
+
+function formatSuspensionEntry(entry) {
+  return formatUnavailableEntry(entry, {
+    reason: entry.reason,
+    dateLabel: "jusqu'au",
+    dateValue: entry.endDate,
+  });
+}
+
+function formatUnavailableEntry(entry, options = {}) {
+  const chunks = [];
+  if (options.reason) {
+    chunks.push(options.reason);
+  }
+  if (options.dateValue) {
+    chunks.push(`${options.dateLabel} ${app.formatDate(options.dateValue)}`);
+  }
+
+  if (!chunks.length) {
+    return entry.name;
+  }
+  return `${entry.name} (${chunks.join(", ")})`;
 }
 
 function currentClub() {
