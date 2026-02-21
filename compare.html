@@ -1,0 +1,74 @@
+﻿<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Football Data Hub | Comparer</title>
+    <meta name="description" content="Comparer facilement deux joueurs ou deux clubs avec radar et stats cote a cote." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="assets/common.js"></script>
+    <script defer src="assets/compare.js"></script>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="topbar reveal">
+        <a class="brand" href="index.html">Football Data Hub<small>Lecture claire des stats</small></a>
+        <nav class="topnav" aria-label="Navigation principale">
+          <a href="index.html">Accueil</a>
+          <a href="clubs.html">Clubs</a>
+          <a href="players.html">Joueurs</a>
+          <a href="teams.html">Classements</a>
+          <a class="active" href="compare.html">Comparer</a>
+        </nav>
+      </header>
+
+      <main class="grid-main" style="margin-top:0.9rem;">
+        <aside class="card panel reveal">
+          <div class="section-title">
+            <span class="chip">Comparaison</span>
+            <h2>Lecture immediate des differences</h2>
+            <p id="compareMeta">Chargement...</p>
+          </div>
+
+          <div class="tabs">
+            <button class="tab-btn active" data-mode="player" type="button">Joueur vs joueur</button>
+            <button class="tab-btn" data-mode="club" type="button">Club vs club</button>
+          </div>
+
+          <div class="filters">
+            <div class="field">
+              <label for="compareCompetition">Competition</label>
+              <select id="compareCompetition"></select>
+            </div>
+            <div class="field">
+              <label for="compareLeft">Profil A</label>
+              <select id="compareLeft"></select>
+            </div>
+            <div class="field">
+              <label for="compareRight">Profil B</label>
+              <select id="compareRight"></select>
+            </div>
+          </div>
+        </aside>
+
+        <section class="grid reveal">
+          <article class="card panel">
+            <div class="section-title">
+              <h1 id="compareTitle">Comparaison</h1>
+              <p id="compareSubtitle">-</p>
+            </div>
+            <div class="chart-box"><canvas id="compareRadar"></canvas></div>
+            <div class="legend" id="compareLegend"></div>
+            <div class="metrics-grid" id="compareStats"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

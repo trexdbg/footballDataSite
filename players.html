@@ -1,96 +1,78 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Touchline HQ - Joueurs</title>
-    <meta
-      name="description"
-      content="Dashboard joueurs: filtres, tops statistiques, tri competition et radar comparatif."
-    />
+    <title>Football Data Hub | Joueurs</title>
+    <meta name="description" content="Explorer les joueurs: recherche, filtres lisibles, top stats et acces profil." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="assets/common.js"></script>
     <script defer src="assets/players.js"></script>
   </head>
   <body>
-    <div class="noise-layer" aria-hidden="true"></div>
-    <div class="page-shell">
-      <header class="top-nav card">
-        <a class="brand" href="index.html">Touchline HQ</a>
-        <nav class="top-nav-links" aria-label="Navigation">
+    <div class="site-shell">
+      <header class="topbar reveal">
+        <a class="brand" href="index.html">Football Data Hub<small>Lecture claire des stats</small></a>
+        <nav class="topnav" aria-label="Navigation principale">
           <a href="index.html">Accueil</a>
-          <a href="teams.html">Championnats</a>
-          <a href="club.html">Clubs</a>
-          <a class="is-active" href="players.html">Joueurs</a>
+          <a href="clubs.html">Clubs</a>
+          <a class="active" href="players.html">Joueurs</a>
+          <a href="teams.html">Classements</a>
+          <a href="compare.html">Comparer</a>
         </nav>
       </header>
 
-      <section class="page-title card reveal">
-        <p class="chip">Player Lab</p>
-        <h1>Classements joueurs et radar de comparaison</h1>
-        <p id="playersMetaText">Chargement des donnees joueurs...</p>
-        <div class="context-links" id="playersHeaderLinks"></div>
-      </section>
+      <main class="grid-main" style="margin-top:0.9rem;">
+        <aside class="card panel reveal">
+          <div class="section-title">
+            <span class="chip">Filtres</span>
+            <h2>Trouver un joueur</h2>
+            <p id="playersMeta">Chargement...</p>
+          </div>
 
-      <main class="dashboard-layout">
-        <aside class="panel card reveal delay-1">
-          <h2>Filtres</h2>
-
-          <label class="field">
-            <span>Recherche</span>
-            <input id="playerSearch" type="search" placeholder="Nom, club, poste" autocomplete="off" />
-          </label>
-
-          <label class="field">
-            <span>Competition</span>
-            <select id="competitionFilter"></select>
-          </label>
-
-          <label class="field">
-            <span>Poste</span>
-            <select id="positionFilter"></select>
-          </label>
-
-          <label class="field">
-            <span>Club</span>
-            <select id="clubFilter"></select>
-          </label>
-
-          <label class="field">
-            <span>Minutes minimum</span>
-            <input id="minMinutes" type="number" min="0" step="30" value="180" />
-          </label>
-
-          <label class="field">
-            <span>Tri classement</span>
-            <select id="rankingMetric"></select>
-          </label>
-
-          <label class="field">
-            <span>Lignes du tableau</span>
-            <select id="tableLimit">
-              <option value="25">Top 25</option>
-              <option value="50" selected>Top 50</option>
-              <option value="100">Top 100</option>
-            </select>
-          </label>
-
-          <div class="quick-actions">
-            <a id="openTeamsFromPlayers" class="button-link button-ghost" href="teams.html">Ouvrir le championnat</a>
-            <a id="openRandomPlayerFromList" class="button-link button-ghost" href="player.html">Profil joueur au hasard</a>
+          <div class="filters">
+            <div class="field">
+              <label for="playersSearch">Recherche</label>
+              <input id="playersSearch" type="search" placeholder="Nom, club, poste" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="playersCompetition">Competition</label>
+              <select id="playersCompetition"></select>
+            </div>
+            <div class="field">
+              <label for="playersPosition">Poste</label>
+              <select id="playersPosition"></select>
+            </div>
+            <div class="field">
+              <label for="playersMetric">Classement par</label>
+              <select id="playersMetric"></select>
+            </div>
+            <div class="field">
+              <label for="playersMinutes">Minutes minimum</label>
+              <input id="playersMinutes" type="number" min="0" step="30" value="180" />
+            </div>
+            <div class="field">
+              <label for="playersLimit">Nombre de lignes</label>
+              <select id="playersLimit">
+                <option value="25">Top 25</option>
+                <option value="50" selected>Top 50</option>
+                <option value="100">Top 100</option>
+              </select>
+            </div>
           </div>
         </aside>
 
-        <section class="stacked">
-          <article class="card reveal delay-1">
-            <div class="card-head">
-              <h2>Table joueurs</h2>
-              <p id="playersCountText">0 joueurs affiches</p>
+        <section class="grid reveal">
+          <article class="card panel">
+            <div class="section-title">
+              <h1>Joueurs</h1>
+              <p id="playersCount">0 joueur</p>
             </div>
             <div class="table-wrap">
               <table>
@@ -102,43 +84,20 @@
                     <th>Club</th>
                     <th>Competition</th>
                     <th>Min</th>
-                    <th>Matchs</th>
-                    <th id="rankingMetricHead">Metrique</th>
+                    <th id="playersMetricHead">Metrique</th>
                   </tr>
                 </thead>
-                <tbody id="playersTableBody"></tbody>
+                <tbody id="playersBody"></tbody>
               </table>
             </div>
           </article>
 
-          <article class="card reveal delay-2">
-            <div class="card-head">
-              <h2>Leaders par statistique</h2>
-              <p id="leadersCountText">0 leader</p>
+          <article class="card panel">
+            <div class="section-title">
+              <h2>Leaders rapides</h2>
+              <p>Vue simple des profils qui ressortent</p>
             </div>
-            <div class="leaders-grid" id="leadersGrid"></div>
-          </article>
-
-          <article class="card reveal delay-2">
-            <div class="card-head">
-              <h2>Duel radar joueurs</h2>
-              <p>Comparer deux profils en un coup d'oeil</p>
-            </div>
-            <div class="compare-controls">
-              <label class="field">
-                <span>Joueur A</span>
-                <select id="comparePlayerA"></select>
-              </label>
-              <label class="field">
-                <span>Joueur B</span>
-                <select id="comparePlayerB"></select>
-              </label>
-            </div>
-            <div class="radar-panel">
-              <canvas id="playersRadar"></canvas>
-            </div>
-            <div class="legend-list" id="playersLegend"></div>
-            <div class="metric-grid" id="playersMetricGrid"></div>
+            <div class="cards-list cols-3" id="playersLeaders"></div>
           </article>
         </section>
       </main>

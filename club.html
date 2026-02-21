@@ -1,127 +1,117 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Touchline HQ - Club</title>
-    <meta
-      name="description"
-      content="Page club: contexte championnat, effectif, tops joueurs et liens vers profils."
-    />
+    <title>Football Data Hub | Fiche Club</title>
+    <meta name="description" content="Fiche club: resume, forme recente, radar profil et effectif lisible." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="assets/common.js"></script>
     <script defer src="assets/club.js"></script>
   </head>
   <body>
-    <div class="noise-layer" aria-hidden="true"></div>
-    <div class="page-shell">
-      <header class="top-nav card">
-        <a class="brand" href="index.html">Touchline HQ</a>
-        <nav class="top-nav-links" aria-label="Navigation">
+    <div class="site-shell">
+      <header class="topbar reveal">
+        <a class="brand" href="index.html">Football Data Hub<small>Lecture claire des stats</small></a>
+        <nav class="topnav" aria-label="Navigation principale">
           <a href="index.html">Accueil</a>
-          <a href="teams.html">Championnats</a>
-          <a class="is-active" href="club.html">Clubs</a>
+          <a href="clubs.html">Clubs</a>
           <a href="players.html">Joueurs</a>
+          <a href="teams.html">Classements</a>
+          <a href="compare.html">Comparer</a>
         </nav>
       </header>
 
-      <section class="page-title card reveal">
-        <p class="chip">Club Center</p>
-        <h1 id="clubPageTitle">Chargement du club...</h1>
-        <p id="clubMetaText">Preparation des donnees club et effectif.</p>
-        <div class="context-links" id="clubBreadcrumbs"></div>
-      </section>
+      <main class="grid-main" style="margin-top:0.9rem;">
+        <aside class="card panel reveal">
+          <div class="section-title">
+            <span class="chip">Fiche Club</span>
+            <h2 id="clubTitle">Chargement...</h2>
+            <p id="clubMeta">-</p>
+          </div>
 
-      <main class="dashboard-layout">
-        <aside class="panel card reveal delay-1">
-          <h2>Filtres effectif</h2>
+          <div class="filters">
+            <div class="field">
+              <label for="clubSelect">Club</label>
+              <select id="clubSelect"></select>
+            </div>
+            <div class="field">
+              <label for="clubPlayerSearch">Recherche effectif</label>
+              <input id="clubPlayerSearch" type="search" placeholder="Nom du joueur" autocomplete="off" />
+            </div>
+            <div class="field">
+              <label for="clubPosition">Poste</label>
+              <select id="clubPosition"></select>
+            </div>
+            <div class="field">
+              <label for="clubCompare">Comparer avec</label>
+              <select id="clubCompare"></select>
+            </div>
+          </div>
 
-          <label class="field">
-            <span>Recherche</span>
-            <input id="clubPlayerSearch" type="search" placeholder="Nom du joueur" autocomplete="off" />
-          </label>
-
-          <label class="field">
-            <span>Poste</span>
-            <select id="clubPositionFilter"></select>
-          </label>
-
-          <label class="field">
-            <span>Minutes minimum</span>
-            <input id="clubMinMinutes" type="number" min="0" step="30" value="90" />
-          </label>
-
-          <label class="field">
-            <span>Tri interne</span>
-            <select id="clubRankingMetric"></select>
-          </label>
-
-          <label class="field">
-            <span>Lignes</span>
-            <select id="clubTableLimit">
-              <option value="15">Top 15</option>
-              <option value="30" selected>Top 30</option>
-              <option value="60">Top 60</option>
-            </select>
-          </label>
-
-          <div class="quick-actions">
-            <a id="openClubLeague" class="button-link button-ghost" href="teams.html">Classement championnat</a>
-            <a id="openClubPlayers" class="button-link button-ghost" href="players.html">Vue joueurs du championnat</a>
-            <a id="openRandomClubPlayer" class="button-link button-ghost" href="player.html">Profil joueur au hasard</a>
+          <div class="actions" style="margin-top:0.6rem;">
+            <a id="clubCompareLink" class="btn" href="compare.html">Comparer ces clubs</a>
+            <a id="clubStandingsLink" class="btn alt" href="teams.html">Voir classement</a>
           </div>
         </aside>
 
-        <section class="stacked">
-          <article class="card reveal delay-1">
-            <div class="card-head">
-              <h2>Fiche club</h2>
-              <p id="clubSummaryText">-</p>
+        <section class="grid reveal">
+          <article class="card panel">
+            <div class="tabs">
+              <button class="tab-btn active" data-tab="summary" type="button">Resume</button>
+              <button class="tab-btn" data-tab="squad" type="button">Effectif</button>
             </div>
-            <div id="clubHero" class="club-hero"></div>
-            <div class="kpi-grid">
-              <div class="kpi-card" id="clubRankCard"></div>
-              <div class="kpi-card" id="clubAttackCard"></div>
-              <div class="kpi-card" id="clubDefenseCard"></div>
-              <div class="kpi-card" id="clubCleanCard"></div>
-            </div>
-            <div class="club-info-lines" id="clubInfoLines"></div>
-          </article>
 
-          <article class="card reveal delay-2">
-            <div class="card-head">
-              <h2>Effectif du club</h2>
-              <p id="clubPlayersCountText">0 joueur</p>
-            </div>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Joueur</th>
-                    <th>Poste</th>
-                    <th>Min</th>
-                    <th>Matchs</th>
-                    <th id="clubMetricHead">Metrique</th>
-                    <th>Liens</th>
-                  </tr>
-                </thead>
-                <tbody id="clubPlayersTableBody"></tbody>
-              </table>
-            </div>
-          </article>
+            <div class="tab-panel active" id="tab-summary">
+              <div class="section-title">
+                <h1 id="clubSummaryTitle">-</h1>
+                <p id="clubSummaryText">-</p>
+              </div>
 
-          <article class="card reveal delay-2">
-            <div class="card-head">
-              <h2>Leaders du club</h2>
-              <p id="clubLeadersText">0 metrique</p>
+              <div class="grid grid-three" id="clubKpis"></div>
+
+              <div class="grid grid-two" style="margin-top:0.7rem;">
+                <div>
+                  <h3 style="margin:0 0 0.4rem;">Profil radar</h3>
+                  <div class="chart-box"><canvas id="clubRadar"></canvas></div>
+                  <div class="legend" id="clubRadarLegend"></div>
+                </div>
+                <div>
+                  <h3 style="margin:0 0 0.4rem;">Forme recente (5 matchs)</h3>
+                  <div class="chart-box short"><canvas id="clubFormChart"></canvas></div>
+                  <div class="metrics-grid" id="clubHighlights"></div>
+                </div>
+              </div>
             </div>
-            <div class="leaders-grid" id="clubLeadersGrid"></div>
+
+            <div class="tab-panel" id="tab-squad">
+              <div class="section-title">
+                <h2>Effectif</h2>
+                <p id="clubSquadCount">0 joueur</p>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Joueur</th>
+                      <th>Poste</th>
+                      <th>Min</th>
+                      <th>Buts/90</th>
+                      <th>Passes/90</th>
+                      <th>Profil</th>
+                    </tr>
+                  </thead>
+                  <tbody id="clubSquadBody"></tbody>
+                </table>
+              </div>
+            </div>
           </article>
         </section>
       </main>
