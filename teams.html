@@ -25,15 +25,17 @@
         <nav class="top-nav-links" aria-label="Navigation">
           <a href="players.html">Joueurs</a>
           <a class="is-active" href="teams.html">Equipes</a>
+          <a href="club.html">Clubs</a>
         </nav>
       </header>
 
       <section class="page-title card reveal">
-        <p class="chip">Page Equipes</p>
-        <h1>Dashboard par championnat</h1>
+        <p class="chip">Page Championnat</p>
+        <h1 id="teamsPageTitle">Dashboard par championnat</h1>
         <p id="teamsMetaText">
           Chargement des donnees equipes...
         </p>
+        <div class="context-links" id="teamsHeaderLinks"></div>
       </section>
 
       <main class="dashboard-layout">
@@ -67,9 +69,23 @@
             <span>Equipe B</span>
             <select id="compareTeamB"></select>
           </label>
+
+          <div class="quick-actions">
+            <a id="openCompetitionPlayers" class="button-link" href="players.html">Top joueurs du championnat</a>
+            <a id="openRandomClub" class="button-link button-ghost" href="club.html">Club au hasard</a>
+            <a id="openRandomPlayer" class="button-link button-ghost" href="player.html">Joueur au hasard</a>
+          </div>
         </aside>
 
         <section class="stacked">
+          <article class="card reveal delay-1">
+            <div class="card-head">
+              <h2>Acces rapide clubs</h2>
+              <p id="clubsQuickCount">0 club</p>
+            </div>
+            <div class="link-grid" id="clubsQuickLinks"></div>
+          </article>
+
           <article class="card reveal delay-1">
             <div class="card-head">
               <h2>Vue Championnat</h2>
@@ -87,6 +103,7 @@
                   <tr>
                     <th>#</th>
                     <th>Equipe</th>
+                    <th>Liens</th>
                     <th>Pts</th>
                     <th>W</th>
                     <th>D</th>

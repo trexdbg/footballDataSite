@@ -1,4 +1,5 @@
 const PLAYERS_URL = "players_stats.json";
+const TEAMS_URL = "teams_stats.json";
 
 const RANKING_METRICS = [
   { id: "goals_per90", label: "Buts /90" },
@@ -25,6 +26,17 @@ const RADAR_METRICS = [
   { id: "duels_won_per90", label: "Duels" },
 ];
 
+const LEADER_METRICS = [
+  "goals_per90",
+  "assists_per90",
+  "shots_on_target_per90",
+  "final_third_passes_per90",
+  "tackles_won_per90",
+  "interceptions_per90",
+  "duels_won_per90",
+  "pass_accuracy_pct",
+];
+
 const COLORS = {
   playerA: "#7aafeb",
   playerASoft: "rgba(122, 175, 235, 0.28)",
@@ -34,16 +46,21 @@ const COLORS = {
   label: "#566d84",
 };
 
+const DEFAULT_TABLE_LIMIT = 50;
+const DEFAULT_MIN_MINUTES = 180;
+
 const state = {
   payload: null,
   players: [],
   filtered: [],
+  competitions: [],
   search: "",
+  competition: "all",
   position: "all",
   club: "all",
-  minMinutes: 180,
+  minMinutes: DEFAULT_MIN_MINUTES,
   rankingMetric: "goals_per90",
-  tableLimit: 50,
+  tableLimit: DEFAULT_TABLE_LIMIT,
   compareA: null,
   compareB: null,
 };
@@ -61,10 +78,16 @@ async function init() {
   cacheElements();
   bindEvents();
 
-  const payload = await fetchJson(PLAYERS_URL);
-  state.payload = payload;
-  state.players = payload.data.map(mapPlayer).filter((player) => player.minutes > 0 || player.matches > 0);
+  const [playersPayload, teamsPayload] = await Promise.all([fetchJson(PLAYERS_URL), fetchJson(TEAMS_URL)]);
+  const competitionIndex = buildCompetitionIndex(teamsPayload.standings || []);
 
+  state.payload = playersPayload;
+  state.competitions = competitionIndex.competitions;
+  state.players = playersPayload.data
+    .map((row) => mapPlayer(row, competitionIndex.clubToCompetition))
+    .filter((player) => player.minutes > 0 || player.matches > 0);
+
+  hydrateStateFromQuery();
   fillRankingMetricSelect();
   fillFilters();
   renderMetaHeader();
@@ -75,15 +98,21 @@ async function init() {
 
 function cacheElements() {
   elements.playersMetaText = document.getElementById("playersMetaText");
+  elements.playersHeaderLinks = document.getElementById("playersHeaderLinks");
   elements.playerSearch = document.getElementById("playerSearch");
+  elements.competitionFilter = document.getElementById("competitionFilter");
   elements.positionFilter = document.getElementById("positionFilter");
   elements.clubFilter = document.getElementById("clubFilter");
   elements.minMinutes = document.getElementById("minMinutes");
   elements.rankingMetric = document.getElementById("rankingMetric");
   elements.tableLimit = document.getElementById("tableLimit");
+  elements.openTeamsFromPlayers = document.getElementById("openTeamsFromPlayers");
+  elements.openRandomPlayerFromList = document.getElementById("openRandomPlayerFromList");
   elements.playersCountText = document.getElementById("playersCountText");
   elements.playersTableBody = document.getElementById("playersTableBody");
   elements.rankingMetricHead = document.getElementById("rankingMetricHead");
+  elements.leadersCountText = document.getElementById("leadersCountText");
+  elements.leadersGrid = document.getElementById("leadersGrid");
   elements.comparePlayerA = document.getElementById("comparePlayerA");
   elements.comparePlayerB = document.getElementById("comparePlayerB");
   elements.playersRadar = document.getElementById("playersRadar");
@@ -94,6 +123,12 @@ function cacheElements() {
 function bindEvents() {
   elements.playerSearch.addEventListener("input", (event) => {
     state.search = event.target.value.trim().toLowerCase();
+    runPipeline();
+  });
+
+  elements.competitionFilter.addEventListener("change", (event) => {
+    state.competition = event.target.value;
+    updateClubFilterOptions();
     runPipeline();
   });
 
@@ -108,7 +143,7 @@ function bindEvents() {
   });
 
   elements.minMinutes.addEventListener("change", (event) => {
-    state.minMinutes = clampNumber(event.target.value, 0, 99999, 180);
+    state.minMinutes = clampNumber(event.target.value, 0, 99999, DEFAULT_MIN_MINUTES);
     event.target.value = String(state.minMinutes);
     runPipeline();
   });
@@ -119,7 +154,7 @@ function bindEvents() {
   });
 
   elements.tableLimit.addEventListener("change", (event) => {
-    state.tableLimit = clampNumber(event.target.value, 10, 500, 50);
+    state.tableLimit = clampNumber(event.target.value, 10, 500, DEFAULT_TABLE_LIMIT);
     runPipeline();
   });
 
@@ -130,6 +165,7 @@ function bindEvents() {
       elements.comparePlayerB.value = state.compareB || "";
     }
     renderComparison();
+    syncUrl();
   });
 
   elements.comparePlayerB.addEventListener("change", (event) => {
@@ -139,6 +175,7 @@ function bindEvents() {
       elements.comparePlayerA.value = state.compareA || "";
     }
     renderComparison();
+    syncUrl();
   });
 }
 
@@ -152,18 +189,57 @@ function fillRankingMetricSelect() {
 
 function fillFilters() {
   const positions = uniqueSorted(state.players.map((player) => player.position));
-  const clubs = uniqueSorted(state.players.map((player) => player.clubName));
+
+  fillSelect(
+    elements.competitionFilter,
+    [
+      { value: "all", label: "Toutes" },
+      ...state.competitions.map((item) => ({ value: item.slug, label: item.name })),
+    ],
+    state.competition,
+  );
 
   fillSelect(
     elements.positionFilter,
     [{ value: "all", label: "Tous" }, ...positions.map((value) => ({ value, label: value }))],
-    "all",
+    state.position,
   );
+
+  updateClubFilterOptions();
+
+  elements.playerSearch.value = state.search;
+  elements.minMinutes.value = String(state.minMinutes);
+  const allowedLimits = new Set(["25", "50", "100"]);
+  if (!allowedLimits.has(String(state.tableLimit))) {
+    const option = document.createElement("option");
+    option.value = String(state.tableLimit);
+    option.textContent = `Top ${state.tableLimit}`;
+    elements.tableLimit.appendChild(option);
+  }
+  elements.tableLimit.value = String(state.tableLimit);
+}
+
+function updateClubFilterOptions() {
+  const source = state.players.filter((player) => state.competition === "all" || player.competitionSlug === state.competition);
+  const clubsMap = new Map();
+  for (const player of source) {
+    if (!clubsMap.has(player.clubSlug)) {
+      clubsMap.set(player.clubSlug, player.clubName);
+    }
+  }
+
+  const clubs = [...clubsMap.entries()]
+    .map(([slug, name]) => ({ slug, name }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  if (state.club !== "all" && !clubs.some((club) => club.slug === state.club)) {
+    state.club = "all";
+  }
 
   fillSelect(
     elements.clubFilter,
-    [{ value: "all", label: "Tous" }, ...clubs.map((value) => ({ value, label: value }))],
-    "all",
+    [{ value: "all", label: "Tous" }, ...clubs.map((club) => ({ value: club.slug, label: club.name }))],
+    state.club,
   );
 }
 
@@ -179,18 +255,22 @@ function renderMetaHeader() {
 
 function runPipeline() {
   state.filtered = state.players.filter((player) => {
+    const byCompetition = state.competition === "all" || player.competitionSlug === state.competition;
     const byPosition = state.position === "all" || player.position === state.position;
-    const byClub = state.club === "all" || player.clubName === state.club;
+    const byClub = state.club === "all" || player.clubSlug === state.club;
     const byMinutes = player.minutes >= state.minMinutes;
-    const searchText = normalize(`${player.name} ${player.position} ${player.clubName}`);
+    const searchText = normalize(`${player.name} ${player.position} ${player.clubName} ${player.competitionName}`);
     const bySearch = !state.search || searchText.includes(normalize(state.search));
-    return byPosition && byClub && byMinutes && bySearch;
+    return byCompetition && byPosition && byClub && byMinutes && bySearch;
   });
 
   const sorted = sortPlayersByMetric(state.filtered, state.rankingMetric);
+  renderContextLinks(sorted);
   renderRankingTable(sorted);
+  renderLeaders();
   syncComparisonSelects(sorted);
   renderComparison();
+  syncUrl();
 }
 
 function sortPlayersByMetric(players, metricId) {
@@ -201,6 +281,27 @@ function sortPlayersByMetric(players, metricId) {
   });
 }
 
+function renderContextLinks(sortedPlayers) {
+  const competition = competitionBySlug(state.competition);
+  const titleLabel = competition?.name || "Tous les championnats";
+  const teamsUrl = competition ? `teams.html?competition=${encodeURIComponent(competition.slug)}` : "teams.html";
+  const randomPlayer = sortedPlayers[Math.floor(Math.random() * sortedPlayers.length)] || null;
+  const randomProfileUrl = randomPlayer
+    ? `player.html?player=${encodeURIComponent(randomPlayer.slug)}`
+    : competition
+      ? `player.html?competition=${encodeURIComponent(competition.slug)}&random=1`
+      : "player.html";
+
+  elements.playersHeaderLinks.innerHTML = `
+    <a class="inline-link" href="${teamsUrl}">Classement championnat: ${escapeHtml(titleLabel)}</a>
+    <a class="inline-link" href="club.html${competition ? `?competition=${encodeURIComponent(competition.slug)}` : ""}">Clubs de la selection</a>
+    <a class="inline-link" href="${randomProfileUrl}">Profil joueur au hasard</a>
+  `;
+
+  elements.openTeamsFromPlayers.href = teamsUrl;
+  elements.openRandomPlayerFromList.href = randomProfileUrl;
+}
+
 function renderRankingTable(sortedPlayers) {
   const limited = sortedPlayers.slice(0, state.tableLimit);
   const metricLabel = metricById(state.rankingMetric)?.label || "Metrique";
@@ -209,7 +310,7 @@ function renderRankingTable(sortedPlayers) {
   elements.playersCountText.textContent = `${state.filtered.length} joueurs filtres`;
 
   if (limited.length === 0) {
-    elements.playersTableBody.innerHTML = `<tr><td colspan="7" class="is-empty">Aucun joueur pour ces filtres.</td></tr>`;
+    elements.playersTableBody.innerHTML = `<tr><td colspan="8" class="is-empty">Aucun joueur pour ces filtres.</td></tr>`;
     return;
   }
 
@@ -217,17 +318,22 @@ function renderRankingTable(sortedPlayers) {
     .map((player, index) => {
       const rank = index + 1;
       const metric = metricValue(player, state.rankingMetric);
+      const playerUrl = `player.html?player=${encodeURIComponent(player.slug)}`;
+      const clubUrl = `club.html?competition=${encodeURIComponent(player.competitionSlug)}&club=${encodeURIComponent(player.clubSlug)}`;
+      const competitionUrl = `teams.html?competition=${encodeURIComponent(player.competitionSlug)}`;
+
       return `
         <tr>
           <td>${rank}</td>
           <td>
             <div class="player-cell">
               ${imageTag(player.imageUrl, player.name)}
-              <span>${escapeHtml(player.name)}</span>
+              <a class="inline-link strong-link" href="${playerUrl}">${escapeHtml(player.name)}</a>
             </div>
           </td>
           <td>${escapeHtml(player.position)}</td>
-          <td>${escapeHtml(player.clubName)}</td>
+          <td><a class="inline-link" href="${clubUrl}">${escapeHtml(player.clubName)}</a></td>
+          <td><a class="inline-link" href="${competitionUrl}">${escapeHtml(player.competitionName)}</a></td>
           <td>${formatNumber(player.minutes, 0)}</td>
           <td>${formatNumber(player.matches, 0)}</td>
           <td><strong>${formatMetric(metric, state.rankingMetric)}</strong></td>
@@ -237,11 +343,68 @@ function renderRankingTable(sortedPlayers) {
     .join("");
 }
 
+function renderLeaders() {
+  if (!state.filtered.length) {
+    elements.leadersCountText.textContent = "0 leader";
+    elements.leadersGrid.innerHTML = `<p class="is-empty">Aucun leader disponible.</p>`;
+    return;
+  }
+
+  const leaders = LEADER_METRICS.map((metricId) => {
+    const metric = metricById(metricId);
+    const top = sortPlayersByMetric(state.filtered, metricId)[0];
+    if (!top || !metric) {
+      return null;
+    }
+    return { metric, top, value: metricValue(top, metricId) };
+  }).filter(Boolean);
+
+  elements.leadersCountText.textContent = `${leaders.length} stats`;
+  elements.leadersGrid.innerHTML = leaders
+    .map((entry) => {
+      const playerUrl = `player.html?player=${encodeURIComponent(entry.top.slug)}`;
+      const clubUrl = `club.html?competition=${encodeURIComponent(entry.top.competitionSlug)}&club=${encodeURIComponent(entry.top.clubSlug)}`;
+      const listUrl = buildPlayersListLink(entry.metric.id);
+
+      return `
+        <article class="leader-card">
+          <small>${escapeHtml(entry.metric.label)}</small>
+          <strong><a class="inline-link strong-link" href="${playerUrl}">${escapeHtml(entry.top.name)}</a></strong>
+          <p>${formatMetric(entry.value, entry.metric.id)}</p>
+          <p>
+            <a class="inline-link" href="${clubUrl}">${escapeHtml(entry.top.clubName)}</a>
+            <span> | </span>
+            <a class="inline-link" href="${listUrl}">Voir top</a>
+          </p>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function buildPlayersListLink(metricId) {
+  const params = new URLSearchParams();
+  if (state.competition !== "all") {
+    params.set("competition", state.competition);
+  }
+  if (state.position !== "all") {
+    params.set("position", state.position);
+  }
+  if (state.club !== "all") {
+    params.set("club", state.club);
+  }
+  params.set("metric", metricId);
+  if (state.minMinutes !== DEFAULT_MIN_MINUTES) {
+    params.set("minMinutes", String(state.minMinutes));
+  }
+  return `players.html?${params.toString()}`;
+}
+
 function syncComparisonSelects(sortedPlayers) {
   const candidates = sortedPlayers.slice(0, 500);
   const options = candidates.map((player) => ({
     value: player.slug,
-    label: `${player.name} (${player.position})`,
+    label: `${player.name} (${player.position}, ${player.clubName})`,
   }));
 
   if (!candidates.length) {
@@ -426,42 +589,44 @@ function drawRadarShape(ctx, points, stroke, fill) {
   ctx.restore();
 }
 
-function mapPlayer(row) {
-  const yearly = row.yearly || {};
-  const latestSeason = latestSeasonKey(yearly);
-  let minutes = 0;
-  let matches = 0;
-  let per90 = {};
-  let totals = {};
+function mapPlayer(row, clubToCompetition) {
+  const season = resolveSeasonRecord(row);
+  let minutes = Number(season?.minutes || season?.minutes_played || 0);
+  let matches = Number(season?.matches_played || 0);
+  let per90 = toNumberObject(season?.stats_per90 || {});
+  let totals = toNumberObject(season?.stats_sum || {});
 
-  if (latestSeason) {
-    const season = yearly[latestSeason];
-    minutes = Number(season?.minutes || 0);
-    matches = Number(season?.matches_played || 0);
-    per90 = toNumberObject(season?.stats_per90 || {});
-    totals = toNumberObject(season?.stats_sum || {});
-  }
-
-  if (minutes <= 0 && Array.isArray(row.last5_matches) && row.last5_matches.length > 0) {
+  if (Array.isArray(row.last5_matches) && row.last5_matches.length > 0) {
     const fallback = aggregateFromLastMatches(row.last5_matches);
-    minutes = fallback.minutes;
-    matches = fallback.matches;
-    per90 = Object.keys(per90).length > 0 ? per90 : fallback.per90;
-    totals = Object.keys(totals).length > 0 ? totals : fallback.totals;
+    if (minutes <= 0) {
+      minutes = fallback.minutes;
+    }
+    if (matches <= 0) {
+      matches = fallback.matches;
+    }
+    per90 = mergeNumberObjects(fallback.per90, per90);
+    totals = mergeNumberObjects(fallback.totals, totals);
   }
 
   const accuratePass = Number(per90.accurate_pass || 0);
   const missedPass = Number(per90.missed_pass || 0);
   const passAccuracy = accuratePass + missedPass > 0 ? (accuratePass * 100) / (accuratePass + missedPass) : 0;
+  const clubSlug = String(row.club_slug || "unknown");
+  const competition = clubToCompetition.get(clubSlug) || {
+    slug: "unknown",
+    name: "Hors championnat",
+  };
 
   return {
     slug: String(row.slug || ""),
     name: repairText(row.name || "Unknown"),
     position: normalizePosition(row.position || "Unknown"),
-    clubSlug: String(row.club_slug || "unknown"),
-    clubName: prettifySlug(row.club_slug || "unknown"),
+    clubSlug,
+    clubName: prettifySlug(clubSlug),
     imageUrl: String(row.player_image_url || ""),
     clubLogo: String(row.club_logo_url || ""),
+    competitionSlug: competition.slug,
+    competitionName: competition.name,
     minutes,
     matches,
     per90,
@@ -503,13 +668,67 @@ function metricById(metricId) {
   return RANKING_METRICS.find((metric) => metric.id === metricId) || null;
 }
 
-function latestSeasonKey(yearly) {
-  const keys = Object.keys(yearly || {}).filter((key) => Number.isFinite(Number(key)));
+function resolveSeasonRecord(row) {
+  const seasonSums = row.season_sums || {};
+  const seasonSumsKey = latestSeasonKey(seasonSums);
+  if (seasonSumsKey && seasonSums[seasonSumsKey]) {
+    return seasonSums[seasonSumsKey];
+  }
+
+  const yearly = row.yearly || {};
+  const yearlyKey = latestSeasonKey(yearly);
+  if (yearlyKey && yearly[yearlyKey]) {
+    return yearly[yearlyKey];
+  }
+
+  return null;
+}
+
+function latestSeasonKey(container) {
+  const keys = Object.keys(container || {});
   if (keys.length === 0) {
     return null;
   }
-  keys.sort((a, b) => Number(b) - Number(a));
-  return keys[0];
+
+  const ranked = keys
+    .map((key) => ({ key, rank: seasonKeyRank(key) }))
+    .filter((entry) => Number.isFinite(entry.rank));
+
+  if (ranked.length === 0) {
+    keys.sort((a, b) => a.localeCompare(b));
+    return keys[keys.length - 1];
+  }
+
+  ranked.sort((a, b) => b.rank - a.rank);
+  return ranked[0].key;
+}
+
+function seasonKeyRank(rawKey) {
+  const key = String(rawKey || "").trim();
+  if (!key) {
+    return null;
+  }
+
+  const numeric = Number(key);
+  if (Number.isFinite(numeric)) {
+    return numeric * 10000;
+  }
+
+  const seasonMatch = key.match(/^(\d{4})\s*[/-]\s*(\d{4})$/);
+  if (seasonMatch) {
+    const startYear = Number(seasonMatch[1]);
+    const endYear = Number(seasonMatch[2]);
+    if (Number.isFinite(startYear) && Number.isFinite(endYear)) {
+      return startYear * 10000 + endYear;
+    }
+  }
+
+  const parsedDate = Date.parse(key);
+  if (!Number.isNaN(parsedDate)) {
+    return parsedDate;
+  }
+
+  return null;
 }
 
 function aggregateFromLastMatches(matches) {
@@ -543,6 +762,14 @@ function aggregateFromLastMatches(matches) {
 function toNumberObject(input) {
   const output = {};
   for (const [key, value] of Object.entries(input || {})) {
+    output[key] = Number(value || 0);
+  }
+  return output;
+}
+
+function mergeNumberObjects(base, override) {
+  const output = toNumberObject(base || {});
+  for (const [key, value] of Object.entries(override || {})) {
     output[key] = Number(value || 0);
   }
   return output;
@@ -685,7 +912,7 @@ function formatDateTime(raw) {
 
 function repairText(input) {
   const raw = String(input || "");
-  if (!/[ÃÂ]/.test(raw)) {
+  if (!/[ÃƒÃ‚]/.test(raw)) {
     return raw;
   }
 
@@ -725,9 +952,102 @@ function debounce(callback, waitMs) {
   };
 }
 
+function buildCompetitionIndex(standings) {
+  const clubToCompetition = new Map();
+  const map = new Map();
+
+  for (const standing of standings || []) {
+    const slug = String(standing.competition_slug || "");
+    const name = repairText(standing.competition_name || slug || "Competition");
+    map.set(slug, { slug, name });
+    for (const row of standing.table || []) {
+      const clubSlug = String(row.club_slug || "");
+      clubToCompetition.set(clubSlug, { slug, name });
+    }
+  }
+
+  const competitions = [...map.values()].sort((a, b) => a.name.localeCompare(b.name));
+  return { competitions, clubToCompetition };
+}
+
+function hydrateStateFromQuery() {
+  const query = readQueryParams();
+  const competitionSet = new Set(state.competitions.map((item) => item.slug));
+  const positionSet = new Set(state.players.map((player) => player.position));
+  const clubSet = new Set(state.players.map((player) => player.clubSlug));
+  const metricSet = new Set(RANKING_METRICS.map((metric) => metric.id));
+
+  state.search = query.search ? query.search.trim().toLowerCase() : "";
+  state.competition = query.competition && competitionSet.has(query.competition) ? query.competition : "all";
+  state.position = query.position && positionSet.has(query.position) ? query.position : "all";
+  state.club = query.club && clubSet.has(query.club) ? query.club : "all";
+  state.rankingMetric = query.metric && metricSet.has(query.metric) ? query.metric : state.rankingMetric;
+  state.minMinutes = clampNumber(query.minMinutes, 0, 99999, DEFAULT_MIN_MINUTES);
+  state.tableLimit = clampNumber(query.limit, 10, 500, DEFAULT_TABLE_LIMIT);
+  state.compareA = query.playerA || null;
+  state.compareB = query.playerB || null;
+}
+
+function readQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    search: params.get("search"),
+    competition: params.get("competition"),
+    position: params.get("position"),
+    club: params.get("club"),
+    metric: params.get("metric"),
+    minMinutes: params.get("minMinutes"),
+    limit: params.get("limit"),
+    playerA: params.get("playerA"),
+    playerB: params.get("playerB"),
+  };
+}
+
+function syncUrl() {
+  const params = new URLSearchParams();
+  if (state.search) {
+    params.set("search", state.search);
+  }
+  if (state.competition !== "all") {
+    params.set("competition", state.competition);
+  }
+  if (state.position !== "all") {
+    params.set("position", state.position);
+  }
+  if (state.club !== "all") {
+    params.set("club", state.club);
+  }
+  if (state.rankingMetric !== "goals_per90") {
+    params.set("metric", state.rankingMetric);
+  }
+  if (state.minMinutes !== DEFAULT_MIN_MINUTES) {
+    params.set("minMinutes", String(state.minMinutes));
+  }
+  if (state.tableLimit !== DEFAULT_TABLE_LIMIT) {
+    params.set("limit", String(state.tableLimit));
+  }
+  if (state.compareA) {
+    params.set("playerA", state.compareA);
+  }
+  if (state.compareB) {
+    params.set("playerB", state.compareB);
+  }
+
+  const targetSearch = params.toString() ? `?${params.toString()}` : "";
+  if (window.location.search !== targetSearch) {
+    window.history.replaceState(null, "", `${window.location.pathname}${targetSearch}`);
+  }
+}
+
+function competitionBySlug(slug) {
+  return state.competitions.find((item) => item.slug === slug) || null;
+}
+
 function showError(message) {
   elements.playersMetaText.textContent = message;
   elements.playersCountText.textContent = message;
-  elements.playersTableBody.innerHTML = `<tr><td colspan="7" class="is-empty">${escapeHtml(message)}</td></tr>`;
+  elements.playersHeaderLinks.innerHTML = "";
+  elements.playersTableBody.innerHTML = `<tr><td colspan="8" class="is-empty">${escapeHtml(message)}</td></tr>`;
+  elements.leadersGrid.innerHTML = `<p class="is-empty">${escapeHtml(message)}</p>`;
   elements.playersMetricGrid.innerHTML = `<p class="is-empty">${escapeHtml(message)}</p>`;
 }

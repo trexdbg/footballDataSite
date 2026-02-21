@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Joueur</title>
+    <meta
+      name="description"
+      content="Page dediee joueur: position dans les classements, radar vs moyenne championnat au meme poste."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="assets/player.js"></script>
+  </head>
+  <body>
+    <div class="noise-layer" aria-hidden="true"></div>
+    <div class="page-shell">
+      <header class="top-nav card">
+        <a class="brand" href="index.html">Pastel Football Data</a>
+        <nav class="top-nav-links" aria-label="Navigation">
+          <a class="is-active" href="player.html">Profil Joueur</a>
+          <a href="players.html">Joueurs</a>
+          <a href="teams.html">Equipes</a>
+          <a href="club.html">Clubs</a>
+        </nav>
+      </header>
+
+      <section class="page-title card reveal">
+        <p class="chip">Page Joueur</p>
+        <h1 id="playerPageTitle">Chargement du profil joueur...</h1>
+        <p id="playerMetaText">Preparation des donnees joueur, club et championnat.</p>
+        <div class="context-links" id="playerBreadcrumbs"></div>
+      </section>
+
+      <main class="dashboard-layout">
+        <aside class="panel card reveal delay-1">
+          <h2>Selection joueur</h2>
+
+          <label class="field">
+            <span>Recherche rapide</span>
+            <input id="playerSearchInput" type="search" placeholder="Nom du joueur" autocomplete="off" />
+          </label>
+
+          <label class="field">
+            <span>Competition</span>
+            <select id="playerCompetitionFilter"></select>
+          </label>
+
+          <label class="field">
+            <span>Joueur</span>
+            <select id="playerSelect"></select>
+          </label>
+
+          <label class="field">
+            <span>Poste de reference</span>
+            <select id="benchmarkPosition"></select>
+          </label>
+
+          <label class="field">
+            <span>Minutes min benchmark</span>
+            <input id="benchmarkMinMinutes" type="number" min="0" step="30" value="180" />
+          </label>
+
+          <div class="quick-actions">
+            <a id="openPlayerClub" class="button-link button-ghost" href="club.html">Page club</a>
+            <a id="openPlayerLeague" class="button-link button-ghost" href="teams.html">Classement championnat</a>
+            <a id="openRandomPlayerProfile" class="button-link" href="player.html">Autre joueur</a>
+          </div>
+        </aside>
+
+        <section class="stacked">
+          <article class="card reveal delay-1">
+            <div class="card-head">
+              <h2>Profil et contexte</h2>
+              <p id="playerSummaryText">-</p>
+            </div>
+            <div id="playerHero" class="player-hero"></div>
+            <div class="kpi-grid">
+              <div class="kpi-card" id="rankLeagueCard"></div>
+              <div class="kpi-card" id="rankPositionCard"></div>
+              <div class="kpi-card" id="minutesCard"></div>
+              <div class="kpi-card" id="impactCard"></div>
+            </div>
+          </article>
+
+          <article class="card reveal delay-2">
+            <div class="card-head">
+              <h2>Classements du joueur</h2>
+              <p id="playerRankingMeta">-</p>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Stat</th>
+                    <th>Valeur</th>
+                    <th>Rang championnat</th>
+                    <th>Rang poste</th>
+                    <th>Percentile championnat</th>
+                    <th>Voir top</th>
+                  </tr>
+                </thead>
+                <tbody id="playerRankingTableBody"></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="card reveal delay-2">
+            <div class="card-head">
+              <h2>Radar benchmark</h2>
+              <p>Joueur vs moyenne du championnat au meme poste</p>
+            </div>
+            <div class="radar-panel">
+              <canvas id="playerBenchmarkRadar"></canvas>
+            </div>
+            <div class="legend-list" id="playerBenchmarkLegend"></div>
+            <div class="metric-grid" id="playerBenchmarkGrid"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

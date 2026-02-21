@@ -25,6 +25,7 @@
         <nav class="top-nav-links" aria-label="Navigation">
           <a class="is-active" href="players.html">Joueurs</a>
           <a href="teams.html">Equipes</a>
+          <a href="club.html">Clubs</a>
         </nav>
       </header>
 
@@ -34,6 +35,7 @@
         <p id="playersMetaText">
           Chargement des donnees joueurs...
         </p>
+        <div class="context-links" id="playersHeaderLinks"></div>
       </section>
 
       <main class="dashboard-layout">
@@ -47,6 +49,11 @@
               placeholder="Nom, club, poste"
               autocomplete="off"
             />
+          </label>
+
+          <label class="field">
+            <span>Competition</span>
+            <select id="competitionFilter"></select>
           </label>
 
           <label class="field">
@@ -77,6 +84,11 @@
               <option value="100">Top 100</option>
             </select>
           </label>
+
+          <div class="quick-actions">
+            <a id="openTeamsFromPlayers" class="button-link button-ghost" href="teams.html">Voir le championnat</a>
+            <a id="openRandomPlayerFromList" class="button-link button-ghost" href="player.html">Joueur au hasard</a>
+          </div>
         </aside>
 
         <section class="stacked">
@@ -93,6 +105,7 @@
                     <th>Joueur</th>
                     <th>Poste</th>
                     <th>Club</th>
+                    <th>Competition</th>
                     <th>Min</th>
                     <th>Matchs</th>
                     <th id="rankingMetricHead">Metrique</th>
@@ -101,6 +114,14 @@
                 <tbody id="playersTableBody"></tbody>
               </table>
             </div>
+          </article>
+
+          <article class="card reveal delay-2">
+            <div class="card-head">
+              <h2>Meilleurs par statistique</h2>
+              <p id="leadersCountText">0 leader</p>
+            </div>
+            <div class="leaders-grid" id="leadersGrid"></div>
           </article>
 
           <article class="card reveal delay-2">

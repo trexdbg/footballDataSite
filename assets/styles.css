@@ -175,6 +175,13 @@ body {
   padding: 0.34rem 0.62rem;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.52rem;
+  margin-top: 1rem;
+}
+
 .entry-grid {
   display: grid;
   gap: 1rem;
@@ -230,6 +237,18 @@ body {
 .page-title {
   margin-bottom: 1rem;
   padding: 1.1rem 1.2rem;
+}
+
+.context-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.82rem;
+}
+
+.context-links span {
+  color: var(--muted);
+  font-size: 0.84rem;
 }
 
 .dashboard-layout {
@@ -288,6 +307,39 @@ select {
   padding: 0.58rem 0.64rem;
 }
 
+.button-link {
+  background: linear-gradient(120deg, rgba(122, 175, 235, 0.24), rgba(129, 206, 185, 0.2));
+  border: 1px solid rgba(122, 175, 235, 0.44);
+  border-radius: 999px;
+  color: var(--text);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 700;
+  gap: 0.3rem;
+  justify-content: center;
+  padding: 0.48rem 0.84rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.button-link:hover {
+  box-shadow: 0 8px 22px rgba(68, 94, 120, 0.16);
+  transform: translateY(-1px);
+}
+
+.button-ghost {
+  background: rgba(255, 255, 255, 0.76);
+  border-color: var(--line);
+  color: var(--muted);
+}
+
+.quick-actions {
+  display: grid;
+  gap: 0.48rem;
+  margin-top: 0.35rem;
+}
+
 input:focus,
 select:focus {
   border-color: rgba(122, 175, 235, 0.72);
@@ -314,6 +366,21 @@ select:focus {
   font-size: 0.8rem;
   margin: 0;
   text-align: right;
+}
+
+.inline-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+  text-decoration-color: rgba(122, 175, 235, 0.66);
+  text-decoration-thickness: 1.5px;
+}
+
+.strong-link {
+  font-weight: 700;
 }
 
 .table-wrap {
@@ -356,6 +423,13 @@ tbody tr:hover {
   display: flex;
   gap: 0.5rem;
   min-width: 160px;
+}
+
+.mini-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.16rem;
+  min-width: 86px;
 }
 
 .avatar {
@@ -436,6 +510,39 @@ canvas {
   margin: 0;
 }
 
+.leaders-grid {
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.leader-card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0.56rem;
+}
+
+.leader-card small {
+  color: var(--muted);
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.leader-card strong {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.leader-card p {
+  color: var(--muted);
+  font-size: 0.76rem;
+  margin: 0.2rem 0 0;
+}
+
 .kpi-grid {
   display: grid;
   gap: 0.6rem;
@@ -503,6 +610,73 @@ canvas {
   margin: 0.18rem 0;
 }
 
+.duel-links {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.link-grid {
+  display: grid;
+  gap: 0.48rem;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.pill-link {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  overflow: hidden;
+  padding: 0.42rem 0.68rem;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pill-link:hover {
+  background: linear-gradient(120deg, rgba(122, 175, 235, 0.2), rgba(129, 206, 185, 0.16));
+}
+
+.club-hero,
+.player-hero {
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.7), rgba(122, 175, 235, 0.14));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  margin-bottom: 0.74rem;
+  padding: 0.62rem;
+}
+
+.club-hero-main,
+.player-hero-main {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.club-hero-main h3,
+.player-hero-main h3 {
+  font-family: "Syne", "Segoe UI", sans-serif;
+  font-size: 1.16rem;
+  margin: 0;
+}
+
+.club-hero-main p,
+.player-hero-main p {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0.2rem 0 0;
+}
+
+.club-info-lines p {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin: 0.24rem 0;
+}
+
 .text-good {
   color: var(--good);
 }
@@ -514,6 +688,11 @@ canvas {
 .is-empty {
   color: var(--muted);
   margin: 0.8rem 0;
+}
+
+.avatar-xl {
+  height: 54px;
+  width: 54px;
 }
 
 .reveal {
@@ -563,7 +742,8 @@ canvas {
   }
 
   .metric-grid,
-  .duel-cards {
+  .duel-cards,
+  .leaders-grid {
     grid-template-columns: 1fr;
   }
 }

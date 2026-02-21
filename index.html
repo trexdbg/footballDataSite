@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pastel Football Dashboard</title>
+    <title>Pastel Football Data - Championnat Aleatoire</title>
     <meta
       name="description"
-      content="Dashboard football en 2 pages: joueurs et equipes, avec classements et comparaison radar."
+      content="Point d'entree vers un championnat aleatoire, puis navigation clubs et joueurs."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
+    <script defer src="assets/index.js"></script>
   </head>
   <body class="landing-page">
     <div class="noise-layer" aria-hidden="true"></div>
@@ -24,21 +25,26 @@
         <nav class="top-nav-links" aria-label="Navigation">
           <a href="players.html">Joueurs</a>
           <a href="teams.html">Equipes</a>
+          <a href="club.html">Clubs</a>
         </nav>
       </header>
 
       <main class="landing-layout">
         <section class="hero-panel card reveal">
-          <p class="chip">Dashboard statique</p>
-          <h1>Analyse joueurs et equipes depuis deux JSON</h1>
+          <p class="chip">Point de depart fan</p>
+          <h1 id="randomLeagueTitle">Chargement d'un championnat aleatoire...</h1>
           <p>
-            Explore les performances, trie les classements, compare les profils
-            avec des radars et navigue par championnat.
+            L'application demarre par un championnat tire au hasard, puis te laisse
+            naviguer vers les clubs et les joueurs en quelques clics.
           </p>
           <div class="hero-tags">
-            <span>players_stats.json</span>
-            <span>teams_stats.json</span>
-            <span>HTML + JavaScript</span>
+            <span id="randomLeagueMeta">Preparation du parcours...</span>
+            <span>Championnat -> Club -> Joueur</span>
+            <span>Liens partout</span>
+          </div>
+          <div class="hero-actions">
+            <a id="openRandomLeague" class="button-link" href="teams.html">Ouvrir le championnat</a>
+            <button id="rerollLeague" class="button-link button-ghost" type="button">Autre tirage</button>
           </div>
         </section>
 
@@ -46,19 +52,19 @@
           <a class="entry-card card reveal delay-1" href="players.html">
             <h2>Page Joueurs</h2>
             <p>
-              Classements par metrique, filtres avances, comparaison de deux
-              joueurs et radar de profil.
+              Recherche rapide, classements multi-stats, tri par competition et
+              acces direct aux profils joueurs.
             </p>
-            <span>Ouvrir le dashboard joueurs</span>
+            <span>Ouvrir la page joueurs</span>
           </a>
 
           <a class="entry-card card reveal delay-2" href="teams.html">
             <h2>Page Equipes</h2>
             <p>
-              Dashboard par championnat, top equipes, table complete et duel
-              equipe vs equipe.
+              Hub championnat avec classement complet, duel equipes et navigation
+              directe vers les pages clubs.
             </p>
-            <span>Ouvrir le dashboard equipes</span>
+            <span>Ouvrir la page equipes</span>
           </a>
         </section>
       </main>

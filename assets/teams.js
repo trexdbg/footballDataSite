@@ -28,13 +28,15 @@ const COLORS = {
   label: "#566d84",
 };
 
+const DEFAULT_TABLE_LIMIT = 20;
+
 const state = {
   payload: null,
   standings: [],
   teamInfo: new Map(),
   competition: null,
   sortMetric: "rank",
-  tableLimit: 20,
+  tableLimit: DEFAULT_TABLE_LIMIT,
   compareA: null,
   compareB: null,
 };
@@ -56,10 +58,18 @@ async function init() {
   state.payload = payload;
   state.standings = mapStandings(payload.standings || []);
   state.teamInfo = mapTeamInfo(payload.data || []);
-  state.competition = state.standings[0]?.competition_slug || null;
+
+  const query = readQueryParams();
+  state.competition = resolveCompetition(query.competition);
+  state.sortMetric = SORT_METRICS.some((metric) => metric.id === query.sort) ? query.sort : "rank";
+  state.tableLimit = clampNumber(query.limit, 5, 100, DEFAULT_TABLE_LIMIT);
+  state.compareA = query.teamA || null;
+  state.compareB = query.teamB || null;
 
   fillCompetitionSelect();
   fillSortMetricSelect();
+  elements.teamSortMetric.value = state.sortMetric;
+  elements.teamsTableLimit.value = String(state.tableLimit);
   renderMetaHeader();
   runPipeline();
 
@@ -68,11 +78,18 @@ async function init() {
 
 function cacheElements() {
   elements.teamsMetaText = document.getElementById("teamsMetaText");
+  elements.teamsPageTitle = document.getElementById("teamsPageTitle");
+  elements.teamsHeaderLinks = document.getElementById("teamsHeaderLinks");
   elements.competitionFilter = document.getElementById("competitionFilter");
   elements.teamSortMetric = document.getElementById("teamSortMetric");
   elements.teamsTableLimit = document.getElementById("teamsTableLimit");
   elements.compareTeamA = document.getElementById("compareTeamA");
   elements.compareTeamB = document.getElementById("compareTeamB");
+  elements.openCompetitionPlayers = document.getElementById("openCompetitionPlayers");
+  elements.openRandomClub = document.getElementById("openRandomClub");
+  elements.openRandomPlayer = document.getElementById("openRandomPlayer");
+  elements.clubsQuickCount = document.getElementById("clubsQuickCount");
+  elements.clubsQuickLinks = document.getElementById("clubsQuickLinks");
   elements.teamsCountText = document.getElementById("teamsCountText");
   elements.leaderCard = document.getElementById("leaderCard");
   elements.attackCard = document.getElementById("attackCard");
@@ -88,6 +105,8 @@ function cacheElements() {
 function bindEvents() {
   elements.competitionFilter.addEventListener("change", (event) => {
     state.competition = event.target.value;
+    state.compareA = null;
+    state.compareB = null;
     runPipeline();
   });
 
@@ -97,7 +116,7 @@ function bindEvents() {
   });
 
   elements.teamsTableLimit.addEventListener("change", (event) => {
-    state.tableLimit = clampNumber(event.target.value, 5, 100, 20);
+    state.tableLimit = clampNumber(event.target.value, 5, 100, DEFAULT_TABLE_LIMIT);
     runPipeline();
   });
 
@@ -108,6 +127,7 @@ function bindEvents() {
       elements.compareTeamB.value = state.compareB || "";
     }
     renderComparison();
+    syncUrl();
   });
 
   elements.compareTeamB.addEventListener("change", (event) => {
@@ -117,6 +137,7 @@ function bindEvents() {
       elements.compareTeamA.value = state.compareA || "";
     }
     renderComparison();
+    syncUrl();
   });
 }
 
@@ -146,13 +167,68 @@ function renderMetaHeader() {
 }
 
 function runPipeline() {
-  const tableRows = currentTableRows();
-  const sorted = sortRows(tableRows, state.sortMetric);
+  const standing = currentStanding();
+  const rows = standing?.table || [];
+  const sorted = sortRows(rows, state.sortMetric);
 
-  renderSummaryCards(tableRows);
+  renderPageContext(standing, rows);
+  renderQuickClubLinks(rows);
+  renderSummaryCards(rows);
   renderTable(sorted);
-  syncCompareSelects(tableRows);
+  syncCompareSelects(rows);
   renderComparison();
+  syncUrl();
+}
+
+function renderPageContext(standing, rows) {
+  if (!standing) {
+    elements.teamsPageTitle.textContent = "Championnat introuvable";
+    elements.teamsHeaderLinks.innerHTML = "";
+    elements.openCompetitionPlayers.href = "players.html";
+    elements.openRandomClub.href = "club.html";
+    elements.openRandomPlayer.href = "player.html";
+    return;
+  }
+
+  elements.teamsPageTitle.textContent = `${standing.competition_name} - classements et passerelles clubs/joueurs`;
+
+  const competitionSlug = standing.competition_slug;
+  const playersUrl = `players.html?competition=${encodeURIComponent(competitionSlug)}`;
+  const randomClub = rows[Math.floor(Math.random() * rows.length)] || null;
+  const randomClubUrl = randomClub
+    ? `club.html?competition=${encodeURIComponent(competitionSlug)}&club=${encodeURIComponent(randomClub.club_slug)}`
+    : `club.html?competition=${encodeURIComponent(competitionSlug)}`;
+  const randomPlayerUrl = `player.html?competition=${encodeURIComponent(competitionSlug)}&random=1`;
+
+  elements.teamsHeaderLinks.innerHTML = `
+    <a class="inline-link" href="${playersUrl}">Voir tous les joueurs du championnat</a>
+    <a class="inline-link" href="${randomClubUrl}">Ouvrir un club au hasard</a>
+    <a class="inline-link" href="index.html">Nouveau championnat aleatoire</a>
+  `;
+
+  elements.openCompetitionPlayers.href = playersUrl;
+  elements.openRandomClub.href = randomClubUrl;
+  elements.openRandomPlayer.href = randomPlayerUrl;
+}
+
+function renderQuickClubLinks(rows) {
+  elements.clubsQuickCount.textContent = `${rows.length} clubs`;
+
+  if (!rows.length) {
+    elements.clubsQuickLinks.innerHTML = `<p class="is-empty">Aucun club sur ce championnat.</p>`;
+    return;
+  }
+
+  const quick = [...rows]
+    .sort((a, b) => a.rank - b.rank)
+    .slice(0, 18)
+    .map((row) => {
+      const url = `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(row.club_slug)}`;
+      return `<a class="pill-link" href="${url}">${row.rank}. ${escapeHtml(row.club_name)}</a>`;
+    })
+    .join("");
+
+  elements.clubsQuickLinks.innerHTML = quick;
 }
 
 function currentStanding() {
@@ -185,41 +261,64 @@ function renderSummaryCards(rows) {
   const bestDefense = [...rows].sort((a, b) => a.goals_against - b.goals_against)[0];
   const bestClean = [...rows].sort((a, b) => b.clean_sheet_rate - a.clean_sheet_rate)[0];
 
+  const leaderUrl = leader ? `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(leader.club_slug)}` : null;
+  const attackUrl = bestAttack
+    ? `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(bestAttack.club_slug)}`
+    : null;
+  const defenseUrl = bestDefense
+    ? `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(bestDefense.club_slug)}`
+    : null;
+  const cleanUrl = bestClean
+    ? `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(bestClean.club_slug)}`
+    : null;
+
   elements.teamsCountText.textContent = `${teamsCount} equipes - ${comp?.competition_name || ""}`;
-  elements.leaderCard.innerHTML = kpiTemplate("Leader", leader?.club_name, `Rang ${leader?.rank || "-"}`);
+  elements.leaderCard.innerHTML = kpiTemplate("Leader", leader?.club_name, `Rang ${leader?.rank || "-"}`, leaderUrl);
   elements.attackCard.innerHTML = kpiTemplate(
     "Meilleure attaque",
     bestAttack?.club_name,
     `${bestAttack?.goals_for ?? "-"} buts marques`,
+    attackUrl,
   );
   elements.defenseCard.innerHTML = kpiTemplate(
     "Meilleure defense",
     bestDefense?.club_name,
     `${bestDefense?.goals_against ?? "-"} buts encaisses`,
+    defenseUrl,
   );
   elements.cleanSheetCard.innerHTML = kpiTemplate(
     "Top clean sheets",
     bestClean?.club_name,
     `${formatPercent(bestClean?.clean_sheet_rate || 0)}`,
+    cleanUrl,
   );
 }
 
 function renderTable(sortedRows) {
   const limited = sortedRows.slice(0, state.tableLimit);
   if (limited.length === 0) {
-    elements.teamsTableBody.innerHTML = `<tr><td colspan="10" class="is-empty">Aucune equipe pour ce championnat.</td></tr>`;
+    elements.teamsTableBody.innerHTML = `<tr><td colspan="11" class="is-empty">Aucune equipe pour ce championnat.</td></tr>`;
     return;
   }
 
   elements.teamsTableBody.innerHTML = limited
     .map((row) => {
+      const clubUrl = `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(row.club_slug)}`;
+      const playersUrl = `players.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(row.club_slug)}`;
+
       return `
         <tr>
           <td>${row.rank}</td>
           <td>
             <div class="team-cell">
               ${imageTag(row.logo_url, row.club_name)}
-              <span>${escapeHtml(row.club_name)}</span>
+              <a class="inline-link strong-link" href="${clubUrl}">${escapeHtml(row.club_name)}</a>
+            </div>
+          </td>
+          <td>
+            <div class="mini-links">
+              <a class="inline-link" href="${clubUrl}">Page club</a>
+              <a class="inline-link" href="${playersUrl}">Joueurs</a>
             </div>
           </td>
           <td>${row.points}</td>
@@ -327,6 +426,8 @@ function duelCardTemplate(row) {
   const lastMatch = formatMatch(info?.last_match);
   const nextFixture = formatFixture(info?.next_fixture);
   const summary = info?.last5_summary || {};
+  const clubUrl = `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(row.club_slug)}`;
+  const playersUrl = `players.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(row.club_slug)}`;
 
   return `
     <article class="duel-card">
@@ -337,6 +438,10 @@ function duelCardTemplate(row) {
       <p><strong>Forme:</strong> ${summary.points ?? row.points} pts sur ${summary.matches ?? 5} matchs</p>
       <p><strong>Dernier match:</strong> ${escapeHtml(lastMatch)}</p>
       <p><strong>Prochain match:</strong> ${escapeHtml(nextFixture)}</p>
+      <p class="duel-links">
+        <a class="inline-link" href="${clubUrl}">Page club</a>
+        <a class="inline-link" href="${playersUrl}">Joueurs du club</a>
+      </p>
     </article>
   `;
 }
@@ -460,6 +565,9 @@ function radarRawValue(row, metric) {
 }
 
 function radarBounds(rows, metric) {
+  if (!rows.length) {
+    return { min: 0, max: 1 };
+  }
   const values = rows.map((row) => radarRawValue(row, metric));
   const min = Math.min(...values);
   const max = Math.max(...values);
@@ -526,10 +634,12 @@ function mapTeamInfo(entries) {
   return map;
 }
 
-function kpiTemplate(label, value, detail) {
+function kpiTemplate(label, value, detail, href = null) {
+  const safeValue = escapeHtml(value || "-");
+  const title = href ? `<a class="inline-link strong-link" href="${href}">${safeValue}</a>` : safeValue;
   return `
     <small>${escapeHtml(label)}</small>
-    <strong>${escapeHtml(value || "-")}</strong>
+    <strong>${title}</strong>
     <span>${escapeHtml(detail || "-")}</span>
   `;
 }
@@ -666,7 +776,7 @@ function prettifySlug(slug) {
 
 function repairText(input) {
   const raw = String(input || "");
-  if (!/[ÃÂ]/.test(raw)) {
+  if (!/[ÃƒÃ‚]/.test(raw)) {
     return raw;
   }
 
@@ -706,10 +816,60 @@ function debounce(callback, waitMs) {
   };
 }
 
+function resolveCompetition(rawSlug) {
+  const available = new Set(state.standings.map((entry) => entry.competition_slug));
+  if (rawSlug && available.has(rawSlug)) {
+    return rawSlug;
+  }
+  if (!state.standings.length) {
+    return null;
+  }
+  const index = Math.floor(Math.random() * state.standings.length);
+  return state.standings[index].competition_slug;
+}
+
+function readQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    competition: params.get("competition"),
+    sort: params.get("sort"),
+    limit: params.get("limit"),
+    teamA: params.get("teamA"),
+    teamB: params.get("teamB"),
+  };
+}
+
+function syncUrl() {
+  const params = new URLSearchParams();
+  if (state.competition) {
+    params.set("competition", state.competition);
+  }
+  if (state.sortMetric !== "rank") {
+    params.set("sort", state.sortMetric);
+  }
+  if (state.tableLimit !== DEFAULT_TABLE_LIMIT) {
+    params.set("limit", String(state.tableLimit));
+  }
+  if (state.compareA) {
+    params.set("teamA", state.compareA);
+  }
+  if (state.compareB) {
+    params.set("teamB", state.compareB);
+  }
+
+  const targetSearch = params.toString() ? `?${params.toString()}` : "";
+  if (window.location.search !== targetSearch) {
+    window.history.replaceState(null, "", `${window.location.pathname}${targetSearch}`);
+  }
+}
+
 function showError(message) {
   elements.teamsMetaText.textContent = message;
+  elements.teamsPageTitle.textContent = "Erreur de chargement";
+  elements.teamsHeaderLinks.innerHTML = "";
   elements.teamsCountText.textContent = message;
-  elements.teamsTableBody.innerHTML = `<tr><td colspan="10" class="is-empty">${escapeHtml(message)}</td></tr>`;
+  elements.clubsQuickLinks.innerHTML = `<p class="is-empty">${escapeHtml(message)}</p>`;
+  elements.teamsTableBody.innerHTML = `<tr><td colspan="11" class="is-empty">${escapeHtml(message)}</td></tr>`;
   elements.teamsMetricGrid.innerHTML = `<p class="is-empty">${escapeHtml(message)}</p>`;
   elements.teamsDuelCards.innerHTML = "";
 }
