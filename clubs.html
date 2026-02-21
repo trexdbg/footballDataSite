@@ -1,14 +1,14 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Football Data Hub | Clubs</title>
-    <meta name="description" content="Explorer les clubs: recherche, stats cles, forme recente et acces fiche club." />
+    <title>Stadium Kids Lab | Equipes</title>
+    <meta name="description" content="Trouve une equipe, lis ses statistiques et prepare les prochains matchs facilement." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -16,39 +16,39 @@
     <script defer src="assets/clubs.js"></script>
   </head>
   <body>
-    <div class="site-shell">
-      <header class="topbar reveal">
-        <a class="brand" href="index.html">Football Data Hub<small>Lecture claire des stats</small></a>
+    <div class="app-shell">
+      <header class="app-header reveal">
+        <a class="brand" href="index.html">Stadium Kids Lab<small>Jouer avec les stats foot</small></a>
         <nav class="topnav" aria-label="Navigation principale">
           <a href="index.html">Accueil</a>
-          <a class="active" href="clubs.html">Clubs</a>
+          <a class="active" href="clubs.html">Equipes</a>
           <a href="players.html">Joueurs</a>
           <a href="teams.html">Classements</a>
-          <a href="compare.html">Comparer</a>
+          <a href="compare.html">Duels</a>
         </nav>
       </header>
 
-      <main class="grid-main" style="margin-top:0.9rem;">
+      <main class="split-layout">
         <aside class="card panel reveal">
           <div class="section-title">
-            <span class="chip">Filtrer</span>
-            <h2>Trouver un club</h2>
-            <p id="clubsMeta">Chargement des clubs...</p>
+            <span class="chip">Zone filtres</span>
+            <h2>Cherche une equipe</h2>
+            <p id="clubsMeta">Chargement des equipes...</p>
           </div>
 
           <div class="filters">
             <div class="field">
-              <label for="clubsSearch">Recherche</label>
-              <input id="clubsSearch" type="search" placeholder="Nom du club" autocomplete="off" />
+              <label for="clubsSearch">Nom d'equipe</label>
+              <input id="clubsSearch" type="search" placeholder="Ex: Arsenal" autocomplete="off" />
             </div>
             <div class="field">
               <label for="clubsCompetition">Competition</label>
               <select id="clubsCompetition"></select>
             </div>
             <div class="field">
-              <label for="clubsSort">Tri</label>
+              <label for="clubsSort">Classement des cartes</label>
               <select id="clubsSort">
-                <option value="rank">Classement officiel</option>
+                <option value="rank">Rang officiel</option>
                 <option value="points">Points</option>
                 <option value="recent">Forme recente</option>
                 <option value="attack">Attaque</option>
@@ -56,13 +56,22 @@
               </select>
             </div>
           </div>
+
+          <div class="highlight-list" style="margin-top: 0.65rem">
+            <article class="highlight-item">
+              <div>
+                <strong>Astuce rapide</strong>
+                <p>Utilise "Forme recente" pour voir les equipes qui montent vite.</p>
+              </div>
+            </article>
+          </div>
         </aside>
 
         <section class="grid reveal">
           <article class="card panel">
             <div class="section-title">
-              <h1>Clubs</h1>
-              <p id="clubsCount">0 club</p>
+              <h1>Cartes equipes</h1>
+              <p id="clubsCount">0 equipe</p>
             </div>
             <div class="cards-list cols-2" id="clubsList"></div>
           </article>

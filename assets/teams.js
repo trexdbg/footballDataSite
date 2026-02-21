@@ -1,4 +1,4 @@
-﻿const app = window.FootballData;
+const app = window.FootballData;
 
 const state = {
   data: null,
@@ -38,6 +38,7 @@ function cacheElements() {
   elements.standingsTitle = document.getElementById("standingsTitle");
   elements.standingsSeason = document.getElementById("standingsSeason");
   elements.standingsKpis = document.getElementById("standingsKpis");
+  elements.standingsFixtures = document.getElementById("standingsFixtures");
   elements.standingsBody = document.getElementById("standingsBody");
 }
 
@@ -92,6 +93,7 @@ function run() {
   const rows = sortRows(competition.table).slice(0, state.limit);
   renderKpis(competition.table);
   renderRows(rows);
+  renderFixtures(competition.table);
   syncUrl();
 }
 
@@ -145,7 +147,7 @@ function renderKpis(rows) {
   ]
     .map((kpi) => {
       const title = kpi.href
-        ? `<a href="${kpi.href}" style="text-decoration:none;font-weight:700;">${app.escapeHtml(kpi.value)}</a>`
+        ? `<a href="${kpi.href}" style="text-decoration:none;font-weight:800;">${app.escapeHtml(kpi.value)}</a>`
         : app.escapeHtml(kpi.value);
       return `<article class="kpi"><small>${app.escapeHtml(kpi.label)}</small><strong>${title}</strong><span>${app.escapeHtml(
         kpi.detail,
@@ -169,7 +171,7 @@ function renderRows(rows) {
           <td>
             <div class="row-id">
               <img class="logo" src="${app.escapeHtml(club.logoUrl)}" alt="${app.escapeHtml(club.name)}" loading="lazy" />
-              <a href="${clubUrl}" style="text-decoration:none;font-weight:700;">${app.escapeHtml(club.name)}</a>
+              <a href="${clubUrl}" style="text-decoration:none;font-weight:800;">${app.escapeHtml(club.name)}</a>
             </div>
           </td>
           <td>${club.points}</td>
@@ -180,8 +182,58 @@ function renderRows(rows) {
           <td>${club.goalsFor}</td>
           <td>${club.goalsAgainst}</td>
           <td>${club.goalDifference}</td>
-          <td>${club.recent.wins}W ${club.recent.draws}D ${club.recent.losses}L</td>
+          <td>${club.recent.wins}V ${club.recent.draws}N ${club.recent.losses}D</td>
         </tr>
+      `;
+    })
+    .join("");
+}
+
+function renderFixtures(rows) {
+  const fixtures = [];
+  for (const club of rows) {
+    const date = club.nextFixture?.date;
+    const opponentSlug = club.nextFixture?.opponentSlug;
+    if (!date || !opponentSlug) {
+      continue;
+    }
+
+    const when = new Date(date);
+    if (Number.isNaN(when.valueOf())) {
+      continue;
+    }
+
+    fixtures.push({
+      key: `${String(date).slice(0, 10)}|${[club.slug, opponentSlug].sort().join("|")}`,
+      when,
+      club,
+      opponent: state.data.clubsBySlug.get(opponentSlug) || null,
+      homeAway: club.nextFixture?.homeAway || "",
+    });
+  }
+
+  const unique = [...new Map(fixtures.map((fixture) => [fixture.key, fixture])).values()]
+    .sort((a, b) => a.when.valueOf() - b.when.valueOf())
+    .slice(0, 3);
+
+  if (!unique.length) {
+    elements.standingsFixtures.innerHTML = `<p class="empty">Pas de prochain match detecte.</p>`;
+    return;
+  }
+
+  elements.standingsFixtures.innerHTML = unique
+    .map((fixture) => {
+      const leftUrl = app.buildUrl("club.html", { club: fixture.club.slug, competition: fixture.club.competitionSlug });
+      const right = fixture.opponent ? fixture.opponent.name : app.prettifySlug(fixture.club.nextFixture?.opponentSlug || "");
+      const where = fixture.homeAway === "home" ? "domicile" : fixture.homeAway === "away" ? "exterieur" : "neutre";
+      return `
+        <article class="highlight-item">
+          <div>
+            <strong>${app.escapeHtml(fixture.club.name)} vs ${app.escapeHtml(right)}</strong>
+            <p>${app.formatDate(fixture.when)} | ${where}</p>
+            <a class="info-pill" href="${leftUrl}" style="margin-top:0.25rem;text-decoration:none;">Fiche equipe</a>
+          </div>
+        </article>
       `;
     })
     .join("");
@@ -204,6 +256,9 @@ function syncUrl() {
 function showError(message) {
   if (elements.standingsMeta) {
     elements.standingsMeta.textContent = message;
+  }
+  if (elements.standingsFixtures) {
+    elements.standingsFixtures.innerHTML = `<p class="empty">${app.escapeHtml(message)}</p>`;
   }
   if (elements.standingsBody) {
     elements.standingsBody.innerHTML = `<tr><td colspan="11" class="empty">${app.escapeHtml(message)}</td></tr>`;

@@ -1,4 +1,4 @@
-﻿const app = window.FootballData;
+const app = window.FootballData;
 
 const state = {
   data: null,
@@ -49,6 +49,7 @@ function cacheElements() {
   elements.playersLimit = document.getElementById("playersLimit");
   elements.playersCount = document.getElementById("playersCount");
   elements.playersMetricHead = document.getElementById("playersMetricHead");
+  elements.playersCards = document.getElementById("playersCards");
   elements.playersBody = document.getElementById("playersBody");
   elements.playersLeaders = document.getElementById("playersLeaders");
 }
@@ -163,14 +164,49 @@ function run() {
   });
 
   renderMeta(filtered.length);
+  renderCards(sorted);
   renderTable(sorted, metricDef);
   renderLeaders(filtered);
   syncUrl();
 }
 
 function renderMeta(total) {
-  elements.playersMeta.textContent = `${state.data.players.length} joueurs disponibles.`;
+  elements.playersMeta.textContent = `${state.data.players.length} joueurs disponibles dans la base.`;
   elements.playersCount.textContent = `${total} joueur${total > 1 ? "s" : ""} filtres`;
+}
+
+function renderCards(sorted) {
+  const metricDef = app.getMetricDefinition("player", state.metric);
+  const topCards = sorted.slice(0, 12);
+
+  if (!topCards.length) {
+    elements.playersCards.innerHTML = `<p class="empty">Aucun joueur pour ces filtres.</p>`;
+    return;
+  }
+
+  elements.playersCards.innerHTML = topCards
+    .map((player, index) => {
+      const profileUrl = app.buildUrl("player.html", { player: player.slug, competition: player.competitionSlug });
+      const clubUrl = app.buildUrl("club.html", { club: player.clubSlug, competition: player.competitionSlug });
+      const metricValue = app.getMetricValue(player, state.metric);
+      return `
+        <article class="player-card">
+          <div class="row-id">
+            <img class="avatar" src="${app.escapeHtml(player.imageUrl)}" alt="${app.escapeHtml(player.name)}" loading="lazy" />
+            <div>
+              <h3><a href="${profileUrl}" style="text-decoration:none;">${app.escapeHtml(player.name)}</a></h3>
+              <p class="player-meta">#${index + 1} | ${app.escapeHtml(player.position)} | <a href="${clubUrl}" style="text-decoration:none;">${app.escapeHtml(player.clubName)}</a></p>
+            </div>
+          </div>
+          <div class="card-tags">
+            <span class="tag">${app.escapeHtml(metricDef?.label || "Metrique")}: ${app.formatMetric("player", state.metric, metricValue)}</span>
+            <span class="tag">Min: ${app.formatNumber(player.minutes, 0)}</span>
+            <span class="tag">${app.escapeHtml(player.competitionName)}</span>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
 }
 
 function renderTable(sorted, metricDef) {
@@ -194,7 +230,7 @@ function renderTable(sorted, metricDef) {
           <td>
             <div class="row-id">
               <img class="avatar" src="${app.escapeHtml(player.imageUrl)}" alt="${app.escapeHtml(player.name)}" loading="lazy" />
-              <a href="${profileUrl}" style="text-decoration:none;font-weight:700;">${app.escapeHtml(player.name)}</a>
+              <a href="${profileUrl}" style="text-decoration:none;font-weight:800;">${app.escapeHtml(player.name)}</a>
             </div>
           </td>
           <td>${app.escapeHtml(player.position)}</td>
@@ -240,8 +276,8 @@ function renderLeaders(pool) {
       const playerUrl = app.buildUrl("player.html", { player: entry.player.slug, competition: entry.player.competitionSlug });
       return `
         <article class="player-card">
-          <h3 style="font-size:0.95rem; margin-bottom:0.2rem;">${app.escapeHtml(entry.metric.label)}</h3>
-          <p class="player-meta"><a href="${playerUrl}" style="text-decoration:none;font-weight:700;">${app.escapeHtml(
+          <h3 style="font-size:0.96rem; margin-bottom:0.2rem;">${app.escapeHtml(entry.metric.label)}</h3>
+          <p class="player-meta"><a href="${playerUrl}" style="text-decoration:none;font-weight:800;">${app.escapeHtml(
             entry.player.name,
           )}</a></p>
           <div class="card-tags"><span class="tag">${app.formatMetric("player", entry.metric.id, value)}</span></div>
@@ -277,6 +313,9 @@ function syncUrl() {
 function showError(message) {
   if (elements.playersMeta) {
     elements.playersMeta.textContent = message;
+  }
+  if (elements.playersCards) {
+    elements.playersCards.innerHTML = `<p class="empty">${app.escapeHtml(message)}</p>`;
   }
   if (elements.playersBody) {
     elements.playersBody.innerHTML = `<tr><td colspan="7" class="empty">${app.escapeHtml(message)}</td></tr>`;

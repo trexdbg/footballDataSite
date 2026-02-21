@@ -1,4 +1,4 @@
-﻿const app = window.FootballData;
+const app = window.FootballData;
 
 const state = {
   data: null,
@@ -13,7 +13,7 @@ const elements = {};
 document.addEventListener("DOMContentLoaded", () => {
   init().catch((error) => {
     console.error(error);
-    showError("Impossible de charger la page Comparer.");
+    showError("Impossible de charger la page Duel.");
   });
 });
 
@@ -33,6 +33,7 @@ async function init() {
 
 function cacheElements() {
   elements.compareMeta = document.getElementById("compareMeta");
+  elements.compareWinner = document.getElementById("compareWinner");
   elements.modeButtons = [...document.querySelectorAll("[data-mode]")];
   elements.compareCompetition = document.getElementById("compareCompetition");
   elements.compareLeft = document.getElementById("compareLeft");
@@ -87,7 +88,7 @@ function bindEvents() {
   window.addEventListener(
     "resize",
     app.debounce(() => {
-      runRadar();
+      runRadarOnly();
     }, 150),
   );
 }
@@ -177,23 +178,24 @@ function run() {
   }
 
   const metrics = selectedMetrics(left, right);
+  const metricKind = state.mode === "club" ? "team" : "player";
   const normalizer = app.normalizeForRadar(pool, metrics, app.getMetricValue);
 
   const leftValues = metrics.map((metricId) => {
-    const metric = app.getMetricDefinition(state.mode === "club" ? "team" : "player", metricId);
+    const metric = app.getMetricDefinition(metricKind, metricId);
     return normalizer.normalizeValue(metricId, app.getMetricValue(left, metricId), metric?.higherIsBetter === false);
   });
 
   const rightValues = metrics.map((metricId) => {
-    const metric = app.getMetricDefinition(state.mode === "club" ? "team" : "player", metricId);
+    const metric = app.getMetricDefinition(metricKind, metricId);
     return normalizer.normalizeValue(metricId, app.getMetricValue(right, metricId), metric?.higherIsBetter === false);
   });
 
-  elements.compareTitle.textContent = state.mode === "club" ? "Comparaison clubs" : "Comparaison joueurs";
+  elements.compareTitle.textContent = state.mode === "club" ? "Duel equipes" : "Duel joueurs";
   elements.compareSubtitle.textContent = `${nameFor(left)} vs ${nameFor(right)}`;
 
   app.drawRadarChart(elements.compareRadar, {
-    axes: metrics.map((metricId) => app.getMetricDefinition(state.mode === "club" ? "team" : "player", metricId)?.label || metricId),
+    axes: metrics.map((metricId) => app.getMetricDefinition(metricKind, metricId)?.label || metricId),
     datasets: [
       { values: leftValues, color: app.colors.emerald, fill: app.colors.emeraldSoft },
       { values: rightValues, color: app.colors.amber, fill: app.colors.amberSoft },
@@ -205,30 +207,62 @@ function run() {
     <span class="legend-item"><span class="legend-dot" style="background:${app.colors.amber};"></span>${app.escapeHtml(nameFor(right))}</span>
   `;
 
+  let leftWins = 0;
+  let rightWins = 0;
+
   elements.compareStats.innerHTML = metrics
     .map((metricId) => {
-      const def = app.getMetricDefinition(state.mode === "club" ? "team" : "player", metricId);
+      const def = app.getMetricDefinition(metricKind, metricId);
       const leftRaw = app.getMetricValue(left, metricId);
       const rightRaw = app.getMetricValue(right, metricId);
-      const betterLeft = def?.higherIsBetter === false ? leftRaw <= rightRaw : leftRaw >= rightRaw;
-      const label = betterLeft ? "A devant" : "B devant";
-      const cls = betterLeft ? "good" : "warn";
+
+      const leftBetter = def?.higherIsBetter === false ? leftRaw <= rightRaw : leftRaw >= rightRaw;
+      const equal = leftRaw === rightRaw;
+
+      if (!equal) {
+        if (leftBetter) {
+          leftWins += 1;
+        } else {
+          rightWins += 1;
+        }
+      }
+
+      const label = equal ? "Egalite" : leftBetter ? "A devant" : "B devant";
+      const cls = equal ? "muted" : leftBetter ? "good" : "warn";
+
       return `
         <article class="metric">
           <strong>${app.escapeHtml(def?.label || metricId)}</strong>
-          <p>A: ${app.formatMetric(state.mode === "club" ? "team" : "player", metricId, leftRaw)}</p>
-          <p>B: ${app.formatMetric(state.mode === "club" ? "team" : "player", metricId, rightRaw)}</p>
+          <p>A: ${app.formatMetric(metricKind, metricId, leftRaw)}</p>
+          <p>B: ${app.formatMetric(metricKind, metricId, rightRaw)}</p>
           <p class="${cls}">${label}</p>
         </article>
       `;
     })
     .join("");
 
+  updateWinnerLabel(left, right, leftWins, rightWins);
   syncUrl();
 }
 
+function updateWinnerLabel(left, right, leftWins, rightWins) {
+  if (!elements.compareWinner) {
+    return;
+  }
+
+  if (leftWins === rightWins) {
+    elements.compareWinner.textContent = `Resultat du duel: egalite ${leftWins}-${rightWins}`;
+    return;
+  }
+
+  const winner = leftWins > rightWins ? nameFor(left) : nameFor(right);
+  const scoreLeft = Math.max(leftWins, rightWins);
+  const scoreRight = Math.min(leftWins, rightWins);
+  elements.compareWinner.textContent = `Resultat du duel: ${winner} gagne ${scoreLeft}-${scoreRight}`;
+}
+
 function nameFor(row) {
-  return state.mode === "club" ? row.name : row.name;
+  return row.name;
 }
 
 function selectedMetrics(left, right) {
@@ -243,7 +277,7 @@ function selectedMetrics(left, right) {
   return ["contributionsP90", "goalsP90", "assistsP90", "shotsOnTargetP90", "passesP90", "duelsWonP90"];
 }
 
-function runRadar() {
+function runRadarOnly() {
   const pool = profilePool();
   const left = pool.find((row) => row.slug === state.left);
   const right = pool.find((row) => row.slug === state.right);
@@ -271,6 +305,9 @@ function syncUrl() {
 function showError(message) {
   if (elements.compareMeta) {
     elements.compareMeta.textContent = message;
+  }
+  if (elements.compareWinner) {
+    elements.compareWinner.textContent = "Resultat du duel: -";
   }
   if (elements.compareStats) {
     elements.compareStats.innerHTML = `<p class="empty">${app.escapeHtml(message)}</p>`;

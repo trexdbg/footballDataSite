@@ -1,30 +1,37 @@
-﻿# Football Data Hub
+# Stadium Kids Lab
 
-Refonte complete orientee UX, basee uniquement sur:
+Refonte complete orientee enfant, basee uniquement sur:
 
 - `teams_stats.json`
 - `players_stats.json`
 
+## Objectif UX
+
+- comparer facilement des joueurs et des equipes
+- comprendre les stats sans jargon complexe
+- voir rapidement les prochains matchs
+- garder un parcours ludique (cartes, duels, reperes visuels)
+
 ## Pages
 
-- `index.html`: accueil (recherche globale, apercu classement, tendances, suggestions de comparaison)
-- `clubs.html`: exploration des clubs
-- `club.html`: fiche club (resume, radar, forme recente, effectif)
-- `players.html`: exploration des joueurs
+- `index.html`: accueil avec recherche globale, mini-classement, matchs a venir, tendances et duels suggeres
+- `clubs.html`: galerie des equipes avec filtres
+- `club.html`: fiche equipe (resume, radar, forme recente, effectif)
+- `players.html`: galerie joueurs + tableau detaille + leaders
 - `player.html`: fiche joueur (resume, radar poste, evolution recente)
-- `teams.html`: classements
-- `compare.html`: comparaison club vs club / joueur vs joueur
+- `teams.html`: classements + prochains matchs
+- `compare.html`: duel joueur vs joueur / equipe vs equipe avec score de duel
 
 ## Scripts
 
-- `assets/common.js`: chargement des donnees + mapping + utilitaires + charts
+- `assets/common.js`: chargement/mapping des JSON + utilitaires + charts
 - `assets/index.js`: logique accueil
-- `assets/clubs.js`: logique page clubs
+- `assets/clubs.js`: logique page equipes
 - `assets/teams.js`: logique classements
 - `assets/players.js`: logique page joueurs
-- `assets/club.js`: logique fiche club
+- `assets/club.js`: logique fiche equipe
 - `assets/player.js`: logique fiche joueur
-- `assets/compare.js`: logique comparaisons
+- `assets/compare.js`: logique duel
 - `assets/styles.css`: design system global
 
 ## Lancer en local

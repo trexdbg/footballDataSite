@@ -41,13 +41,13 @@
   const TEAM_RADAR_METRICS = ["points", "goalsFor", "goalDifference", "cleanSheetRate", "recentPoints", "goalsAgainst"];
 
   const COLORS = {
-    emerald: "#14745f",
-    emeraldSoft: "rgba(20, 116, 95, 0.2)",
-    amber: "#c96f2b",
-    amberSoft: "rgba(201, 111, 43, 0.2)",
-    navy: "#16324f",
-    grid: "rgba(22, 50, 79, 0.18)",
-    text: "#152433",
+    emerald: "#0c84d8",
+    emeraldSoft: "rgba(12, 132, 216, 0.2)",
+    amber: "#f08f2c",
+    amberSoft: "rgba(240, 143, 44, 0.22)",
+    navy: "#1e3f5a",
+    grid: "rgba(30, 63, 90, 0.2)",
+    text: "#13283d",
   };
 
   let cachePromise = null;
@@ -628,7 +628,7 @@
     }
 
     ctx.fillStyle = COLORS.text;
-    ctx.font = "600 12px 'Plus Jakarta Sans', 'Segoe UI', sans-serif";
+    ctx.font = "700 12px 'Nunito', 'Segoe UI', sans-serif";
     for (let i = 0; i < axisCount; i += 1) {
       const p = polar(center, radius + 16, startAngle + i * step);
       ctx.textAlign = p.x < center.x - 8 ? "right" : p.x > center.x + 8 ? "left" : "center";
@@ -750,7 +750,7 @@
     const palette = options.palette || [COLORS.emerald, COLORS.amber, COLORS.navy];
 
     ctx.save();
-    ctx.font = "600 11px 'Plus Jakarta Sans', 'Segoe UI', sans-serif";
+    ctx.font = "700 11px 'Nunito', 'Segoe UI', sans-serif";
     ctx.textAlign = "center";
 
     for (let i = 0; i < values.length; i += 1) {

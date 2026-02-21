@@ -1,4 +1,4 @@
-﻿const app = window.FootballData;
+const app = window.FootballData;
 
 const state = {
   data: null,
@@ -11,7 +11,7 @@ const elements = {};
 document.addEventListener("DOMContentLoaded", () => {
   init().catch((error) => {
     console.error(error);
-    fail("Impossible de charger les donnees de la page d'accueil.");
+    fail("Impossible de charger la page d'accueil.");
   });
 });
 
@@ -26,6 +26,7 @@ async function init() {
   renderMeta();
   renderKpis();
   renderStandingsPreview();
+  renderNextFixtures();
   renderTrending();
   renderSuggestions();
 }
@@ -38,6 +39,7 @@ function cacheElements() {
   elements.homeCompetition = document.getElementById("homeCompetition");
   elements.homeStandingsBody = document.getElementById("homeStandingsBody");
   elements.homeStandingsLink = document.getElementById("homeStandingsLink");
+  elements.homeNextFixtures = document.getElementById("homeNextFixtures");
   elements.hotClubs = document.getElementById("hotClubs");
   elements.hotPlayers = document.getElementById("hotPlayers");
   elements.homeSuggestions = document.getElementById("homeSuggestions");
@@ -52,13 +54,13 @@ function bindEvents() {
   elements.homeCompetition.addEventListener("change", (event) => {
     state.competition = event.target.value;
     renderStandingsPreview();
+    renderNextFixtures();
   });
 }
 
 function renderMeta() {
-  elements.homeMeta.textContent = `${state.data.clubs.length} clubs, ${state.data.players.length} joueurs. MAJ ${app.formatDateTime(
-    state.data.generatedAt,
-  )}.`;
+  const generated = state.data.generatedAt ? app.formatDateTime(state.data.generatedAt) : "date inconnue";
+  elements.homeMeta.textContent = `${state.data.competitions.length} competitions, ${state.data.clubs.length} equipes, ${state.data.players.length} joueurs. MAJ ${generated}.`;
 }
 
 function fillCompetitionSelect() {
@@ -76,31 +78,38 @@ function renderKpis() {
     .filter((player) => player.minutes >= 240)
     .sort((a, b) => b.metrics.contributionsP90 - a.metrics.contributionsP90)[0];
   const topClub = [...state.data.clubs].sort((a, b) => b.points - a.points)[0];
+  const topDefense = [...state.data.clubs].sort((a, b) => a.goalsAgainst - b.goalsAgainst)[0];
 
   const cards = [
     {
-      label: "Competitions suivies",
+      label: "Competitions actives",
       value: String(state.data.competitions.length),
-      detail: "Classements lisibles",
+      detail: "A explorer",
     },
     {
-      label: "Club leader actuel",
+      label: "Equipe numero 1",
       value: topClub ? topClub.name : "-",
-      detail: topClub ? `${topClub.points} pts` : "",
+      detail: topClub ? `${topClub.points} points` : "",
       href: topClub ? app.buildUrl("club.html", { club: topClub.slug, competition: topClub.competitionSlug }) : null,
     },
     {
-      label: "Joueur tendance",
+      label: "Joueur du moment",
       value: topPlayer ? topPlayer.name : "-",
       detail: topPlayer ? `${app.formatMetric("player", "contributionsP90", topPlayer.metrics.contributionsP90)}` : "",
       href: topPlayer ? app.buildUrl("player.html", { player: topPlayer.slug, competition: topPlayer.competitionSlug }) : null,
+    },
+    {
+      label: "Defense la plus solide",
+      value: topDefense ? topDefense.name : "-",
+      detail: topDefense ? `${topDefense.goalsAgainst} buts encaisses` : "",
+      href: topDefense ? app.buildUrl("club.html", { club: topDefense.slug, competition: topDefense.competitionSlug }) : null,
     },
   ];
 
   elements.homeKpis.innerHTML = cards
     .map((card) => {
       const title = card.href
-        ? `<a class="inline-links" href="${card.href}" style="display:block;text-decoration:none;"><strong>${app.escapeHtml(card.value)}</strong></a>`
+        ? `<a href="${card.href}" style="text-decoration:none;"><strong>${app.escapeHtml(card.value)}</strong></a>`
         : `<strong>${app.escapeHtml(card.value)}</strong>`;
       return `<article class="kpi"><small>${app.escapeHtml(card.label)}</small>${title}<span>${app.escapeHtml(card.detail || "")}</span></article>`;
     })
@@ -124,17 +133,77 @@ function renderStandingsPreview() {
           <td>
             <div class="row-id">
               <img class="logo" src="${app.escapeHtml(club.logoUrl)}" alt="${app.escapeHtml(club.name)}" loading="lazy" />
-              <a href="${clubUrl}" style="text-decoration:none;font-weight:700;">${app.escapeHtml(club.name)}</a>
+              <a href="${clubUrl}" style="text-decoration:none;font-weight:800;">${app.escapeHtml(club.name)}</a>
             </div>
           </td>
           <td>${club.points}</td>
-          <td>${club.recent.wins}W ${club.recent.draws}D ${club.recent.losses}L</td>
+          <td>${club.recent.wins}V ${club.recent.draws}N ${club.recent.losses}D</td>
         </tr>
       `;
     })
     .join("");
 
   elements.homeStandingsLink.href = app.buildUrl("teams.html", { competition: competition.slug });
+}
+
+function renderNextFixtures() {
+  const clubs = state.data.clubs.filter((club) => !state.competition || club.competitionSlug === state.competition);
+  const fixtures = [];
+
+  for (const club of clubs) {
+    const date = club.nextFixture?.date;
+    const opponentSlug = club.nextFixture?.opponentSlug;
+    if (!date || !opponentSlug) {
+      continue;
+    }
+
+    const fixtureDate = new Date(date);
+    if (Number.isNaN(fixtureDate.valueOf())) {
+      continue;
+    }
+
+    const canonical = [club.slug, opponentSlug].sort().join("|");
+    fixtures.push({
+      key: `${String(date).slice(0, 10)}|${canonical}`,
+      date: fixtureDate,
+      club,
+      opponent: state.data.clubsBySlug.get(opponentSlug) || null,
+      homeAway: club.nextFixture?.homeAway || "",
+    });
+  }
+
+  const dedup = new Map();
+  for (const fixture of fixtures) {
+    if (!dedup.has(fixture.key)) {
+      dedup.set(fixture.key, fixture);
+    }
+  }
+
+  const next = [...dedup.values()]
+    .sort((a, b) => a.date.valueOf() - b.date.valueOf())
+    .slice(0, 6);
+
+  if (!next.length) {
+    elements.homeNextFixtures.innerHTML = `<p class="empty">Aucun match a venir trouve dans cette competition.</p>`;
+    return;
+  }
+
+  elements.homeNextFixtures.innerHTML = next
+    .map((item) => {
+      const leftUrl = app.buildUrl("club.html", { club: item.club.slug, competition: item.club.competitionSlug });
+      const rightName = item.opponent ? item.opponent.name : app.prettifySlug(item.club.nextFixture?.opponentSlug || "");
+      const where = item.homeAway === "home" ? "domicile" : item.homeAway === "away" ? "exterieur" : "terrain neutre";
+      return `
+        <article class="highlight-item">
+          <div>
+            <strong>${app.escapeHtml(item.club.name)} vs ${app.escapeHtml(rightName)}</strong>
+            <p>${app.formatDate(item.date)} | ${where}</p>
+            <a href="${leftUrl}" class="info-pill" style="margin-top:0.28rem;text-decoration:none;">Voir l'equipe</a>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
 }
 
 function renderTrending() {
@@ -187,25 +256,33 @@ function renderSuggestions() {
     .sort((a, b) => b.metrics.contributionsP90 - a.metrics.contributionsP90)
     .slice(0, 2);
 
-  const clubCard = topClubs.length === 2
-    ? `<article class="compare-row"><h3>Club vs Club</h3><p class="muted">${app.escapeHtml(topClubs[0].name)} vs ${app.escapeHtml(topClubs[1].name)}</p><a class="btn" href="${app.buildUrl("compare.html", {
-        mode: "club",
-        competition: topClubs[0].competitionSlug,
-        left: topClubs[0].slug,
-        right: topClubs[1].slug,
-      })}">Ouvrir cette comparaison</a></article>`
-    : "";
+  const clubCard =
+    topClubs.length === 2
+      ? `<article class="compare-row"><h3>Duel equipes</h3><p class="muted">${app.escapeHtml(topClubs[0].name)} vs ${app.escapeHtml(topClubs[1].name)}</p><a class="btn" href="${app.buildUrl(
+          "compare.html",
+          {
+            mode: "club",
+            competition: topClubs[0].competitionSlug,
+            left: topClubs[0].slug,
+            right: topClubs[1].slug,
+          },
+        )}">Lancer ce duel</a></article>`
+      : "";
 
-  const playerCard = topPlayers.length === 2
-    ? `<article class="compare-row"><h3>Joueur vs Joueur</h3><p class="muted">${app.escapeHtml(topPlayers[0].name)} vs ${app.escapeHtml(topPlayers[1].name)}</p><a class="btn" href="${app.buildUrl("compare.html", {
-        mode: "player",
-        competition: topPlayers[0].competitionSlug,
-        left: topPlayers[0].slug,
-        right: topPlayers[1].slug,
-      })}">Ouvrir cette comparaison</a></article>`
-    : "";
+  const playerCard =
+    topPlayers.length === 2
+      ? `<article class="compare-row"><h3>Duel joueurs</h3><p class="muted">${app.escapeHtml(topPlayers[0].name)} vs ${app.escapeHtml(topPlayers[1].name)}</p><a class="btn accent" href="${app.buildUrl(
+          "compare.html",
+          {
+            mode: "player",
+            competition: topPlayers[0].competitionSlug,
+            left: topPlayers[0].slug,
+            right: topPlayers[1].slug,
+          },
+        )}">Lancer ce duel</a></article>`
+      : "";
 
-  elements.homeSuggestions.innerHTML = `${clubCard}${playerCard}` || `<p class="empty">Pas assez de donnees pour suggerer un duel.</p>`;
+  elements.homeSuggestions.innerHTML = `${clubCard}${playerCard}` || `<p class="empty">Pas assez de donnees pour proposer un duel.</p>`;
 }
 
 function renderSearchResults() {
@@ -219,7 +296,7 @@ function renderSearchResults() {
     .filter((club) => app.normalizeText(`${club.name} ${club.competitionName}`).includes(query))
     .slice(0, 4)
     .map((club) => ({
-      type: "Club",
+      type: "Equipe",
       label: club.name,
       detail: club.competitionName,
       href: app.buildUrl("club.html", { club: club.slug, competition: club.competitionSlug }),

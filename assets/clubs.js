@@ -1,4 +1,4 @@
-﻿const app = window.FootballData;
+const app = window.FootballData;
 
 const state = {
   data: null,
@@ -12,7 +12,7 @@ const elements = {};
 document.addEventListener("DOMContentLoaded", () => {
   init().catch((error) => {
     console.error(error);
-    showError("Impossible de charger la page Clubs.");
+    showError("Impossible de charger la page Equipes.");
   });
 });
 
@@ -62,7 +62,7 @@ function bindEvents() {
 }
 
 function renderMeta() {
-  elements.clubsMeta.textContent = `${state.data.clubs.length} clubs disponibles.`;
+  elements.clubsMeta.textContent = `${state.data.clubs.length} equipes disponibles.`;
 }
 
 function fillCompetitionSelect() {
@@ -87,10 +87,10 @@ function run() {
   });
 
   const sorted = sortClubs(filtered);
-  elements.clubsCount.textContent = `${sorted.length} club${sorted.length > 1 ? "s" : ""}`;
+  elements.clubsCount.textContent = `${sorted.length} equipe${sorted.length > 1 ? "s" : ""}`;
 
   if (!sorted.length) {
-    elements.clubsList.innerHTML = `<p class="empty">Aucun club avec ces filtres.</p>`;
+    elements.clubsList.innerHTML = `<p class="empty">Aucune equipe avec ces filtres.</p>`;
     syncUrl();
     return;
   }
@@ -99,6 +99,7 @@ function run() {
     .map((club) => {
       const clubUrl = app.buildUrl("club.html", { club: club.slug, competition: club.competitionSlug });
       const compareUrl = app.buildUrl("compare.html", { mode: "club", competition: club.competitionSlug, left: club.slug });
+      const fixture = app.formatFixture(club.nextFixture, state.data.clubsBySlug);
       return `
         <article class="club-card">
           <div class="row-id">
@@ -110,13 +111,14 @@ function run() {
           </div>
           <div class="card-tags">
             <span class="tag">${club.points} pts</span>
-            <span class="tag">${club.goalsFor} GF</span>
-            <span class="tag">${club.goalsAgainst} GA</span>
+            <span class="tag">${club.goalsFor} BP</span>
+            <span class="tag">${club.goalsAgainst} BC</span>
             <span class="tag">Forme: ${club.recent.points}/15</span>
           </div>
-          <div class="actions" style="margin-top:0.6rem;">
-            <a class="btn alt" href="${clubUrl}">Voir fiche</a>
-            <a class="btn" href="${compareUrl}">Comparer</a>
+          <p class="club-meta" style="margin-top:0.45rem;">Prochain match: ${app.escapeHtml(fixture)}</p>
+          <div class="actions" style="margin-top:0.58rem;">
+            <a class="btn alt" href="${clubUrl}">Voir la fiche</a>
+            <a class="btn" href="${compareUrl}">Duel equipe</a>
           </div>
         </article>
       `;

@@ -1,14 +1,14 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Football Data Hub | Comparer</title>
-    <meta name="description" content="Comparer facilement deux joueurs ou deux clubs avec radar et stats cote a cote." />
+    <title>Stadium Kids Lab | Duel</title>
+    <meta name="description" content="Duel joueur ou equipe en mode simple: radar, stats et gagnant par metriques." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -16,29 +16,29 @@
     <script defer src="assets/compare.js"></script>
   </head>
   <body>
-    <div class="site-shell">
-      <header class="topbar reveal">
-        <a class="brand" href="index.html">Football Data Hub<small>Lecture claire des stats</small></a>
+    <div class="app-shell">
+      <header class="app-header reveal">
+        <a class="brand" href="index.html">Stadium Kids Lab<small>Jouer avec les stats foot</small></a>
         <nav class="topnav" aria-label="Navigation principale">
           <a href="index.html">Accueil</a>
-          <a href="clubs.html">Clubs</a>
+          <a href="clubs.html">Equipes</a>
           <a href="players.html">Joueurs</a>
           <a href="teams.html">Classements</a>
-          <a class="active" href="compare.html">Comparer</a>
+          <a class="active" href="compare.html">Duels</a>
         </nav>
       </header>
 
-      <main class="grid-main" style="margin-top:0.9rem;">
+      <main class="split-layout">
         <aside class="card panel reveal">
           <div class="section-title">
-            <span class="chip">Comparaison</span>
-            <h2>Lecture immediate des differences</h2>
+            <span class="chip">Mode duel</span>
+            <h2>Qui est devant ?</h2>
             <p id="compareMeta">Chargement...</p>
           </div>
 
           <div class="tabs">
             <button class="tab-btn active" data-mode="player" type="button">Joueur vs joueur</button>
-            <button class="tab-btn" data-mode="club" type="button">Club vs club</button>
+            <button class="tab-btn" data-mode="club" type="button">Equipe vs equipe</button>
           </div>
 
           <div class="filters">
@@ -55,14 +55,24 @@
               <select id="compareRight"></select>
             </div>
           </div>
+
+          <div class="highlight-list" style="margin-top: 0.7rem">
+            <article class="highlight-item">
+              <div>
+                <strong id="compareWinner">Resultat du duel: -</strong>
+                <p>Le gagnant est calcule selon les metriques du radar.</p>
+              </div>
+            </article>
+          </div>
         </aside>
 
         <section class="grid reveal">
           <article class="card panel">
             <div class="section-title">
-              <h1 id="compareTitle">Comparaison</h1>
+              <h1 id="compareTitle">Duel</h1>
               <p id="compareSubtitle">-</p>
             </div>
+
             <div class="chart-box"><canvas id="compareRadar"></canvas></div>
             <div class="legend" id="compareLegend"></div>
             <div class="metrics-grid" id="compareStats"></div>

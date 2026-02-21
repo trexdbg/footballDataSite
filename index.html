@@ -1,17 +1,17 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Football Data Hub | Accueil</title>
+    <title>Stadium Kids Lab | Accueil</title>
     <meta
       name="description"
-      content="Application football data claire et lisible: clubs, joueurs, classements et comparaisons radar."
+      content="Application football ludique pour enfants: comparer les joueurs, voir les stats des equipes et preparer les prochains matchs."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -19,88 +19,106 @@
     <script defer src="assets/index.js"></script>
   </head>
   <body>
-    <div class="site-shell">
-      <header class="topbar reveal">
-        <a class="brand" href="index.html">Football Data Hub<small>Lecture claire des stats</small></a>
+    <div class="app-shell">
+      <header class="app-header reveal">
+        <a class="brand" href="index.html">Stadium Kids Lab<small>Jouer avec les stats foot</small></a>
         <nav class="topnav" aria-label="Navigation principale">
           <a class="active" href="index.html">Accueil</a>
-          <a href="clubs.html">Clubs</a>
+          <a href="clubs.html">Equipes</a>
           <a href="players.html">Joueurs</a>
           <a href="teams.html">Classements</a>
-          <a href="compare.html">Comparer</a>
+          <a href="compare.html">Duels</a>
         </nav>
       </header>
 
-      <main class="grid" style="margin-top:0.9rem;">
-        <section class="card hero reveal">
+      <main class="main-stack">
+        <section class="card panel hero reveal">
           <div class="section-title">
-            <span class="chip">MVP Football Data</span>
-            <h1>L’essentiel des clubs et joueurs en quelques secondes</h1>
+            <span class="chip">Mode explorateur</span>
+            <h1>Compare, observe, deviens coach</h1>
             <p id="homeMeta">Chargement des donnees...</p>
           </div>
-          <div class="field">
-            <label for="globalSearch">Recherche rapide club / joueur</label>
-            <input id="globalSearch" type="search" placeholder="Ex: Marseille, Mbappe..." autocomplete="off" />
+
+          <div class="field" style="max-width: 560px">
+            <label for="globalSearch">Recherche rapide</label>
+            <input id="globalSearch" type="search" placeholder="Tape un club ou un joueur..." autocomplete="off" />
           </div>
           <div class="search-results" id="searchResults"></div>
-          <div class="actions" style="margin-top:0.4rem;">
-            <a class="btn" href="teams.html">Voir les classements</a>
-            <a class="btn alt" href="compare.html">Lancer une comparaison</a>
+
+          <div class="actions" style="margin-top: 0.35rem">
+            <a class="btn pulse" href="compare.html">Lancer un duel</a>
+            <a class="btn alt" href="teams.html">Voir les classements</a>
+            <a class="btn alt" href="clubs.html">Explorer les equipes</a>
           </div>
         </section>
 
-        <section class="cards-list cols-3 reveal" id="homeKpis"></section>
+        <section class="card panel reveal">
+          <div class="section-title">
+            <h2>Tableau des champions</h2>
+            <p>Une vue simple pour reperer vite les equipes et joueurs en forme.</p>
+          </div>
+          <div class="cards-list cols-3" id="homeKpis"></div>
+        </section>
 
-        <section class="grid grid-two reveal">
+        <section class="spotlight-grid reveal">
           <article class="card panel">
             <div class="section-title">
-              <h2>Apercu classement</h2>
-              <p>Lecture stable du top 6</p>
+              <h2>Mini classement</h2>
+              <p>Selectionne une competition et observe le top.</p>
             </div>
-            <div class="field" style="max-width:360px;">
+            <div class="field" style="max-width: 360px">
               <label for="homeCompetition">Competition</label>
               <select id="homeCompetition"></select>
             </div>
-            <div class="table-wrap" style="margin-top:0.55rem;">
+            <div class="table-wrap" style="margin-top: 0.6rem">
               <table>
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>Club</th>
+                    <th>Equipe</th>
                     <th>Pts</th>
-                    <th>Forme 5m</th>
+                    <th>Forme</th>
                   </tr>
                 </thead>
                 <tbody id="homeStandingsBody"></tbody>
               </table>
             </div>
-            <div class="inline-links" style="margin-top:0.55rem;">
-              <a id="homeStandingsLink" href="teams.html">Ouvrir le classement complet</a>
+            <div class="inline-links" style="margin-top: 0.55rem">
+              <a id="homeStandingsLink" href="teams.html" class="btn alt" style="text-decoration: none">Classement complet</a>
             </div>
           </article>
 
           <article class="card panel">
             <div class="section-title">
-              <h2>Tendances</h2>
-              <p>Profils et clubs qui ressortent vite</p>
+              <h2>Prochains matchs</h2>
+              <p>Le programme du terrain pour preparer ton prochain duel.</p>
             </div>
-            <div class="grid" style="gap:0.75rem;">
-              <div>
-                <h3 style="margin:0 0 0.35rem; font-size:1rem;">Clubs en forme</h3>
-                <div class="cards-list" id="hotClubs"></div>
-              </div>
-              <div>
-                <h3 style="margin:0 0 0.35rem; font-size:1rem;">Joueurs a suivre</h3>
-                <div class="cards-list" id="hotPlayers"></div>
-              </div>
+            <div class="highlight-list" id="homeNextFixtures"></div>
+          </article>
+        </section>
+
+        <section class="spotlight-grid reveal">
+          <article class="card panel">
+            <div class="section-title">
+              <h2>Equipes chaudes</h2>
+              <p>Celles qui avancent le plus en ce moment.</p>
             </div>
+            <div class="cards-list" id="hotClubs"></div>
+          </article>
+
+          <article class="card panel">
+            <div class="section-title">
+              <h2>Joueurs a suivre</h2>
+              <p>Des profils simples a comparer entre amis.</p>
+            </div>
+            <div class="cards-list" id="hotPlayers"></div>
           </article>
         </section>
 
         <section class="card panel reveal">
           <div class="section-title">
-            <h2>Comparaisons suggerees</h2>
-            <p>Demarrage en 1 clic pour le mode Comparer</p>
+            <h2>Defis du jour</h2>
+            <p>Un clic et le duel est pret.</p>
           </div>
           <div class="cards-list cols-2" id="homeSuggestions"></div>
         </section>

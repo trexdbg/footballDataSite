@@ -1,14 +1,14 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Football Data Hub | Fiche Joueur</title>
-    <meta name="description" content="Fiche joueur: resume, radar adapte au poste, evolution recente et comparaison rapide." />
+    <title>Stadium Kids Lab | Fiche Joueur</title>
+    <meta name="description" content="Profil joueur simple: points forts, evolution recente et duel rapide." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -16,22 +16,22 @@
     <script defer src="assets/player.js"></script>
   </head>
   <body>
-    <div class="site-shell">
-      <header class="topbar reveal">
-        <a class="brand" href="index.html">Football Data Hub<small>Lecture claire des stats</small></a>
+    <div class="app-shell">
+      <header class="app-header reveal">
+        <a class="brand" href="index.html">Stadium Kids Lab<small>Jouer avec les stats foot</small></a>
         <nav class="topnav" aria-label="Navigation principale">
           <a href="index.html">Accueil</a>
-          <a href="clubs.html">Clubs</a>
+          <a href="clubs.html">Equipes</a>
           <a href="players.html">Joueurs</a>
           <a href="teams.html">Classements</a>
-          <a href="compare.html">Comparer</a>
+          <a href="compare.html">Duels</a>
         </nav>
       </header>
 
-      <main class="grid-main" style="margin-top:0.9rem;">
+      <main class="split-layout">
         <aside class="card panel reveal">
           <div class="section-title">
-            <span class="chip">Fiche Joueur</span>
+            <span class="chip">Fiche joueur</span>
             <h2 id="playerTitle">Chargement...</h2>
             <p id="playerMeta">-</p>
           </div>
@@ -42,8 +42,8 @@
               <select id="playerCompetition"></select>
             </div>
             <div class="field">
-              <label for="playerSearch">Recherche</label>
-              <input id="playerSearch" type="search" placeholder="Nom du joueur" autocomplete="off" />
+              <label for="playerSearch">Recherche rapide</label>
+              <input id="playerSearch" type="search" placeholder="Trouve ton joueur" autocomplete="off" />
             </div>
             <div class="field">
               <label for="playerSelect">Joueur</label>
@@ -51,9 +51,9 @@
             </div>
           </div>
 
-          <div class="actions" style="margin-top:0.6rem;">
-            <a id="playerCompareLink" class="btn" href="compare.html">Comparer ce joueur</a>
-            <a id="playerClubLink" class="btn alt" href="club.html">Voir son club</a>
+          <div class="actions" style="margin-top: 0.65rem">
+            <a id="playerCompareLink" class="btn accent" href="compare.html">Duel joueur</a>
+            <a id="playerClubLink" class="btn alt" href="club.html">Voir son equipe</a>
           </div>
         </aside>
 
@@ -64,24 +64,24 @@
               <p id="playerSummaryText">-</p>
             </div>
 
-            <div class="grid grid-three" id="playerKpis"></div>
+            <div class="cards-list cols-3" id="playerKpis"></div>
 
-            <div class="grid grid-two" style="margin-top:0.7rem;">
+            <div class="grid grid-two" style="margin-top: 0.75rem">
               <div>
-                <h3 style="margin:0 0 0.4rem;">Radar profil (poste)</h3>
+                <h3 style="margin: 0 0 0.45rem">Radar du poste</h3>
                 <div class="chart-box"><canvas id="playerRadar"></canvas></div>
                 <div class="legend" id="playerRadarLegend"></div>
               </div>
               <div>
-                <h3 style="margin:0 0 0.4rem;">Evolution recente</h3>
+                <h3 style="margin: 0 0 0.45rem">Courbe recente</h3>
                 <div class="chart-box short"><canvas id="playerTrend"></canvas></div>
-                <p class="muted" id="playerTrendText" style="margin:0.45rem 0 0;"></p>
+                <p class="muted" id="playerTrendText" style="margin: 0.4rem 0 0"></p>
               </div>
             </div>
 
-            <div class="section-title" style="margin-top:0.75rem;">
+            <div class="section-title" style="margin-top: 0.75rem">
               <h2>Forces principales</h2>
-              <p>Contextualisees par rapport aux joueurs du meme poste</p>
+              <p>Comparees aux joueurs du meme poste.</p>
             </div>
             <div class="metrics-grid" id="playerStrengths"></div>
           </article>
