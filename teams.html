@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dashboard Equipes</title>
+    <title>Touchline HQ - Championnats</title>
     <meta
       name="description"
-      content="Dashboard equipes par championnat avec classements et comparaison radar."
+      content="Hub championnat: classement, comparaison radar equipes et liens vers clubs et joueurs."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -21,26 +21,26 @@
     <div class="noise-layer" aria-hidden="true"></div>
     <div class="page-shell">
       <header class="top-nav card">
-        <a class="brand" href="index.html">Pastel Football Data</a>
+        <a class="brand" href="index.html">Touchline HQ</a>
         <nav class="top-nav-links" aria-label="Navigation">
-          <a href="players.html">Joueurs</a>
-          <a class="is-active" href="teams.html">Equipes</a>
+          <a href="index.html">Accueil</a>
+          <a class="is-active" href="teams.html">Championnats</a>
           <a href="club.html">Clubs</a>
+          <a href="players.html">Joueurs</a>
         </nav>
       </header>
 
       <section class="page-title card reveal">
-        <p class="chip">Page Championnat</p>
-        <h1 id="teamsPageTitle">Dashboard par championnat</h1>
-        <p id="teamsMetaText">
-          Chargement des donnees equipes...
-        </p>
+        <p class="chip">Championship Control Room</p>
+        <h1 id="teamsPageTitle">Lecture complete du championnat</h1>
+        <p id="teamsMetaText">Chargement des donnees equipes...</p>
         <div class="context-links" id="teamsHeaderLinks"></div>
       </section>
 
       <main class="dashboard-layout">
         <aside class="panel card reveal delay-1">
-          <h2>Configuration</h2>
+          <h2>Pilotage</h2>
+
           <label class="field">
             <span>Championnat</span>
             <select id="competitionFilter"></select>
@@ -52,7 +52,7 @@
           </label>
 
           <label class="field">
-            <span>Lignes du tableau</span>
+            <span>Taille du tableau</span>
             <select id="teamsTableLimit">
               <option value="10">Top 10</option>
               <option value="20" selected>Top 20</option>
@@ -71,16 +71,24 @@
           </label>
 
           <div class="quick-actions">
-            <a id="openCompetitionPlayers" class="button-link" href="players.html">Top joueurs du championnat</a>
+            <a id="openCompetitionPlayers" class="button-link" href="players.html">Voir les joueurs du championnat</a>
             <a id="openRandomClub" class="button-link button-ghost" href="club.html">Club au hasard</a>
-            <a id="openRandomPlayer" class="button-link button-ghost" href="player.html">Joueur au hasard</a>
+            <a id="openRandomPlayer" class="button-link button-ghost" href="player.html">Profil joueur au hasard</a>
           </div>
         </aside>
 
         <section class="stacked">
           <article class="card reveal delay-1">
             <div class="card-head">
-              <h2>Acces rapide clubs</h2>
+              <h2>Matchs a venir importants</h2>
+              <p id="fixturesMetaText">Chargement des affiches...</p>
+            </div>
+            <div class="fixtures-grid" id="fixturesGrid"></div>
+          </article>
+
+          <article class="card reveal delay-1">
+            <div class="card-head">
+              <h2>Navigation clubs</h2>
               <p id="clubsQuickCount">0 club</p>
             </div>
             <div class="link-grid" id="clubsQuickLinks"></div>
@@ -88,7 +96,7 @@
 
           <article class="card reveal delay-1">
             <div class="card-head">
-              <h2>Vue Championnat</h2>
+              <h2>Table championnat</h2>
               <p id="teamsCountText">0 equipes</p>
             </div>
             <div class="kpi-grid">
@@ -121,8 +129,8 @@
 
           <article class="card reveal delay-2">
             <div class="card-head">
-              <h2>Comparer deux equipes</h2>
-              <p>Radar forme recente</p>
+              <h2>Duel radar equipes</h2>
+              <p>Comparaison visuelle des profils collectifs</p>
             </div>
             <div class="radar-panel">
               <canvas id="teamsRadar"></canvas>

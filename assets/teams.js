@@ -20,12 +20,12 @@ const RADAR_METRICS = [
 ];
 
 const COLORS = {
-  teamA: "#7aafeb",
-  teamASoft: "rgba(122, 175, 235, 0.28)",
-  teamB: "#f7a8b6",
-  teamBSoft: "rgba(247, 168, 182, 0.28)",
-  grid: "rgba(123, 145, 167, 0.28)",
-  label: "#566d84",
+  teamA: "#2f6e4f",
+  teamASoft: "rgba(47, 110, 79, 0.28)",
+  teamB: "#d2792a",
+  teamBSoft: "rgba(210, 121, 42, 0.24)",
+  grid: "rgba(95, 109, 91, 0.3)",
+  label: "#445240",
 };
 
 const DEFAULT_TABLE_LIMIT = 20;
@@ -88,6 +88,8 @@ function cacheElements() {
   elements.openCompetitionPlayers = document.getElementById("openCompetitionPlayers");
   elements.openRandomClub = document.getElementById("openRandomClub");
   elements.openRandomPlayer = document.getElementById("openRandomPlayer");
+  elements.fixturesMetaText = document.getElementById("fixturesMetaText");
+  elements.fixturesGrid = document.getElementById("fixturesGrid");
   elements.clubsQuickCount = document.getElementById("clubsQuickCount");
   elements.clubsQuickLinks = document.getElementById("clubsQuickLinks");
   elements.teamsCountText = document.getElementById("teamsCountText");
@@ -172,6 +174,7 @@ function runPipeline() {
   const sorted = sortRows(rows, state.sortMetric);
 
   renderPageContext(standing, rows);
+  renderUpcomingFixtures(rows);
   renderQuickClubLinks(rows);
   renderSummaryCards(rows);
   renderTable(sorted);
@@ -229,6 +232,168 @@ function renderQuickClubLinks(rows) {
     .join("");
 
   elements.clubsQuickLinks.innerHTML = quick;
+}
+
+function renderUpcomingFixtures(rows) {
+  const fixtures = buildUpcomingFixtures(rows).slice(0, 8);
+  elements.fixturesMetaText.textContent = `${fixtures.length} affiches prioritaires`;
+
+  if (!fixtures.length) {
+    elements.fixturesGrid.innerHTML = `<p class="is-empty">Aucun match a venir detecte.</p>`;
+    return;
+  }
+
+  elements.fixturesGrid.innerHTML = fixtures
+    .map((fixture) => {
+      const homeClubUrl = `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(fixture.homeSlug)}`;
+      const awayClubUrl = `club.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(fixture.awaySlug)}`;
+      const homePlayersUrl = `players.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(fixture.homeSlug)}`;
+      const awayPlayersUrl = `players.html?competition=${encodeURIComponent(state.competition)}&club=${encodeURIComponent(fixture.awaySlug)}`;
+      const duelUrl = `teams.html?competition=${encodeURIComponent(state.competition)}&teamA=${encodeURIComponent(fixture.homeSlug)}&teamB=${encodeURIComponent(fixture.awaySlug)}`;
+
+      return `
+        <article class="fixture-card">
+          <div class="fixture-top">
+            <strong>${formatFixtureDate(fixture.date)}</strong>
+            <span class="fixture-badge">${escapeHtml(fixture.tag)}</span>
+          </div>
+          <h3>
+            <a class="inline-link strong-link" href="${homeClubUrl}">${escapeHtml(fixture.homeName)}</a>
+            <span> vs </span>
+            <a class="inline-link strong-link" href="${awayClubUrl}">${escapeHtml(fixture.awayName)}</a>
+          </h3>
+          <p>${escapeHtml(fixture.rankLine)}</p>
+          <p class="fixture-note">${escapeHtml(fixture.note)}</p>
+          <div class="fixture-links">
+            <a class="inline-link" href="${homePlayersUrl}">Joueurs ${escapeHtml(fixture.homeShort)}</a>
+            <a class="inline-link" href="${awayPlayersUrl}">Joueurs ${escapeHtml(fixture.awayShort)}</a>
+            <a class="inline-link" href="${duelUrl}">Ouvrir duel radar</a>
+          </div>
+        </article>
+      `;
+    })
+    .join("");
+}
+
+function buildUpcomingFixtures(rows) {
+  if (!rows.length) {
+    return [];
+  }
+
+  const rowBySlug = new Map(rows.map((row) => [row.club_slug, row]));
+  const fixtures = new Map();
+
+  for (const row of rows) {
+    const info = state.teamInfo.get(row.club_slug);
+    const next = info?.next_fixture;
+    if (!next || !next.opponent_slug) {
+      continue;
+    }
+
+    const opponentSlug = String(next.opponent_slug || "");
+    if (!opponentSlug) {
+      continue;
+    }
+
+    const date = String(next.date || "");
+    const teamsKey = [row.club_slug, opponentSlug].sort().join("|");
+    const uniqueKey = `${date}|${teamsKey}`;
+    if (fixtures.has(uniqueKey)) {
+      continue;
+    }
+
+    let homeSlug = row.club_slug;
+    let awaySlug = opponentSlug;
+    if (next.home_away === "away") {
+      homeSlug = opponentSlug;
+      awaySlug = row.club_slug;
+    }
+
+    const homeRow = rowBySlug.get(homeSlug) || null;
+    const awayRow = rowBySlug.get(awaySlug) || null;
+    const homeName = homeRow?.club_name || state.teamInfo.get(homeSlug)?.name || prettifySlug(homeSlug);
+    const awayName = awayRow?.club_name || state.teamInfo.get(awaySlug)?.name || prettifySlug(awaySlug);
+    const importance = fixtureImportance(homeRow, awayRow, rows.length);
+
+    fixtures.set(uniqueKey, {
+      date,
+      homeSlug,
+      awaySlug,
+      homeName,
+      awayName,
+      homeShort: shortName(homeName),
+      awayShort: shortName(awayName),
+      tag: importance.tag,
+      note: importance.note,
+      score: importance.score,
+      rankLine: importance.rankLine,
+    });
+  }
+
+  return [...fixtures.values()].sort((left, right) => {
+    const leftDate = Date.parse(left.date || "");
+    const rightDate = Date.parse(right.date || "");
+    const safeLeft = Number.isNaN(leftDate) ? Number.MAX_SAFE_INTEGER : leftDate;
+    const safeRight = Number.isNaN(rightDate) ? Number.MAX_SAFE_INTEGER : rightDate;
+    if (safeLeft !== safeRight) {
+      return safeLeft - safeRight;
+    }
+    return right.score - left.score;
+  });
+}
+
+function fixtureImportance(homeRow, awayRow, tableSize) {
+  const fallbackRank = tableSize + 5;
+  const homeRank = Number(homeRow?.rank || fallbackRank);
+  const awayRank = Number(awayRow?.rank || fallbackRank);
+  const homePoints = Number(homeRow?.points || 0);
+  const awayPoints = Number(awayRow?.points || 0);
+  const rankGap = Math.abs(homeRank - awayRank);
+  const pointsGap = Math.abs(homePoints - awayPoints);
+
+  const topCut = Math.max(4, Math.min(6, Math.ceil(tableSize * 0.34)));
+  const bottomStart = Math.max(tableSize - 3, 1);
+
+  let score = 45;
+  let tag = "Affiche";
+  let note = "Match a suivre pour la dynamique du championnat.";
+
+  if (homeRank <= topCut && awayRank <= topCut) {
+    score += 38;
+    tag = "Choc haut de tableau";
+    note = "Confrontation directe entre equipes de tete.";
+  } else if (homeRank >= bottomStart && awayRank >= bottomStart) {
+    score += 30;
+    tag = "Bataille maintien";
+    note = "Duel sensible pour rester en vie au classement.";
+  } else if (rankGap <= 2) {
+    score += 24;
+    tag = "Duel direct";
+    note = "Equipes proches au classement, impact immediat.";
+  } else if (pointsGap <= 3) {
+    score += 18;
+    tag = "Course aux points";
+    note = "Ecart de points serre, match potentiellement charniere.";
+  }
+
+  if (rankGap <= 1) {
+    score += 8;
+  }
+  if (pointsGap <= 1) {
+    score += 8;
+  }
+
+  const rankLine = `Classement: #${homeRank} (${homePoints} pts) vs #${awayRank} (${awayPoints} pts)`;
+  return { score, tag, note, rankLine };
+}
+
+function shortName(name) {
+  const cleaned = String(name || "").trim();
+  const parts = cleaned.split(/\s+/).filter(Boolean);
+  if (parts.length <= 1) {
+    return cleaned;
+  }
+  return parts.slice(0, 2).join(" ");
 }
 
 function currentStanding() {
@@ -523,7 +688,7 @@ function drawRadarGrid(ctx, center, radius, axisCount, levels, startAngle, step)
 function drawRadarLabels(ctx, center, radius, startAngle, step) {
   ctx.save();
   ctx.fillStyle = COLORS.label;
-  ctx.font = "12px Space Grotesk";
+  ctx.font = "12px IBM Plex Sans";
   for (let i = 0; i < RADAR_METRICS.length; i += 1) {
     const p = polar(center, radius, startAngle + i * step);
     ctx.textAlign = p.x < center.x - 10 ? "right" : p.x > center.x + 10 ? "left" : "center";
@@ -764,6 +929,22 @@ function formatDateTime(raw) {
   });
 }
 
+function formatFixtureDate(raw) {
+  if (!raw) {
+    return "Date inconnue";
+  }
+  const date = new Date(raw);
+  if (Number.isNaN(date.valueOf())) {
+    return raw;
+  }
+  return date.toLocaleDateString("fr-FR", {
+    weekday: "short",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
 function prettifySlug(slug) {
   return repairText(
     String(slug || "")
@@ -868,6 +1049,8 @@ function showError(message) {
   elements.teamsPageTitle.textContent = "Erreur de chargement";
   elements.teamsHeaderLinks.innerHTML = "";
   elements.teamsCountText.textContent = message;
+  elements.fixturesMetaText.textContent = message;
+  elements.fixturesGrid.innerHTML = `<p class="is-empty">${escapeHtml(message)}</p>`;
   elements.clubsQuickLinks.innerHTML = `<p class="is-empty">${escapeHtml(message)}</p>`;
   elements.teamsTableBody.innerHTML = `<tr><td colspan="11" class="is-empty">${escapeHtml(message)}</td></tr>`;
   elements.teamsMetricGrid.innerHTML = `<p class="is-empty">${escapeHtml(message)}</p>`;

@@ -26,12 +26,12 @@ const RADAR_METRICS = [
 ];
 
 const COLORS = {
-  player: "#7aafeb",
-  playerSoft: "rgba(122, 175, 235, 0.28)",
-  benchmark: "#81ceb9",
-  benchmarkSoft: "rgba(129, 206, 185, 0.28)",
-  grid: "rgba(123, 145, 167, 0.28)",
-  label: "#566d84",
+  player: "#2f6e4f",
+  playerSoft: "rgba(47, 110, 79, 0.26)",
+  benchmark: "#d2792a",
+  benchmarkSoft: "rgba(210, 121, 42, 0.24)",
+  grid: "rgba(95, 109, 91, 0.3)",
+  label: "#445240",
 };
 
 const DEFAULT_BENCHMARK_MIN_MINUTES = 180;
@@ -494,7 +494,7 @@ function drawRadarGrid(ctx, center, radius, axisCount, levels, startAngle, step)
 function drawRadarLabels(ctx, center, radius, startAngle, step) {
   ctx.save();
   ctx.fillStyle = COLORS.label;
-  ctx.font = "12px Space Grotesk";
+  ctx.font = "12px IBM Plex Sans";
   for (let i = 0; i < RADAR_METRICS.length; i += 1) {
     const point = polar(center, radius, startAngle + i * step);
     ctx.textAlign = point.x < center.x - 10 ? "right" : point.x > center.x + 10 ? "left" : "center";

@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pastel Football Data - Championnat Aleatoire</title>
+    <title>Touchline HQ - Depart Championnat</title>
     <meta
       name="description"
-      content="Point d'entree vers un championnat aleatoire, puis navigation clubs et joueurs."
+      content="Application football fans: entree championnat aleatoire, navigation clubs et joueurs, comparaisons radar."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -21,50 +21,50 @@
     <div class="noise-layer" aria-hidden="true"></div>
     <div class="page-shell">
       <header class="top-nav card">
-        <a class="brand" href="index.html">Pastel Football Data</a>
+        <a class="brand" href="index.html">Touchline HQ</a>
         <nav class="top-nav-links" aria-label="Navigation">
-          <a href="players.html">Joueurs</a>
-          <a href="teams.html">Equipes</a>
+          <a class="is-active" href="index.html">Accueil</a>
+          <a href="teams.html">Championnats</a>
           <a href="club.html">Clubs</a>
+          <a href="players.html">Joueurs</a>
         </nav>
       </header>
 
       <main class="landing-layout">
         <section class="hero-panel card reveal">
-          <p class="chip">Point de depart fan</p>
-          <h1 id="randomLeagueTitle">Chargement d'un championnat aleatoire...</h1>
+          <p class="chip">War Room</p>
+          <h1 id="randomLeagueTitle">Preparation du championnat du jour...</h1>
           <p>
-            L'application demarre par un championnat tire au hasard, puis te laisse
-            naviguer vers les clubs et les joueurs en quelques clics.
+            Cette application est pensee pour les fans: tu demarres sur un championnat, tu explores les clubs,
+            puis tu plonges dans les profils joueurs avec classements et radars comparatifs.
           </p>
           <div class="hero-tags">
-            <span id="randomLeagueMeta">Preparation du parcours...</span>
-            <span>Championnat -> Club -> Joueur</span>
-            <span>Liens partout</span>
+            <span id="randomLeagueMeta">Selection en cours...</span>
+            <span>Radar Joueurs</span>
+            <span>Radar Equipes</span>
+            <span>Liens contextuels partout</span>
           </div>
           <div class="hero-actions">
-            <a id="openRandomLeague" class="button-link" href="teams.html">Ouvrir le championnat</a>
-            <button id="rerollLeague" class="button-link button-ghost" type="button">Autre tirage</button>
+            <a id="openRandomLeague" class="button-link" href="teams.html">Entrer dans le championnat</a>
+            <button id="rerollLeague" class="button-link button-ghost" type="button">Changer de championnat</button>
           </div>
         </section>
 
         <section class="entry-grid">
-          <a class="entry-card card reveal delay-1" href="players.html">
-            <h2>Page Joueurs</h2>
+          <a class="entry-card card reveal delay-1" href="teams.html">
+            <h2>Hub Championnats</h2>
             <p>
-              Recherche rapide, classements multi-stats, tri par competition et
-              acces direct aux profils joueurs.
+              Classements, top clubs, comparaisons equipes et passerelles directes vers chaque page club.
             </p>
-            <span>Ouvrir la page joueurs</span>
+            <span>Ouvrir les championnats</span>
           </a>
 
-          <a class="entry-card card reveal delay-2" href="teams.html">
-            <h2>Page Equipes</h2>
+          <a class="entry-card card reveal delay-2" href="players.html">
+            <h2>Radar Joueurs</h2>
             <p>
-              Hub championnat avec classement complet, duel equipes et navigation
-              directe vers les pages clubs.
+              Recherche, tri par competition, tops statistiques et comparaison radar de profils.
             </p>
-            <span>Ouvrir la page equipes</span>
+            <span>Ouvrir les joueurs</span>
           </a>
         </section>
       </main>

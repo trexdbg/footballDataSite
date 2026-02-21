@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Joueur</title>
+    <title>Touchline HQ - Profil Joueur</title>
     <meta
       name="description"
-      content="Page dediee joueur: position dans les classements, radar vs moyenne championnat au meme poste."
+      content="Profil joueur: rangs, percentiles et radar vs moyenne du championnat au meme poste."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="assets/styles.css" />
@@ -21,17 +21,18 @@
     <div class="noise-layer" aria-hidden="true"></div>
     <div class="page-shell">
       <header class="top-nav card">
-        <a class="brand" href="index.html">Pastel Football Data</a>
+        <a class="brand" href="index.html">Touchline HQ</a>
         <nav class="top-nav-links" aria-label="Navigation">
-          <a class="is-active" href="player.html">Profil Joueur</a>
-          <a href="players.html">Joueurs</a>
-          <a href="teams.html">Equipes</a>
+          <a href="index.html">Accueil</a>
+          <a href="teams.html">Championnats</a>
           <a href="club.html">Clubs</a>
+          <a href="players.html">Joueurs</a>
+          <a class="is-active" href="player.html">Profil</a>
         </nav>
       </header>
 
       <section class="page-title card reveal">
-        <p class="chip">Page Joueur</p>
+        <p class="chip">Player Detail</p>
         <h1 id="playerPageTitle">Chargement du profil joueur...</h1>
         <p id="playerMetaText">Preparation des donnees joueur, club et championnat.</p>
         <div class="context-links" id="playerBreadcrumbs"></div>
@@ -39,7 +40,7 @@
 
       <main class="dashboard-layout">
         <aside class="panel card reveal delay-1">
-          <h2>Selection joueur</h2>
+          <h2>Selection</h2>
 
           <label class="field">
             <span>Recherche rapide</span>
@@ -57,7 +58,7 @@
           </label>
 
           <label class="field">
-            <span>Poste de reference</span>
+            <span>Poste benchmark</span>
             <select id="benchmarkPosition"></select>
           </label>
 
@@ -69,14 +70,14 @@
           <div class="quick-actions">
             <a id="openPlayerClub" class="button-link button-ghost" href="club.html">Page club</a>
             <a id="openPlayerLeague" class="button-link button-ghost" href="teams.html">Classement championnat</a>
-            <a id="openRandomPlayerProfile" class="button-link" href="player.html">Autre joueur</a>
+            <a id="openRandomPlayerProfile" class="button-link" href="player.html">Nouveau profil</a>
           </div>
         </aside>
 
         <section class="stacked">
           <article class="card reveal delay-1">
             <div class="card-head">
-              <h2>Profil et contexte</h2>
+              <h2>Identite et contexte</h2>
               <p id="playerSummaryText">-</p>
             </div>
             <div id="playerHero" class="player-hero"></div>
