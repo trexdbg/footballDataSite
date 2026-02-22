@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Ballon et tableau du coach">
+  <title>Coach et ballon</title>
+  <desc>Une illustration simple avec un ballon et un tableau de stratégie.</desc>
+  <rect width="320" height="220" rx="20" fill="#f2ead8" />
+  <rect x="28" y="30" width="160" height="110" rx="12" fill="#ffffff" stroke="#0e8a69" stroke-width="4" />
+  <path d="M40 55h136M40 85h100M40 115h124" stroke="#3a4b4e" stroke-width="5" stroke-linecap="round" />
+  <circle cx="244" cy="120" r="58" fill="#ffffff" stroke="#0e8a69" stroke-width="5" />
+  <polygon points="244,75 265,90 257,114 231,114 223,90" fill="#0e8a69" opacity="0.25" />
+  <polygon points="244,165 265,150 257,126 231,126 223,150" fill="#0e8a69" opacity="0.25" />
+  <path d="M196 120h96M244 72v96" stroke="#0e8a69" stroke-width="4" />
+</svg>

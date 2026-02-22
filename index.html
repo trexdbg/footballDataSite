@@ -1,128 +1,68 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stadium Kids Lab | Accueil</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Foot Stats Coach - Explorer les stats du football</title>
     <meta
       name="description"
-      content="Application football ludique pour enfants: comparer les joueurs, voir les stats des equipes et preparer les prochains matchs."
+      content="Application web statique pour découvrir les statistiques football avec des explications simples."
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/styles.css" />
-    <script defer src="assets/common.js"></script>
-    <script defer src="assets/index.js"></script>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <header class="app-header reveal">
-        <a class="brand" href="index.html">Stadium Kids Lab<small>Jouer avec les stats foot</small></a>
-        <nav class="topnav" aria-label="Navigation principale">
-          <a class="active" href="index.html">Accueil</a>
-          <a href="clubs.html">Equipes</a>
-          <a href="players.html">Joueurs</a>
-          <a href="teams.html">Classements</a>
-          <a href="compare.html">Duels</a>
-        </nav>
-      </header>
+    <a class="skip-link" href="#main-content">Aller au contenu principal</a>
 
-      <main class="main-stack">
-        <section class="card panel hero reveal">
-          <div class="section-title">
-            <span class="chip">Mode explorateur</span>
-            <h1>Compare, observe, deviens coach</h1>
-            <p id="homeMeta">Chargement des donnees...</p>
-          </div>
+    <header class="site-header">
+      <div class="brand-wrap">
+        <p class="brand-eyebrow">Coach Data</p>
+        <h1>Foot Stats Coach</h1>
+        <p class="brand-subtitle">
+          Comprends tes stats comme un vrai coach, pas à pas.
+        </p>
+      </div>
 
-          <div class="field" style="max-width: 560px">
-            <label for="globalSearch">Recherche rapide</label>
-            <input id="globalSearch" type="search" placeholder="Tape un club ou un joueur..." autocomplete="off" />
-          </div>
-          <div class="search-results" id="searchResults"></div>
+      <div class="header-controls">
+        <label for="global-search-input">Recherche globale</label>
+        <input
+          id="global-search-input"
+          type="search"
+          inputmode="search"
+          autocomplete="off"
+          placeholder="Nom, club ou nationalité"
+        />
+        <a id="settings-link" class="settings-link" href="#/settings"
+          >Paramètres</a
+        >
+      </div>
 
-          <div class="actions" style="margin-top: 0.35rem">
-            <a class="btn pulse" href="compare.html">Lancer un duel</a>
-            <a class="btn alt" href="teams.html">Voir les classements</a>
-            <a class="btn alt" href="clubs.html">Explorer les equipes</a>
-          </div>
-        </section>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <a data-nav-link href="#/home">Accueil</a>
+        <a data-nav-link href="#/players">Joueurs</a>
+        <a data-nav-link href="#/favorites">Favoris</a>
+        <a data-nav-link href="#/compare">Comparer</a>
+        <a data-nav-link href="#/leaderboards">Top stats</a>
+        <a data-nav-link href="#/clubs">Classements</a>
+        <a data-nav-link href="#/learn">Glossaire</a>
+      </nav>
+    </header>
 
-        <section class="card panel reveal">
-          <div class="section-title">
-            <h2>Tableau des champions</h2>
-            <p>Une vue simple pour reperer vite les equipes et joueurs en forme.</p>
-          </div>
-          <div class="cards-list cols-3" id="homeKpis"></div>
-        </section>
+    <main id="main-content" tabindex="-1">
+      <section id="app" aria-live="off"></section>
+    </main>
 
-        <section class="spotlight-grid reveal">
-          <article class="card panel">
-            <div class="section-title">
-              <h2>Mini classement</h2>
-              <p>Selectionne une competition et observe le top.</p>
-            </div>
-            <div class="field" style="max-width: 360px">
-              <label for="homeCompetition">Competition</label>
-              <select id="homeCompetition"></select>
-            </div>
-            <div class="table-wrap" style="margin-top: 0.6rem">
-              <table>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Equipe</th>
-                    <th>Pts</th>
-                    <th>Forme</th>
-                  </tr>
-                </thead>
-                <tbody id="homeStandingsBody"></tbody>
-              </table>
-            </div>
-            <div class="inline-links" style="margin-top: 0.55rem">
-              <a id="homeStandingsLink" href="teams.html" class="btn alt" style="text-decoration: none">Classement complet</a>
-            </div>
-          </article>
+    <div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
 
-          <article class="card panel">
-            <div class="section-title">
-              <h2>Prochains matchs</h2>
-              <p>Le programme du terrain pour preparer ton prochain duel.</p>
-            </div>
-            <div class="highlight-list" id="homeNextFixtures"></div>
-          </article>
-        </section>
+    <noscript>
+      <div class="page-card error-card">
+        <h2>JavaScript est nécessaire</h2>
+        <p>
+          Cette application a besoin de JavaScript pour charger les statistiques.
+        </p>
+      </div>
+    </noscript>
 
-        <section class="spotlight-grid reveal">
-          <article class="card panel">
-            <div class="section-title">
-              <h2>Equipes chaudes</h2>
-              <p>Celles qui avancent le plus en ce moment.</p>
-            </div>
-            <div class="cards-list" id="hotClubs"></div>
-          </article>
-
-          <article class="card panel">
-            <div class="section-title">
-              <h2>Joueurs a suivre</h2>
-              <p>Des profils simples a comparer entre amis.</p>
-            </div>
-            <div class="cards-list" id="hotPlayers"></div>
-          </article>
-        </section>
-
-        <section class="card panel reveal">
-          <div class="section-title">
-            <h2>Defis du jour</h2>
-            <p>Un clic et le duel est pret.</p>
-          </div>
-          <div class="cards-list cols-2" id="homeSuggestions"></div>
-        </section>
-      </main>
-    </div>
+    <script src="./config.js"></script>
+    <script type="module" src="./app.js"></script>
   </body>
 </html>

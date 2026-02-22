@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-22T03:37:46.170931+00:00",
+    "generated_at": "2026-02-22T12:13:54.337453+00:00",
     "source": "sorare_api_graphql",
     "teams_count": 145,
     "competitions_filter": [
@@ -4389,25 +4389,25 @@
       "name": "FC Groningen",
       "logo_url": "https://assets.sorare.com/team/afb8de1c-bf07-43a9-bd1c-b7201deba1fd/picture/low_res-2b1a86c41a32be786d4ee853ac420462.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "utrecht-utrecht",
-        "score": "1-2",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "twente-enschede",
+        "score": "1-1",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 0,
+        "wins": 0,
+        "draws": 1,
         "losses": 4,
-        "points": 3,
-        "goals_for": 5,
-        "goals_against": 8,
-        "goal_difference": -3,
-        "clean_sheet_rate": 0.2
+        "points": 1,
+        "goals_for": 4,
+        "goals_against": 9,
+        "goal_difference": -5,
+        "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "twente-enschede",
+        "date": "2026-03-01",
+        "opponent_slug": "volendam-volendam",
         "home_away": "away"
       }
     },
@@ -6387,25 +6387,25 @@
       "name": "FC Twente",
       "logo_url": "https://assets.sorare.com/team/fd9fda78-68d6-4a23-a1f4-3d0311ea0364/picture/low_res-290d6e2adc18b866ea5d13658464d0e1.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "telstar-velsen-zuid",
+        "date": "2026-02-22",
+        "opponent_slug": "groningen-groningen",
         "score": "1-1",
-        "home_away": "away"
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
-        "draws": 3,
+        "wins": 1,
+        "draws": 4,
         "losses": 0,
-        "points": 9,
-        "goals_for": 10,
-        "goals_against": 3,
-        "goal_difference": 7,
-        "clean_sheet_rate": 0.6
+        "points": 7,
+        "goals_for": 9,
+        "goals_against": 4,
+        "goal_difference": 5,
+        "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "groningen-groningen",
+        "date": "2026-03-01",
+        "opponent_slug": "feyenoord-rotterdam",
         "home_away": "home"
       }
     },
