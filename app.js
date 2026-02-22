@@ -19,6 +19,10 @@ import {
   debounce,
   el,
   formatNumber,
+  formatPercent,
+  metricIsPercent,
+  metricLabel,
+  resolveMetricValue,
 } from "./lib/ui/components.js";
 import { renderPlayersTableView } from "./lib/ui/playersTable.js";
 import { renderPlayerProfile } from "./lib/ui/playerProfile.js";
@@ -88,7 +92,7 @@ const initialState = {
       metrics: [],
     },
     leaderboards: {
-      metric: "accurate_pass",
+      metric: "decisiveActions",
       position: "",
       minutesMin: 300,
       topN: 10,
@@ -438,6 +442,32 @@ async function loadConfiguredData() {
   }
 }
 
+function metricValueForHome(player, metricKey, preferPer90 = false) {
+  const value = resolveMetricValue(player, metricKey, { preferPer90 });
+  if (value === null || value === undefined || Number.isNaN(value)) {
+    return 0;
+  }
+  return Number(value) || 0;
+}
+
+function decisiveScore(player) {
+  const goals = metricValueForHome(player, "goals");
+  const assists = metricValueForHome(player, "assists");
+  const penEntries90 = metricValueForHome(player, "pen_area_entries", true);
+  const finalThird90 = metricValueForHome(player, "successful_final_third_passes", true);
+  const contest90 = metricValueForHome(player, "won_contest", true);
+  const duelsRate = metricValueForHome(player, "duelsWonRate");
+
+  return (
+    goals * 14 +
+    assists * 10 +
+    penEntries90 * 4 +
+    finalThird90 * 3 +
+    contest90 * 2 +
+    duelsRate * 1.2
+  );
+}
+
 function createWarningsCard(warnings) {
   const card = el("section", { className: "page-card" });
   card.append(el("h2", { text: "Infos de chargement" }));
@@ -460,9 +490,8 @@ function createPlayerSpotlightCard(player) {
         attrs: {
           src: player.photoUrl,
           alt: `Photo de ${player.name}`,
-          loading: "lazy",
+          loading: "eager",
           decoding: "async",
-          referrerpolicy: "no-referrer",
         },
       })
     );
@@ -485,7 +514,6 @@ function createPlayerSpotlightCard(player) {
           alt: `Logo ${player.club?.name || "club"}`,
           loading: "lazy",
           decoding: "async",
-          referrerpolicy: "no-referrer",
         },
       })
     );
@@ -498,12 +526,25 @@ function createPlayerSpotlightCard(player) {
     attrs: { href: `#/player/${encodeURIComponent(player.slug)}` },
   });
   card.append(link);
-  card.append(el("p", { className: "muted", text: `${player.position || "Poste?"} | ${player.club?.name || "Club?"}` }));
+  card.append(
+    el("p", {
+      className: "muted",
+      text: `${player.position || "Poste?"} | ${player.club?.name || "Club?"}`,
+    })
+  );
 
   const badges = el("div", { className: "spotlight-badges" });
   badges.append(el("span", { text: `${formatNumber(player.stats?.minutes, 0)} min` }));
-  badges.append(el("span", { text: `${formatNumber(player.stats?.goals, 0)} buts` }));
-  badges.append(el("span", { text: `${formatNumber(player.stats?.assists, 0)} assists` }));
+  badges.append(
+    el("span", {
+      text: `Actions decisives: ${formatNumber(metricValueForHome(player, "decisiveActions"), 1)}`,
+    })
+  );
+  badges.append(
+    el("span", {
+      text: `Decisif /90: ${formatNumber(metricValueForHome(player, "decisiveActions", true), 2)}`,
+    })
+  );
   card.append(badges);
   return card;
 }
@@ -520,7 +561,6 @@ function createClubSpotlightCard(club) {
           alt: `Logo ${club.name}`,
           loading: "lazy",
           decoding: "async",
-          referrerpolicy: "no-referrer",
         },
       })
     );
@@ -536,7 +576,59 @@ function createClubSpotlightCard(club) {
     })
   );
   card.append(top);
-  card.append(el("p", { className: "muted", text: `Rang ${formatNumber(club.rank, 0)} | ${formatNumber(club.points, 0)} pts` }));
+  card.append(
+    el("p", {
+      className: "muted",
+      text: `Rang ${formatNumber(club.rank, 0)} | ${formatNumber(club.points, 0)} pts`,
+    })
+  );
+  return card;
+}
+
+function topPlayerByMetric(players, metricKey, options = {}) {
+  const minMinutes = Number(options.minMinutes) || 300;
+  const preferPer90 = Boolean(options.preferPer90);
+  const position = options.position || "";
+
+  const rows = players
+    .filter((player) => {
+      if (position && player.position !== position) {
+        return false;
+      }
+      const minutes = player.stats?.minutes ?? 0;
+      return minutes >= minMinutes;
+    })
+    .map((player) => ({
+      player,
+      value: resolveMetricValue(player, metricKey, { preferPer90 }),
+    }))
+    .filter((entry) => entry.value !== null && entry.value !== undefined)
+    .sort((a, b) => b.value - a.value);
+
+  return rows[0] || null;
+}
+
+function createKpiInsightCard(title, entry, metricKey) {
+  const card = el("article", { className: "stat-card kpi-insight" });
+  card.append(el("h3", { text: title }));
+
+  if (!entry) {
+    card.append(el("p", { className: "muted", text: "Pas de donnee disponible" }));
+    return card;
+  }
+
+  const link = el("a", {
+    text: entry.player.name,
+    attrs: { href: `#/player/${encodeURIComponent(entry.player.slug)}` },
+  });
+  card.append(link);
+  card.append(el("p", { className: "muted", text: `${entry.player.position} | ${entry.player.club?.name || "Club?"}` }));
+
+  const valueText = metricIsPercent(metricKey)
+    ? formatPercent(entry.value)
+    : formatNumber(entry.value, 2);
+  card.append(el("p", { className: "kpi", text: valueText }));
+  card.append(el("p", { className: "muted", text: metricLabel(metricKey) }));
   return card;
 }
 
@@ -545,7 +637,7 @@ function renderHomeView(root, state) {
   card.append(el("h2", { text: "Tableau de bord coach" }));
   card.append(
     createCoachNote(
-      "Charge rapide, visuels complets, navigation mobile: l'objectif est une lecture immediate de tes donnees football."
+      "Explore rapidement les KPI utiles: joueurs decisifs, tops par metrique, et lecture par poste."
     )
   );
 
@@ -612,12 +704,60 @@ function renderHomeView(root, state) {
 
   root.append(card);
 
+  const kpiSection = el("section", { className: "page-card" });
+  kpiSection.append(el("h3", { text: "KPI express" }));
+  const kpiGrid = el("div", { className: "grid-cards" });
+  const players = state.data.players;
+  kpiGrid.append(
+    createKpiInsightCard(
+      "Precision de passe",
+      topPlayerByMetric(players, "passAccuracy", { minMinutes: 500 }),
+      "passAccuracy"
+    )
+  );
+  kpiGrid.append(
+    createKpiInsightCard(
+      "Duels gagnes",
+      topPlayerByMetric(players, "duelsWonRate", { minMinutes: 500 }),
+      "duelsWonRate"
+    )
+  );
+  kpiGrid.append(
+    createKpiInsightCard(
+      "Recuperations /90",
+      topPlayerByMetric(players, "poss_won", { minMinutes: 400, preferPer90: true }),
+      "poss_won"
+    )
+  );
+  kpiGrid.append(
+    createKpiInsightCard(
+      "Arrets /90 (gardiens)",
+      topPlayerByMetric(players, "saves", {
+        minMinutes: 400,
+        preferPer90: true,
+        position: "Gardien",
+      }),
+      "saves"
+    )
+  );
+  kpiSection.append(kpiGrid);
+  root.append(kpiSection);
+
   const featuredPlayers = [...state.data.players]
-    .sort((a, b) => (b.stats?.minutes ?? 0) - (a.stats?.minutes ?? 0))
-    .slice(0, 6);
+    .filter((player) => player.position !== "Gardien" && (player.stats?.minutes ?? 0) >= 450)
+    .map((player) => ({ player, score: decisiveScore(player) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8)
+    .map((row) => row.player);
 
   const playersSection = el("section", { className: "page-card" });
-  playersSection.append(el("h3", { text: "Joueurs a suivre" }));
+  playersSection.append(el("h3", { text: "Joueurs les plus decisifs" }));
+  playersSection.append(
+    el("p", {
+      className: "muted",
+      text: "Classement base sur les actions decisives et la contribution offensive /90.",
+    })
+  );
   const playersGrid = el("div", { className: "grid-cards home-spotlights" });
   const playersFragment = document.createDocumentFragment();
   featuredPlayers.forEach((player) => playersFragment.append(createPlayerSpotlightCard(player)));
@@ -853,5 +993,6 @@ searchInput.addEventListener(
 
 render();
 loadConfiguredData();
+
 
 
