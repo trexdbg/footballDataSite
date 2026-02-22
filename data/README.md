@@ -1,9 +1,6 @@
-Placez ici vos fichiers JSON si vous utilisez le mode "chemins configurés".
+Ce dossier n'est plus utilise comme source de donnees.
 
-Par défaut:
-- `./data/players.json`
-- `./data/teams.json`
+La base de donnees de l'application est fixe et chargee uniquement depuis:
 
-Vous pouvez aussi:
-- garder vos noms actuels (ex: `players_stats.json`, `teams_stats.json`)
-- puis changer les chemins dans l'onglet `Paramètres` de l'application.
+- `../players_stats.json`
+- `../teams_stats.json`

@@ -6,11 +6,7 @@ import {
   persistFavorites,
 } from "./lib/store.js";
 import { createRouter } from "./lib/router.js";
-import {
-  explainExpectedShape,
-  loadFromConfiguredPaths,
-  loadFromImportedFiles,
-} from "./lib/dataLoader.js";
+import { loadFromConfiguredPaths } from "./lib/dataLoader.js";
 import { normalizeDatasets } from "./lib/normalize.js";
 import {
   clearNode,
@@ -32,8 +28,8 @@ import { renderLearnView } from "./lib/ui/learn.js";
 import { ChartProvider } from "./lib/charts/chartProvider.js";
 
 const defaultConfig = window.APP_DEFAULT_CONFIG || {
-  PLAYERS_JSON_URL: "./data/players.json",
-  TEAMS_JSON_URL: "./data/teams.json",
+  PLAYERS_JSON_URL: "./players_stats.json",
+  TEAMS_JSON_URL: "./teams_stats.json",
   useChartJs: false,
   chartJsCdnUrl: "",
   chartJsLocalUrl: "",
@@ -59,8 +55,7 @@ const initialState = {
     seasonKeys: [],
     dataQuality: null,
     meta: { generatedAt: "" },
-    sourceMode: "demo",
-    detectedFiles: null,
+    sourceMode: "fixed-json-files",
   },
   index: {
     searchMap: new Map(),
@@ -334,7 +329,17 @@ const actions = {
   },
   updateConfig(partialConfig) {
     updateState((state) => {
-      const config = { ...state.config, ...partialConfig };
+      const config = {
+        ...state.config,
+        playersUrl: state.config.playersUrl,
+        teamsUrl: state.config.teamsUrl,
+        useChartJs:
+          typeof partialConfig.useChartJs === "boolean"
+            ? partialConfig.useChartJs
+            : state.config.useChartJs,
+        chartJsCdnUrl: partialConfig.chartJsCdnUrl ?? state.config.chartJsCdnUrl,
+        chartJsLocalUrl: partialConfig.chartJsLocalUrl ?? state.config.chartJsLocalUrl,
+      };
       persistConfig(config);
       chartProvider = new ChartProvider(config);
       return { ...state, config };
@@ -365,7 +370,6 @@ const actions = {
           dataQuality: bundle.dataQuality,
           meta: bundle.meta,
           sourceMode: loadMeta.mode,
-          detectedFiles: loadMeta.detected || null,
         },
         index: indexes,
         ui: {
@@ -386,9 +390,9 @@ const actions = {
 };
 
 async function loadConfiguredData() {
-  actions.setLoading(true, "Chargement des fichiers configurés...");
+  actions.setLoading(true, "Chargement de la base JSON...");
   try {
-    const loaded = await loadFromConfiguredPaths(store.getState().config);
+    const loaded = await loadFromConfiguredPaths();
     const normalized = normalizeDatasets(
       loaded.playersArray,
       loaded.teamsObject,
@@ -399,36 +403,10 @@ async function loadConfiguredData() {
     announce(`${normalized.players.length} joueurs chargés.`);
   } catch (error) {
     actions.setError({
-      title: "Chargement impossible depuis les chemins configurés",
+      title: "Chargement impossible des fichiers de base",
       message:
-        "Tu peux corriger les chemins dans Paramètres ou importer les deux fichiers JSON à la main.",
+        "Vérifie la présence de players_stats.json et teams_stats.json à la racine du projet.",
       details: error.technicalDetails || error.message,
-    });
-  } finally {
-    actions.setLoading(false, "");
-  }
-}
-
-async function loadImportedData(files) {
-  actions.setLoading(true, "Lecture des fichiers importés...");
-  try {
-    const loaded = await loadFromImportedFiles(files);
-    const normalized = normalizeDatasets(
-      loaded.playersArray,
-      loaded.teamsObject,
-      loaded.rawPlayersSource,
-      loaded.rawTeamsSource
-    );
-    actions.applyNormalizedData(normalized, loaded);
-    announce(`${normalized.players.length} joueurs importés avec succès.`);
-    router.navigate("/home");
-  } catch (error) {
-    actions.setError({
-      title: "Import impossible",
-      message:
-        error.message ||
-        "Je n'arrive pas à reconnaître les deux fichiers JSON. Vérifie les données et réessaie.",
-      details: error.technicalDetails || "",
     });
   } finally {
     actions.setLoading(false, "");
@@ -451,19 +429,19 @@ function renderHomeView(root, state) {
   card.append(el("h2", { text: "Accueil du coach" }));
   card.append(
     createCoachNote(
-      "Commence par charger les fichiers, puis explore les joueurs, les tops et la comparaison."
+      "L'app lit directement players_stats.json et teams_stats.json, puis tu peux explorer les joueurs, les tops et la comparaison."
     )
   );
 
   if (state.data.players.length === 0) {
     card.append(
       el("p", {
-        text: "Mode démo: aucune donnée chargée pour l'instant.",
+        text: "Aucune donnée chargée pour l'instant.",
       })
     );
     card.append(
       el("p", {
-        text: "Va dans Paramètres pour renseigner les chemins JSON ou importer 2 fichiers.",
+        text: "Vérifie que players_stats.json et teams_stats.json sont accessibles à la racine du projet.",
       })
     );
     card.append(el("a", { text: "Ouvrir les paramètres", attrs: { href: "#/settings" } }));
@@ -496,7 +474,7 @@ function renderHomeView(root, state) {
   quickGrid.append(
     el("article", {
       className: "stat-card",
-      html: `<h3>Source</h3><p class="kpi">${state.data.sourceMode === "import-files" ? "Import" : "Chemins"}</p>`,
+      html: `<h3>Source</h3><p class="kpi">Base JSON fixe</p>`,
     })
   );
 
@@ -513,39 +491,36 @@ function renderHomeView(root, state) {
 
 function renderSettingsView(root, state) {
   const page = el("section", { className: "page-card" });
-  page.append(el("h2", { text: "Paramètres de chargement" }));
+  page.append(el("h2", { text: "Paramètres" }));
   page.append(
     createCoachNote(
-      "Deux modes: 1) chemins configurés, 2) import manuel de fichiers JSON."
+      "La base de données est fixe: players_stats.json + teams_stats.json."
     )
   );
 
-  const pathForm = el("form", { className: "controls-panel" });
-  pathForm.append(el("h3", { text: "Mode 1 - chemins configurés" }));
-  const pathGrid = el("div", { className: "controls-grid" });
-
-  const playersUrlField = el("label", { className: "field" });
-  playersUrlField.append(el("span", { text: "Chemin JSON joueurs" }));
-  const playersUrlInput = el("input", {
-    attrs: {
-      type: "text",
-      value: state.config.playersUrl,
-      placeholder: "./data/players.json",
-    },
+  const sourcePanel = el("section", { className: "controls-panel" });
+  sourcePanel.append(el("h3", { text: "Source de données" }));
+  sourcePanel.append(
+    el("p", {
+      text: "Fichier joueurs: ./players_stats.json",
+    })
+  );
+  sourcePanel.append(
+    el("p", {
+      text: "Fichier clubs/classements: ./teams_stats.json",
+    })
+  );
+  const reloadBtn = el("button", {
+    text: "Recharger les données",
+    attrs: { type: "button" },
   });
-  playersUrlField.append(playersUrlInput);
+  reloadBtn.addEventListener("click", () => loadConfiguredData());
+  sourcePanel.append(reloadBtn);
+  page.append(sourcePanel);
 
-  const teamsUrlField = el("label", { className: "field" });
-  teamsUrlField.append(el("span", { text: "Chemin JSON clubs/classements" }));
-  const teamsUrlInput = el("input", {
-    attrs: {
-      type: "text",
-      value: state.config.teamsUrl,
-      placeholder: "./data/teams.json",
-    },
-  });
-  teamsUrlField.append(teamsUrlInput);
-
+  const chartForm = el("form", { className: "controls-panel" });
+  chartForm.append(el("h3", { text: "Graphiques" }));
+  const chartGrid = el("div", { className: "controls-grid" });
   const chartJsField = el("label", { className: "field" });
   chartJsField.append(el("span", { text: "Option graphique" }));
   const chartSelect = document.createElement("select");
@@ -565,84 +540,30 @@ function renderSettingsView(root, state) {
   });
   cndUrlField.append(chartCdnInput);
 
-  pathGrid.append(playersUrlField, teamsUrlField, chartJsField, cndUrlField);
-  pathForm.append(pathGrid);
+  chartGrid.append(chartJsField, cndUrlField);
+  chartForm.append(chartGrid);
 
-  const pathButtons = el("div", { className: "control-row" });
+  const chartButtons = el("div", { className: "control-row" });
   const saveBtn = el("button", {
-    text: "Sauvegarder + recharger",
+    text: "Sauvegarder",
     attrs: { type: "submit" },
   });
   const retryBtn = el("button", {
-    text: "Recharger sans modifier",
+    text: "Recharger",
     attrs: { type: "button" },
   });
   retryBtn.addEventListener("click", () => loadConfiguredData());
-  pathButtons.append(saveBtn, retryBtn);
-  pathForm.append(pathButtons);
+  chartButtons.append(saveBtn, retryBtn);
+  chartForm.append(chartButtons);
 
-  pathForm.addEventListener("submit", (event) => {
+  chartForm.addEventListener("submit", (event) => {
     event.preventDefault();
     actions.updateConfig({
-      playersUrl: playersUrlInput.value.trim(),
-      teamsUrl: teamsUrlInput.value.trim(),
       useChartJs: chartSelect.value === "true",
       chartJsCdnUrl: chartCdnInput.value.trim(),
     });
-    loadConfiguredData();
   });
-
-  page.append(pathForm);
-
-  const importSection = el("section", { className: "controls-panel" });
-  importSection.append(el("h3", { text: "Mode 2 - import de fichiers" }));
-  importSection.append(
-    el("p", { text: "Sélectionne les 2 JSON. L'app détecte automatiquement joueurs et classements." })
-  );
-
-  const fileInput = el("input", {
-    attrs: {
-      type: "file",
-      accept: "application/json,.json",
-      multiple: "true",
-      "aria-label": "Importer des fichiers JSON",
-    },
-  });
-  const importBtn = el("button", {
-    text: "Importer maintenant",
-    attrs: { type: "button" },
-  });
-  importBtn.addEventListener("click", () => {
-    if (!fileInput.files || fileInput.files.length === 0) {
-      actions.setError({
-        title: "Import incomplet",
-        message: "Choisis d'abord les fichiers JSON à importer.",
-      });
-      return;
-    }
-    loadImportedData(fileInput.files);
-  });
-
-  importSection.append(fileInput, importBtn);
-  page.append(importSection);
-
-  const shape = explainExpectedShape();
-  const helpDetails = el("details");
-  helpDetails.append(el("summary", { text: "Exemples de structure attendue" }));
-  helpDetails.append(el("p", { text: "Format joueurs (simplifié):" }));
-  helpDetails.append(el("pre", { text: shape.playersExample }));
-  helpDetails.append(el("p", { text: "Format clubs/classements (simplifié):" }));
-  helpDetails.append(el("pre", { text: shape.teamsExample }));
-  page.append(helpDetails);
-
-  if (state.data.detectedFiles) {
-    page.append(
-      el("p", {
-        className: "success-text",
-        text: `Dernier import détecté: joueurs=${state.data.detectedFiles.playersFile}, clubs=${state.data.detectedFiles.teamsFile}`,
-      })
-    );
-  }
+  page.append(chartForm);
 
   if (state.error) {
     page.append(createErrorCard(state.error));
