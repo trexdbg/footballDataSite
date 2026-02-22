@@ -3,10 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Foot Stats Coach - Explorer les stats du football</title>
+    <title>Foot Stats Coach | Data Football Interactive</title>
     <meta
       name="description"
-      content="Application web statique pour découvrir les statistiques football avec des explications simples."
+      content="Application statique pour explorer des statistiques football avec une interface visuelle, rapide et mobile-first."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
@@ -14,12 +20,22 @@
     <a class="skip-link" href="#main-content">Aller au contenu principal</a>
 
     <header class="site-header">
-      <div class="brand-wrap">
-        <p class="brand-eyebrow">Coach Data</p>
-        <h1>Foot Stats Coach</h1>
-        <p class="brand-subtitle">
-          Comprends tes stats comme un vrai coach, pas à pas.
-        </p>
+      <div class="header-top">
+        <div class="brand-wrap">
+          <p class="brand-eyebrow">Coach Data Lab</p>
+          <h1>Foot Stats Coach</h1>
+          <p class="brand-subtitle">
+            Donnees brutes, lecture instantanee. Tes stats football enfin claires.
+          </p>
+          <div class="brand-badges">
+            <span>Fast load</span>
+            <span>Mobile first</span>
+            <span>Visual cards</span>
+          </div>
+        </div>
+        <figure class="header-illustration" aria-hidden="true">
+          <img src="./assets/illustrations/coach-ball.svg" alt="" />
+        </figure>
       </div>
 
       <div class="header-controls">
@@ -29,11 +45,9 @@
           type="search"
           inputmode="search"
           autocomplete="off"
-          placeholder="Nom, club ou nationalité"
+          placeholder="Nom, club, nationalite"
         />
-        <a id="settings-link" class="settings-link" href="#/settings"
-          >Paramètres</a
-        >
+        <a id="settings-link" class="settings-link" href="#/settings">Parametres</a>
       </div>
 
       <nav class="main-nav" aria-label="Navigation principale">
@@ -55,10 +69,8 @@
 
     <noscript>
       <div class="page-card error-card">
-        <h2>JavaScript est nécessaire</h2>
-        <p>
-          Cette application a besoin de JavaScript pour charger les statistiques.
-        </p>
+        <h2>JavaScript est necessaire</h2>
+        <p>Cette application a besoin de JavaScript pour charger les statistiques.</p>
       </div>
     </noscript>
 

@@ -4,23 +4,29 @@ Application web **HTML/CSS/JavaScript vanilla** pour explorer des statistiques f
 
 ## Base de donnees
 
-L'application utilise **uniquement** ces deux fichiers JSON a la racine du projet:
+L'application charge en priorite les fichiers compresses a la racine:
+
+- `./players_stats.json.gz`
+- `./teams_stats.json.gz`
+
+Puis elle bascule automatiquement sur:
 
 - `./players_stats.json`
 - `./teams_stats.json`
 
-Aucune option d'import manuel ni de changement de chemins n'est prevue pour les donnees.
+si le `.gz` est indisponible ou si le navigateur ne supporte pas la decompression.
 
 ## Fonctionnalites principales
 
 - SPA statique avec hash routing (`#/players`, `#/compare`, etc.).
-- Chargement automatique de la base JSON fixe au demarrage.
-- Normalisation defensive des joueurs/clubs.
+- Chargement automatique de la base JSON fixe au demarrage (cache runtime + fallback .json).
+- Normalisation defensive des joueurs/clubs, en traitement progressif pour garder l'UI fluide.
 - Recherche globale (nom, club, nationalite).
 - Favoris persistants (`localStorage`).
 - Table Joueurs triable/filtrable/paginee + mode cartes.
 - Profil joueur, comparaison A/B, leaderboards, classements clubs.
 - Glossaire et panneaux de qualite des donnees.
+- Interface responsive revue (mobile-first) avec visuels joueurs/clubs.
 
 ## Structure
 
@@ -30,6 +36,8 @@ Aucune option d'import manuel ni de changement de chemins n'est prevue pour les 
   styles.css
   config.js
   app.js
+  players_stats.json.gz
+  teams_stats.json.gz
   players_stats.json
   teams_stats.json
   /lib/
@@ -59,7 +67,7 @@ Aucune option d'import manuel ni de changement de chemins n'est prevue pour les 
 
 1. Heberger ce dossier sur un serveur statique.
 2. Ouvrir `index.html`.
-3. Verifier que `players_stats.json` et `teams_stats.json` sont presents et accessibles a la racine.
+3. Verifier que les fichiers `.json.gz` sont presents (et garder les `.json` comme fallback).
 
 ## Option Chart.js (facultative)
 

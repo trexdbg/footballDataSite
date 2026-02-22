@@ -1,4 +1,4 @@
-import {
+﻿import {
   createStore,
   loadFavorites,
   loadPersistedConfig,
@@ -7,7 +7,7 @@ import {
 } from "./lib/store.js";
 import { createRouter } from "./lib/router.js";
 import { loadFromConfiguredPaths } from "./lib/dataLoader.js";
-import { normalizeDatasets } from "./lib/normalize.js";
+import { normalizeDatasetsAsync } from "./lib/normalize.js";
 import {
   clearNode,
   createAboutDataCard,
@@ -15,6 +15,7 @@ import {
   createDataQualityPanel,
   createErrorCard,
   createLoadingCard,
+  createPill,
   debounce,
   el,
   formatNumber,
@@ -28,8 +29,8 @@ import { renderLearnView } from "./lib/ui/learn.js";
 import { ChartProvider } from "./lib/charts/chartProvider.js";
 
 const defaultConfig = window.APP_DEFAULT_CONFIG || {
-  PLAYERS_JSON_URL: "./players_stats.json",
-  TEAMS_JSON_URL: "./teams_stats.json",
+  PLAYERS_JSON_URL: "./players_stats.json.gz",
+  TEAMS_JSON_URL: "./teams_stats.json.gz",
   useChartJs: false,
   chartJsCdnUrl: "",
   chartJsLocalUrl: "",
@@ -39,6 +40,10 @@ const appRoot = document.getElementById("app");
 const searchInput = document.getElementById("global-search-input");
 const liveRegion = document.getElementById("live-region");
 const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
+const prefersCardsLayout =
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  window.matchMedia("(max-width: 860px)").matches;
 
 const initialState = {
   route: { name: "home", params: {} },
@@ -55,6 +60,7 @@ const initialState = {
     seasonKeys: [],
     dataQuality: null,
     meta: { generatedAt: "" },
+    loadInfo: null,
     sourceMode: "fixed-json-files",
   },
   index: {
@@ -74,7 +80,7 @@ const initialState = {
       sort: { key: "name", dir: "asc" },
       page: 1,
       pageSize: 50,
-      viewMode: "table",
+      viewMode: prefersCardsLayout ? "cards" : "table",
     },
     compare: {
       a: "",
@@ -160,7 +166,7 @@ const actions = {
         next.add(slug);
       }
       persistFavorites(next);
-      announce(`${next.size} favori(s) enregistré(s).`);
+      announce(`${next.size} favori(s) enregistre(s).`);
       return { ...state, favorites: next };
     });
   },
@@ -369,6 +375,7 @@ const actions = {
           seasonKeys: bundle.seasonKeys,
           dataQuality: bundle.dataQuality,
           meta: bundle.meta,
+          loadInfo: loadMeta.diagnostics || null,
           sourceMode: loadMeta.mode,
         },
         index: indexes,
@@ -392,20 +399,38 @@ const actions = {
 async function loadConfiguredData() {
   actions.setLoading(true, "Chargement de la base JSON...");
   try {
-    const loaded = await loadFromConfiguredPaths();
-    const normalized = normalizeDatasets(
+    const config = store.getState().config;
+    const loaded = await loadFromConfiguredPaths(config, {
+      onProgress: (message) => actions.setLoading(true, message),
+    });
+    actions.setLoading(true, "Preparation des statistiques...");
+    const normalized = await normalizeDatasetsAsync(
       loaded.playersArray,
       loaded.teamsObject,
       loaded.rawPlayersSource,
-      loaded.rawTeamsSource
+      loaded.rawTeamsSource,
+      {
+        chunkSize: 220,
+        onProgress: ({ processed, total }) => {
+          if (processed === total || processed % 440 === 0) {
+            actions.setLoading(
+              true,
+              `Preparation des statistiques (${formatNumber(processed, 0)}/${formatNumber(total, 0)})...`
+            );
+          }
+        },
+      }
     );
     actions.applyNormalizedData(normalized, loaded);
-    announce(`${normalized.players.length} joueurs chargés.`);
+    const loadMs = loaded.diagnostics?.loadMs;
+    const durationText =
+      typeof loadMs === "number" ? ` en ${formatNumber(loadMs, 0)} ms` : "";
+    announce(`${normalized.players.length} joueurs charges${durationText}.`);
   } catch (error) {
     actions.setError({
       title: "Chargement impossible des fichiers de base",
       message:
-        "Vérifie la présence de players_stats.json et teams_stats.json à la racine du projet.",
+        "Verifie la presence de players_stats/teams_stats (.json.gz ou .json) a la racine du projet.",
       details: error.technicalDetails || error.message,
     });
   } finally {
@@ -424,27 +449,118 @@ function createWarningsCard(warnings) {
   return card;
 }
 
+function createPlayerSpotlightCard(player) {
+  const card = el("article", { className: "spotlight-card" });
+  const top = el("div", { className: "spotlight-top" });
+  const avatar = el("span", { className: "spotlight-avatar" });
+
+  if (player.photoUrl) {
+    avatar.append(
+      el("img", {
+        attrs: {
+          src: player.photoUrl,
+          alt: `Photo de ${player.name}`,
+          loading: "lazy",
+          decoding: "async",
+          referrerpolicy: "no-referrer",
+        },
+      })
+    );
+  } else {
+    const initials = player.name
+      .split(" ")
+      .slice(0, 2)
+      .map((part) => part[0]?.toUpperCase() || "")
+      .join("");
+    avatar.textContent = initials || "J";
+  }
+
+  top.append(avatar);
+  if (player.club?.logoUrl) {
+    top.append(
+      el("img", {
+        className: "club-logo-sm",
+        attrs: {
+          src: player.club.logoUrl,
+          alt: `Logo ${player.club?.name || "club"}`,
+          loading: "lazy",
+          decoding: "async",
+          referrerpolicy: "no-referrer",
+        },
+      })
+    );
+  }
+
+  card.append(top);
+  const link = el("a", {
+    className: "spotlight-title",
+    text: player.name,
+    attrs: { href: `#/player/${encodeURIComponent(player.slug)}` },
+  });
+  card.append(link);
+  card.append(el("p", { className: "muted", text: `${player.position || "Poste?"} | ${player.club?.name || "Club?"}` }));
+
+  const badges = el("div", { className: "spotlight-badges" });
+  badges.append(el("span", { text: `${formatNumber(player.stats?.minutes, 0)} min` }));
+  badges.append(el("span", { text: `${formatNumber(player.stats?.goals, 0)} buts` }));
+  badges.append(el("span", { text: `${formatNumber(player.stats?.assists, 0)} assists` }));
+  card.append(badges);
+  return card;
+}
+
+function createClubSpotlightCard(club) {
+  const card = el("article", { className: "club-card" });
+  const top = el("div", { className: "club-identity" });
+  if (club.logoUrl) {
+    top.append(
+      el("img", {
+        className: "club-logo-sm",
+        attrs: {
+          src: club.logoUrl,
+          alt: `Logo ${club.name}`,
+          loading: "lazy",
+          decoding: "async",
+          referrerpolicy: "no-referrer",
+        },
+      })
+    );
+  }
+  top.append(
+    el("a", {
+      text: club.name,
+      attrs: {
+        href: `#/club/${encodeURIComponent(club.competitionSlug || "unknown")}/${encodeURIComponent(
+          club.slug
+        )}`,
+      },
+    })
+  );
+  card.append(top);
+  card.append(el("p", { className: "muted", text: `Rang ${formatNumber(club.rank, 0)} | ${formatNumber(club.points, 0)} pts` }));
+  return card;
+}
+
 function renderHomeView(root, state) {
-  const card = el("section", { className: "page-card" });
-  card.append(el("h2", { text: "Accueil du coach" }));
+  const card = el("section", { className: "page-card hero-shell" });
+  card.append(el("h2", { text: "Tableau de bord coach" }));
   card.append(
     createCoachNote(
-      "L'app lit directement players_stats.json et teams_stats.json, puis tu peux explorer les joueurs, les tops et la comparaison."
+      "Charge rapide, visuels complets, navigation mobile: l'objectif est une lecture immediate de tes donnees football."
     )
   );
 
   if (state.data.players.length === 0) {
     card.append(
       el("p", {
-        text: "Aucune donnée chargée pour l'instant.",
+        text: "Aucune donnee chargee pour l'instant.",
       })
     );
     card.append(
       el("p", {
-        text: "Vérifie que players_stats.json et teams_stats.json sont accessibles à la racine du projet.",
+        text: "Verifie que players_stats et teams_stats sont accessibles a la racine.",
       })
     );
-    card.append(el("a", { text: "Ouvrir les paramètres", attrs: { href: "#/settings" } }));
+    card.append(el("a", { text: "Ouvrir les parametres", attrs: { href: "#/settings" } }));
     root.append(card);
     if (state.error) {
       root.append(createErrorCard(state.error));
@@ -452,7 +568,7 @@ function renderHomeView(root, state) {
     return;
   }
 
-  const quickGrid = el("div", { className: "grid-cards" });
+  const quickGrid = el("div", { className: "grid-cards hero-grid" });
   quickGrid.append(
     el("article", {
       className: "stat-card",
@@ -474,13 +590,53 @@ function renderHomeView(root, state) {
   quickGrid.append(
     el("article", {
       className: "stat-card",
-      html: `<h3>Source</h3><p class="kpi">Base JSON fixe</p>`,
+      html: `<h3>Source</h3><p class="kpi">JSON fixe</p>`,
     })
   );
 
   card.append(quickGrid);
-  card.append(el("p", { className: "muted", text: "Astuce: utilise la recherche globale en haut pour aller plus vite." }));
+
+  if (state.data.loadInfo) {
+    const loadInfoRow = el("div", { className: "status-row" });
+    loadInfoRow.append(createPill("Joueurs", state.data.loadInfo.playersSource || "network"));
+    loadInfoRow.append(createPill("Clubs", state.data.loadInfo.teamsSource || "network"));
+    loadInfoRow.append(createPill("Temps", `${formatNumber(state.data.loadInfo.loadMs, 0)} ms`, "ok"));
+    card.append(loadInfoRow);
+  }
+
+  const cta = el("div", { className: "hero-cta" });
+  cta.append(el("a", { className: "button", text: "Explorer les joueurs", attrs: { href: "#/players" } }));
+  cta.append(el("a", { className: "button", text: "Voir les tops", attrs: { href: "#/leaderboards" } }));
+  cta.append(el("a", { className: "button", text: "Comparer", attrs: { href: "#/compare" } }));
+  card.append(cta);
+
   root.append(card);
+
+  const featuredPlayers = [...state.data.players]
+    .sort((a, b) => (b.stats?.minutes ?? 0) - (a.stats?.minutes ?? 0))
+    .slice(0, 6);
+
+  const playersSection = el("section", { className: "page-card" });
+  playersSection.append(el("h3", { text: "Joueurs a suivre" }));
+  const playersGrid = el("div", { className: "grid-cards home-spotlights" });
+  const playersFragment = document.createDocumentFragment();
+  featuredPlayers.forEach((player) => playersFragment.append(createPlayerSpotlightCard(player)));
+  playersGrid.append(playersFragment);
+  playersSection.append(playersGrid);
+  root.append(playersSection);
+
+  const featuredClubs = [...state.data.clubs]
+    .sort((a, b) => (a.rank ?? Number.MAX_SAFE_INTEGER) - (b.rank ?? Number.MAX_SAFE_INTEGER))
+    .slice(0, 8);
+
+  const clubsSection = el("section", { className: "page-card" });
+  clubsSection.append(el("h3", { text: "Clubs en vue" }));
+  const clubsGrid = el("div", { className: "grid-cards home-clubs" });
+  const clubsFragment = document.createDocumentFragment();
+  featuredClubs.forEach((club) => clubsFragment.append(createClubSpotlightCard(club)));
+  clubsGrid.append(clubsFragment);
+  clubsSection.append(clubsGrid);
+  root.append(clubsSection);
 
   if (state.warnings.length > 0) {
     root.append(createWarningsCard(state.warnings));
@@ -491,27 +647,27 @@ function renderHomeView(root, state) {
 
 function renderSettingsView(root, state) {
   const page = el("section", { className: "page-card" });
-  page.append(el("h2", { text: "Paramètres" }));
+  page.append(el("h2", { text: "Parametres" }));
   page.append(
     createCoachNote(
-      "La base de données est fixe: players_stats.json + teams_stats.json."
+      "La base de donnees est fixe: players_stats + teams_stats (formats .json.gz ou .json)."
     )
   );
 
   const sourcePanel = el("section", { className: "controls-panel" });
-  sourcePanel.append(el("h3", { text: "Source de données" }));
+  sourcePanel.append(el("h3", { text: "Source de donnees" }));
   sourcePanel.append(
     el("p", {
-      text: "Fichier joueurs: ./players_stats.json",
+      text: "Fichier joueurs prioritaire: ./players_stats.json.gz (fallback: ./players_stats.json)",
     })
   );
   sourcePanel.append(
     el("p", {
-      text: "Fichier clubs/classements: ./teams_stats.json",
+      text: "Fichier clubs prioritaire: ./teams_stats.json.gz (fallback: ./teams_stats.json)",
     })
   );
   const reloadBtn = el("button", {
-    text: "Recharger les données",
+    text: "Recharger les donnees",
     attrs: { type: "button" },
   });
   reloadBtn.addEventListener("click", () => loadConfiguredData());
@@ -524,7 +680,7 @@ function renderSettingsView(root, state) {
   const chartJsField = el("label", { className: "field" });
   chartJsField.append(el("span", { text: "Option graphique" }));
   const chartSelect = document.createElement("select");
-  chartSelect.append(el("option", { text: "SVG (léger, recommandé)", attrs: { value: "false" } }));
+  chartSelect.append(el("option", { text: "SVG (leger, recommande)", attrs: { value: "false" } }));
   chartSelect.append(el("option", { text: "Chart.js si disponible", attrs: { value: "true" } }));
   chartSelect.value = state.config.useChartJs ? "true" : "false";
   chartJsField.append(chartSelect);
@@ -697,3 +853,5 @@ searchInput.addEventListener(
 
 render();
 loadConfiguredData();
+
+

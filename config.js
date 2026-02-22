@@ -1,5 +1,5 @@
-const PLAYERS_JSON_URL = "./players_stats.json";
-const TEAMS_JSON_URL = "./teams_stats.json";
+const PLAYERS_JSON_URL = "./players_stats.json.gz";
+const TEAMS_JSON_URL = "./teams_stats.json.gz";
 
 window.PLAYERS_JSON_URL = PLAYERS_JSON_URL;
 window.TEAMS_JSON_URL = TEAMS_JSON_URL;
