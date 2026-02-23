@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-22T12:13:54.337453+00:00",
+    "generated_at": "2026-02-23T03:42:02.858334+00:00",
     "source": "sorare_api_graphql",
     "teams_count": 145,
     "competitions_filter": [
@@ -33,7 +33,7 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 203,
+      "matches_counted": 206,
       "table": [
         {
           "club_slug": "bayern-munchen-munchen",
@@ -84,15 +84,15 @@
           "club_slug": "stuttgart-stuttgart",
           "club_name": "VfB Stuttgart",
           "logo_url": "https://assets.sorare.com/team/2a59b2bd-3847-4f6d-b5ef-5d89c9347843/picture/low_res-23d13f724b51102ab68e139ad95b0db6.png",
-          "played": 22,
-          "points": 42,
+          "played": 23,
+          "points": 43,
           "wins": 13,
-          "draws": 3,
+          "draws": 4,
           "losses": 6,
-          "goals_for": 41,
-          "goals_against": 29,
+          "goals_for": 44,
+          "goals_against": 32,
           "goal_difference": 12,
-          "clean_sheet_rate": 0.364,
+          "clean_sheet_rate": 0.348,
           "rank": 4
         },
         {
@@ -126,6 +126,21 @@
           "rank": 6
         },
         {
+          "club_slug": "freiburg-freiburg-im-breisgau",
+          "club_name": "Sport-Club Freiburg",
+          "logo_url": "https://assets.sorare.com/team/a517d073-900e-40d5-b065-d2d3e015eb4e/picture/low_res-539c03414aed9c153370e496c694d9e9.png",
+          "played": 23,
+          "points": 33,
+          "wins": 9,
+          "draws": 6,
+          "losses": 8,
+          "goals_for": 34,
+          "goals_against": 37,
+          "goal_difference": -3,
+          "clean_sheet_rate": 0.217,
+          "rank": 7
+        },
+        {
           "club_slug": "eintracht-frankfurt-frankfurt-am-main",
           "club_name": "Eintracht Frankfurt",
           "logo_url": "https://assets.sorare.com/team/5f1be743-510a-4d01-ad32-f3b362598251/picture/low_res-69aef9f8e24fd1649ff02f3b4ccd6c58.png",
@@ -138,21 +153,6 @@
           "goals_against": 49,
           "goal_difference": -3,
           "clean_sheet_rate": 0.174,
-          "rank": 7
-        },
-        {
-          "club_slug": "freiburg-freiburg-im-breisgau",
-          "club_name": "Sport-Club Freiburg",
-          "logo_url": "https://assets.sorare.com/team/a517d073-900e-40d5-b065-d2d3e015eb4e/picture/low_res-539c03414aed9c153370e496c694d9e9.png",
-          "played": 22,
-          "points": 30,
-          "wins": 8,
-          "draws": 6,
-          "losses": 8,
-          "goals_for": 32,
-          "goals_against": 36,
-          "goal_difference": -4,
-          "clean_sheet_rate": 0.227,
           "rank": 8
         },
         {
@@ -234,15 +234,15 @@
           "club_slug": "borussia-m-gladbach-monchengladbach",
           "club_name": "Borussia Mönchengladbach",
           "logo_url": "https://assets.sorare.com/team/67715b49-9256-47b3-ade2-444a79131864/picture/low_res-53715c81143b15a7e0f3f0bc43ef72a9.png",
-          "played": 22,
+          "played": 23,
           "points": 22,
           "wins": 5,
           "draws": 7,
-          "losses": 10,
-          "goals_for": 25,
-          "goals_against": 37,
-          "goal_difference": -12,
-          "clean_sheet_rate": 0.364,
+          "losses": 11,
+          "goals_for": 26,
+          "goals_against": 39,
+          "goal_difference": -13,
+          "clean_sheet_rate": 0.348,
           "rank": 14
         },
         {
@@ -261,46 +261,46 @@
           "rank": 15
         },
         {
-          "club_slug": "werder-bremen-bremen",
-          "club_name": "SV Werder Bremen",
-          "logo_url": "https://assets.sorare.com/team/ac73eee4-e140-4c96-baf6-e3dae0e41e57/picture/low_res-d455ac94061168d04ed9b95b881a3dec.png",
-          "played": 22,
-          "points": 19,
-          "wins": 4,
-          "draws": 7,
-          "losses": 11,
-          "goals_for": 22,
-          "goals_against": 42,
-          "goal_difference": -20,
-          "clean_sheet_rate": 0.182,
-          "rank": 16
-        },
-        {
           "club_slug": "st-pauli-hamburg",
           "club_name": "FC St. Pauli",
           "logo_url": "https://assets.sorare.com/team/bdcadfb0-3c49-4d41-ad92-6178d23cd15d/picture/low_res-9323db86ebeac3883b6fa49459cb64e4.png",
-          "played": 22,
-          "points": 17,
-          "wins": 4,
+          "played": 23,
+          "points": 20,
+          "wins": 5,
           "draws": 5,
           "losses": 13,
-          "goals_for": 20,
-          "goals_against": 39,
-          "goal_difference": -19,
-          "clean_sheet_rate": 0.136,
+          "goals_for": 22,
+          "goals_against": 40,
+          "goal_difference": -18,
+          "clean_sheet_rate": 0.13,
+          "rank": 16
+        },
+        {
+          "club_slug": "werder-bremen-bremen",
+          "club_name": "SV Werder Bremen",
+          "logo_url": "https://assets.sorare.com/team/ac73eee4-e140-4c96-baf6-e3dae0e41e57/picture/low_res-d455ac94061168d04ed9b95b881a3dec.png",
+          "played": 23,
+          "points": 19,
+          "wins": 4,
+          "draws": 7,
+          "losses": 12,
+          "goals_for": 23,
+          "goals_against": 44,
+          "goal_difference": -21,
+          "clean_sheet_rate": 0.174,
           "rank": 17
         },
         {
           "club_slug": "heidenheim-heidenheim-an-der-brenz",
           "club_name": "1. FC Heidenheim 1846",
           "logo_url": "https://assets.sorare.com/team/a47d1903-ea3e-4e9e-813f-1962782255d9/picture/low_res-16348f2dfc5c829b3e938d42475982d3.png",
-          "played": 22,
-          "points": 13,
+          "played": 23,
+          "points": 14,
           "wins": 3,
-          "draws": 4,
+          "draws": 5,
           "losses": 15,
-          "goals_for": 19,
-          "goals_against": 48,
+          "goals_for": 22,
+          "goals_against": 51,
           "goal_difference": -29,
           "clean_sheet_rate": 0.0,
           "rank": 18
@@ -316,37 +316,52 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 117,
+      "matches_counted": 120,
       "table": [
         {
           "club_slug": "salzburg-wals-siezenheim",
           "club_name": "FC Red Bull Salzburg",
           "logo_url": "https://assets.sorare.com/team/82f65ec8-6195-44dc-bf94-3e8a0f83100d/picture/low_res-cca3a74c1b7db1d3b2adb532f578a6b8.png",
-          "played": 19,
-          "points": 33,
-          "wins": 9,
+          "played": 20,
+          "points": 36,
+          "wins": 10,
           "draws": 6,
           "losses": 4,
-          "goals_for": 37,
-          "goals_against": 24,
-          "goal_difference": 13,
-          "clean_sheet_rate": 0.211,
+          "goals_for": 42,
+          "goals_against": 25,
+          "goal_difference": 17,
+          "clean_sheet_rate": 0.2,
           "rank": 1
+        },
+        {
+          "club_slug": "sturm-graz-graz",
+          "club_name": "SK Puntigamer Sturm Graz",
+          "logo_url": "https://assets.sorare.com/team/ebb1fa2b-e745-4399-b3d0-4ae02b563a3b/picture/low_res-72b0f0d220111f18268bb2224eac7702.png",
+          "played": 20,
+          "points": 34,
+          "wins": 11,
+          "draws": 1,
+          "losses": 8,
+          "goals_for": 29,
+          "goals_against": 24,
+          "goal_difference": 5,
+          "clean_sheet_rate": 0.4,
+          "rank": 2
         },
         {
           "club_slug": "lask-linz",
           "club_name": "LASK",
           "logo_url": "https://assets.sorare.com/team/6578fe9c-21a4-4879-a322-99044d84d8c5/picture/low_res-06dfe19dc3f52f6bc8255e8d33819c65.png",
-          "played": 19,
+          "played": 20,
           "points": 33,
           "wins": 10,
           "draws": 3,
-          "losses": 6,
-          "goals_for": 26,
-          "goals_against": 22,
-          "goal_difference": 4,
-          "clean_sheet_rate": 0.368,
-          "rank": 2
+          "losses": 7,
+          "goals_for": 27,
+          "goals_against": 27,
+          "goal_difference": 0,
+          "clean_sheet_rate": 0.35,
+          "rank": 3
         },
         {
           "club_slug": "austria-wien-wien",
@@ -361,7 +376,7 @@
           "goals_against": 28,
           "goal_difference": 2,
           "clean_sheet_rate": 0.25,
-          "rank": 3
+          "rank": 4
         },
         {
           "club_slug": "hartberg-hartberg",
@@ -376,21 +391,6 @@
           "goals_against": 23,
           "goal_difference": 5,
           "clean_sheet_rate": 0.3,
-          "rank": 4
-        },
-        {
-          "club_slug": "sturm-graz-graz",
-          "club_name": "SK Puntigamer Sturm Graz",
-          "logo_url": "https://assets.sorare.com/team/ebb1fa2b-e745-4399-b3d0-4ae02b563a3b/picture/low_res-72b0f0d220111f18268bb2224eac7702.png",
-          "played": 19,
-          "points": 31,
-          "wins": 10,
-          "draws": 1,
-          "losses": 8,
-          "goals_for": 28,
-          "goals_against": 24,
-          "goal_difference": 4,
-          "clean_sheet_rate": 0.368,
           "rank": 5
         },
         {
@@ -427,15 +427,15 @@
           "club_slug": "ried-ried-im-innkreis",
           "club_name": "SV Guntamatic Ried",
           "logo_url": "https://assets.sorare.com/team/f3e272e7-1e67-4a51-914a-19381ea88d10/picture/low_res-aaf423b9e8353e633311b329bcf75196.png",
-          "played": 19,
-          "points": 27,
+          "played": 20,
+          "points": 28,
           "wins": 8,
-          "draws": 3,
+          "draws": 4,
           "losses": 8,
-          "goals_for": 24,
-          "goals_against": 25,
+          "goals_for": 25,
+          "goals_against": 26,
           "goal_difference": -1,
-          "clean_sheet_rate": 0.263,
+          "clean_sheet_rate": 0.25,
           "rank": 8
         },
         {
@@ -457,15 +457,15 @@
           "club_slug": "wattens-wattens",
           "club_name": "WSG Tirol",
           "logo_url": "https://assets.sorare.com/team/494251c1-b3da-4d21-b653-19b6d94d0c99/picture/low_res-7824b69f9113f2439079b628fbc47f25.png",
-          "played": 19,
-          "points": 24,
+          "played": 20,
+          "points": 25,
           "wins": 6,
-          "draws": 6,
+          "draws": 7,
           "losses": 7,
-          "goals_for": 25,
-          "goals_against": 27,
+          "goals_for": 26,
+          "goals_against": 28,
           "goal_difference": -2,
-          "clean_sheet_rate": 0.211,
+          "clean_sheet_rate": 0.2,
           "rank": 10
         },
         {
@@ -487,15 +487,15 @@
           "club_slug": "blau-weiss-linz-linz",
           "club_name": "FC Blau-Weiß Linz",
           "logo_url": "https://assets.sorare.com/team/a4aee177-abe5-4002-a18e-654c8d39fa9e/picture/low_res-823635057ecb8b14eecfb76ced2307d2.jpeg",
-          "played": 19,
+          "played": 20,
           "points": 14,
           "wins": 4,
           "draws": 2,
-          "losses": 13,
+          "losses": 14,
           "goals_for": 17,
-          "goals_against": 31,
-          "goal_difference": -14,
-          "clean_sheet_rate": 0.158,
+          "goals_against": 32,
+          "goal_difference": -15,
+          "clean_sheet_rate": 0.15,
           "rank": 12
         }
       ]
@@ -509,7 +509,7 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 210,
+      "matches_counted": 215,
       "table": [
         {
           "club_slug": "psv-eindhoven",
@@ -530,15 +530,15 @@
           "club_slug": "feyenoord-rotterdam",
           "club_name": "Feyenoord Rotterdam",
           "logo_url": "https://assets.sorare.com/team/eb233d96-1765-4ee8-8a72-d90d7d0a3469/picture/low_res-b4948d8a5f17bab61c432e7a9a98a93e.png",
-          "played": 23,
-          "points": 45,
-          "wins": 14,
+          "played": 24,
+          "points": 48,
+          "wins": 15,
           "draws": 3,
           "losses": 6,
-          "goals_for": 53,
-          "goals_against": 32,
-          "goal_difference": 21,
-          "clean_sheet_rate": 0.348,
+          "goals_for": 55,
+          "goals_against": 33,
+          "goal_difference": 22,
+          "clean_sheet_rate": 0.333,
           "rank": 2
         },
         {
@@ -575,61 +575,76 @@
           "club_slug": "az-alkmaar",
           "club_name": "AZ",
           "logo_url": "https://assets.sorare.com/team/f22e062a-a455-441d-a1f9-84298eba94ca/picture/low_res-92c4dac8f0572492ef040e37116e78d5.png",
-          "played": 23,
-          "points": 36,
-          "wins": 10,
+          "played": 24,
+          "points": 39,
+          "wins": 11,
           "draws": 6,
           "losses": 7,
-          "goals_for": 39,
-          "goals_against": 37,
-          "goal_difference": 2,
-          "clean_sheet_rate": 0.217,
+          "goals_for": 42,
+          "goals_against": 38,
+          "goal_difference": 4,
+          "clean_sheet_rate": 0.208,
           "rank": 5
-        },
-        {
-          "club_slug": "sparta-rotterdam-rotterdam",
-          "club_name": "Sparta Rotterdam",
-          "logo_url": "https://assets.sorare.com/team/6c5ef6ef-2c36-465b-bb2f-70f0972db3ca/picture/low_res-3bb1c2a1827faf4c216140a5a6752259.png",
-          "played": 22,
-          "points": 36,
-          "wins": 11,
-          "draws": 3,
-          "losses": 8,
-          "goals_for": 29,
-          "goals_against": 36,
-          "goal_difference": -7,
-          "clean_sheet_rate": 0.409,
-          "rank": 6
         },
         {
           "club_slug": "twente-enschede",
           "club_name": "FC Twente",
           "logo_url": "https://assets.sorare.com/team/fd9fda78-68d6-4a23-a1f4-3d0311ea0364/picture/low_res-290d6e2adc18b866ea5d13658464d0e1.png",
-          "played": 23,
-          "points": 35,
-          "wins": 8,
+          "played": 24,
+          "points": 38,
+          "wins": 9,
           "draws": 11,
           "losses": 4,
-          "goals_for": 37,
-          "goals_against": 25,
-          "goal_difference": 12,
-          "clean_sheet_rate": 0.261,
+          "goals_for": 39,
+          "goals_against": 26,
+          "goal_difference": 13,
+          "clean_sheet_rate": 0.25,
+          "rank": 6
+        },
+        {
+          "club_slug": "sparta-rotterdam-rotterdam",
+          "club_name": "Sparta Rotterdam",
+          "logo_url": "https://assets.sorare.com/team/6c5ef6ef-2c36-465b-bb2f-70f0972db3ca/picture/low_res-3bb1c2a1827faf4c216140a5a6752259.png",
+          "played": 23,
+          "points": 36,
+          "wins": 11,
+          "draws": 3,
+          "losses": 9,
+          "goals_for": 30,
+          "goals_against": 39,
+          "goal_difference": -9,
+          "clean_sheet_rate": 0.391,
           "rank": 7
+        },
+        {
+          "club_slug": "utrecht-utrecht",
+          "club_name": "FC Utrecht",
+          "logo_url": "https://assets.sorare.com/team/649fa616-8dcd-4029-a4df-01774a8a2868/picture/low_res-10efe7520c9430a463fd75d8d8cc17e7.png",
+          "played": 24,
+          "points": 31,
+          "wins": 8,
+          "draws": 7,
+          "losses": 9,
+          "goals_for": 36,
+          "goals_against": 31,
+          "goal_difference": 5,
+          "clean_sheet_rate": 0.125,
+          "rank": 8
         },
         {
           "club_slug": "groningen-groningen",
           "club_name": "FC Groningen",
           "logo_url": "https://assets.sorare.com/team/afb8de1c-bf07-43a9-bd1c-b7201deba1fd/picture/low_res-2b1a86c41a32be786d4ee853ac420462.png",
-          "played": 23,
+          "played": 24,
           "points": 31,
           "wins": 9,
           "draws": 4,
-          "losses": 10,
-          "goals_for": 30,
-          "goals_against": 30,
-          "goal_difference": 0,
-          "clean_sheet_rate": 0.304,
-          "rank": 8
+          "losses": 11,
+          "goals_for": 31,
+          "goals_against": 32,
+          "goal_difference": -1,
+          "clean_sheet_rate": 0.292,
+          "rank": 9
         },
         {
           "club_slug": "heerenveen-heerenveen-1920",
@@ -644,21 +659,6 @@
           "goals_against": 42,
           "goal_difference": -2,
           "clean_sheet_rate": 0.083,
-          "rank": 9
-        },
-        {
-          "club_slug": "utrecht-utrecht",
-          "club_name": "FC Utrecht",
-          "logo_url": "https://assets.sorare.com/team/649fa616-8dcd-4029-a4df-01774a8a2868/picture/low_res-10efe7520c9430a463fd75d8d8cc17e7.png",
-          "played": 23,
-          "points": 30,
-          "wins": 8,
-          "draws": 6,
-          "losses": 9,
-          "goals_for": 35,
-          "goals_against": 30,
-          "goal_difference": 5,
-          "clean_sheet_rate": 0.13,
           "rank": 10
         },
         {
@@ -677,6 +677,36 @@
           "rank": 11
         },
         {
+          "club_slug": "pec-zwolle-zwolle",
+          "club_name": "PEC Zwolle",
+          "logo_url": "https://assets.sorare.com/team/b321a88b-b400-4297-9fc5-97e5ff83e3f5/picture/low_res-fb76b08a8d7438961164709f62fb67eb.png",
+          "played": 24,
+          "points": 27,
+          "wins": 7,
+          "draws": 6,
+          "losses": 11,
+          "goals_for": 34,
+          "goals_against": 50,
+          "goal_difference": -16,
+          "clean_sheet_rate": 0.167,
+          "rank": 12
+        },
+        {
+          "club_slug": "go-ahead-eagles-deventer",
+          "club_name": "Go Ahead Eagles",
+          "logo_url": "https://assets.sorare.com/team/234cfac1-564f-483d-8158-95cc2764925f/picture/low_res-560e11891c00a26e0af3efe064c548a4.png",
+          "played": 24,
+          "points": 26,
+          "wins": 5,
+          "draws": 11,
+          "losses": 8,
+          "goals_for": 37,
+          "goals_against": 39,
+          "goal_difference": -2,
+          "clean_sheet_rate": 0.167,
+          "rank": 13
+        },
+        {
           "club_slug": "excelsior-rotterdam",
           "club_name": "Excelsior Rotterdam",
           "logo_url": "https://assets.sorare.com/club/9b85c428-2116-4dd9-a986-d2ea9a652a05/picture/low_res-de3a756f33316e0c3aca19593dc146fc.png",
@@ -689,22 +719,7 @@
           "goals_against": 41,
           "goal_difference": -15,
           "clean_sheet_rate": 0.208,
-          "rank": 12
-        },
-        {
-          "club_slug": "pec-zwolle-zwolle",
-          "club_name": "PEC Zwolle",
-          "logo_url": "https://assets.sorare.com/team/b321a88b-b400-4297-9fc5-97e5ff83e3f5/picture/low_res-fb76b08a8d7438961164709f62fb67eb.png",
-          "played": 23,
-          "points": 26,
-          "wins": 7,
-          "draws": 5,
-          "losses": 11,
-          "goals_for": 33,
-          "goals_against": 49,
-          "goal_difference": -16,
-          "clean_sheet_rate": 0.174,
-          "rank": 13
+          "rank": 14
         },
         {
           "club_slug": "volendam-volendam",
@@ -719,21 +734,6 @@
           "goals_against": 39,
           "goal_difference": -13,
           "clean_sheet_rate": 0.042,
-          "rank": 14
-        },
-        {
-          "club_slug": "go-ahead-eagles-deventer",
-          "club_name": "Go Ahead Eagles",
-          "logo_url": "https://assets.sorare.com/team/234cfac1-564f-483d-8158-95cc2764925f/picture/low_res-560e11891c00a26e0af3efe064c548a4.png",
-          "played": 23,
-          "points": 23,
-          "wins": 4,
-          "draws": 11,
-          "losses": 8,
-          "goals_for": 33,
-          "goals_against": 39,
-          "goal_difference": -6,
-          "clean_sheet_rate": 0.13,
           "rank": 15
         },
         {
@@ -755,30 +755,30 @@
           "club_slug": "telstar-velsen-zuid",
           "club_name": "SC Telstar",
           "logo_url": "https://assets.sorare.com/club/60b826cd-2254-4d9a-b519-48109f0d2dd1/picture/low_res-a90257776d5724286818966fec1e520e.png",
-          "played": 23,
+          "played": 24,
           "points": 18,
           "wins": 3,
           "draws": 9,
-          "losses": 11,
-          "goals_for": 27,
-          "goals_against": 39,
-          "goal_difference": -12,
-          "clean_sheet_rate": 0.13,
+          "losses": 12,
+          "goals_for": 28,
+          "goals_against": 41,
+          "goal_difference": -13,
+          "clean_sheet_rate": 0.125,
           "rank": 17
         },
         {
           "club_slug": "heracles-almelo",
           "club_name": "Heracles Almelo",
           "logo_url": "https://assets.sorare.com/team/addb0bfd-4b7d-4661-9520-966d2edeb225/picture/low_res-a07272276975b75fbde21f0ed12158dd.png",
-          "played": 23,
+          "played": 24,
           "points": 17,
           "wins": 5,
           "draws": 2,
-          "losses": 16,
+          "losses": 17,
           "goals_for": 31,
-          "goals_against": 58,
-          "goal_difference": -27,
-          "clean_sheet_rate": 0.043,
+          "goals_against": 62,
+          "goal_difference": -31,
+          "clean_sheet_rate": 0.042,
           "rank": 18
         }
       ]
@@ -792,7 +792,7 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 204,
+      "matches_counted": 208,
       "table": [
         {
           "club_slug": "union-saint-gilloise-bruxelles-brussels",
@@ -843,16 +843,31 @@
           "club_slug": "anderlecht-bruxelles-brussel",
           "club_name": "RSC Anderlecht",
           "logo_url": "https://assets.sorare.com/team/13c3570d-7bdb-49d4-b61e-8a9c26a73e15/picture/low_res-6b7a6f5e10a1f89bbc23b30acb704a66.png",
-          "played": 25,
-          "points": 37,
-          "wins": 10,
+          "played": 26,
+          "points": 40,
+          "wins": 11,
           "draws": 7,
           "losses": 8,
-          "goals_for": 30,
-          "goals_against": 30,
-          "goal_difference": 0,
-          "clean_sheet_rate": 0.4,
+          "goals_for": 34,
+          "goals_against": 32,
+          "goal_difference": 2,
+          "clean_sheet_rate": 0.385,
           "rank": 4
+        },
+        {
+          "club_slug": "mechelen-mechelen-malines",
+          "club_name": "YR KV Mechelen",
+          "logo_url": "https://assets.sorare.com/team/cdaa8294-28bf-4261-94bd-9f7e657fbb93/picture/low_res-40b50559d585d933296c6cdf3587b9d7.png",
+          "played": 26,
+          "points": 39,
+          "wins": 10,
+          "draws": 9,
+          "losses": 7,
+          "goals_for": 34,
+          "goals_against": 29,
+          "goal_difference": 5,
+          "clean_sheet_rate": 0.269,
+          "rank": 5
         },
         {
           "club_slug": "gent-gent",
@@ -867,81 +882,66 @@
           "goals_against": 38,
           "goal_difference": 3,
           "clean_sheet_rate": 0.231,
-          "rank": 5
-        },
-        {
-          "club_slug": "mechelen-mechelen-malines",
-          "club_name": "YR KV Mechelen",
-          "logo_url": "https://assets.sorare.com/team/cdaa8294-28bf-4261-94bd-9f7e657fbb93/picture/low_res-40b50559d585d933296c6cdf3587b9d7.png",
-          "played": 25,
-          "points": 36,
-          "wins": 9,
-          "draws": 9,
-          "losses": 7,
-          "goals_for": 32,
-          "goals_against": 29,
-          "goal_difference": 3,
-          "clean_sheet_rate": 0.24,
           "rank": 6
         },
         {
           "club_slug": "genk-genk",
           "club_name": "KRC Genk",
           "logo_url": "https://assets.sorare.com/team/09fbdc8c-82b3-4f36-8a6d-d88ea5e34c27/picture/low_res-8ea3aba5d4b7d6e6d9b126a4711fedc0.png",
-          "played": 25,
+          "played": 26,
           "points": 35,
           "wins": 9,
           "draws": 8,
-          "losses": 8,
+          "losses": 9,
           "goals_for": 36,
-          "goals_against": 37,
-          "goal_difference": -1,
-          "clean_sheet_rate": 0.08,
+          "goals_against": 40,
+          "goal_difference": -4,
+          "clean_sheet_rate": 0.077,
           "rank": 7
-        },
-        {
-          "club_slug": "sporting-charleroi-charleroi",
-          "club_name": "Royal Charleroi S.C.",
-          "logo_url": "https://assets.sorare.com/team/f71ec6e2-a10f-4573-91ac-7834ff0fc22d/picture/low_res-ce2adb91047654d08e4aefa499b57a31.png",
-          "played": 25,
-          "points": 33,
-          "wins": 9,
-          "draws": 6,
-          "losses": 10,
-          "goals_for": 34,
-          "goals_against": 33,
-          "goal_difference": 1,
-          "clean_sheet_rate": 0.28,
-          "rank": 8
         },
         {
           "club_slug": "westerlo-westerlo",
           "club_name": "KVC Westerlo",
           "logo_url": "https://assets.sorare.com/team/d1136e14-6b21-44f6-93e6-92c6d2d774e7/picture/low_res-3781227ff0e16b2eba5141b65ae3a1a9.png",
-          "played": 25,
-          "points": 31,
-          "wins": 8,
+          "played": 26,
+          "points": 34,
+          "wins": 9,
           "draws": 7,
           "losses": 10,
-          "goals_for": 32,
-          "goals_against": 37,
-          "goal_difference": -5,
-          "clean_sheet_rate": 0.32,
-          "rank": 9
+          "goals_for": 34,
+          "goals_against": 38,
+          "goal_difference": -4,
+          "clean_sheet_rate": 0.308,
+          "rank": 8
         },
         {
           "club_slug": "standard-liege-liege-luik",
           "club_name": "Standard de Liège",
           "logo_url": "https://assets.sorare.com/team/1c6512b5-0fac-4a63-b42b-4c565dace350/picture/low_res-5295b3365fcf3c6b3fb6e168ab8f164b.png",
-          "played": 25,
-          "points": 31,
-          "wins": 9,
+          "played": 26,
+          "points": 34,
+          "wins": 10,
           "draws": 4,
           "losses": 12,
-          "goals_for": 21,
+          "goals_for": 24,
           "goals_against": 33,
-          "goal_difference": -12,
-          "clean_sheet_rate": 0.28,
+          "goal_difference": -9,
+          "clean_sheet_rate": 0.308,
+          "rank": 9
+        },
+        {
+          "club_slug": "sporting-charleroi-charleroi",
+          "club_name": "Royal Charleroi S.C.",
+          "logo_url": "https://assets.sorare.com/team/f71ec6e2-a10f-4573-91ac-7834ff0fc22d/picture/low_res-ce2adb91047654d08e4aefa499b57a31.png",
+          "played": 26,
+          "points": 33,
+          "wins": 9,
+          "draws": 6,
+          "losses": 11,
+          "goals_for": 35,
+          "goals_against": 35,
+          "goal_difference": 0,
+          "clean_sheet_rate": 0.269,
           "rank": 10
         },
         {
@@ -963,15 +963,15 @@
           "club_slug": "zulte-waregem-waregem",
           "club_name": "SV Zulte-Waregem",
           "logo_url": "https://assets.sorare.com/club/e23ebdb7-61fb-47de-9d1a-68a1bff1fa59/picture/low_res-cac4d67ed932ba28402a71fb10ef1d24.png",
-          "played": 25,
+          "played": 26,
           "points": 29,
           "wins": 7,
           "draws": 8,
-          "losses": 10,
-          "goals_for": 34,
-          "goals_against": 38,
-          "goal_difference": -4,
-          "clean_sheet_rate": 0.2,
+          "losses": 11,
+          "goals_for": 36,
+          "goals_against": 42,
+          "goal_difference": -6,
+          "clean_sheet_rate": 0.192,
           "rank": 12
         },
         {
@@ -1008,15 +1008,15 @@
           "club_slug": "la-louviere-la-louviere",
           "club_name": "RAAL La Louvière",
           "logo_url": "https://assets.sorare.com/club/1acb86da-fc79-407e-9ecd-2310d7716866/picture/low_res-8e2a2bee4db8ec90198de811bf443c15.png",
-          "played": 25,
+          "played": 26,
           "points": 25,
           "wins": 5,
           "draws": 10,
-          "losses": 10,
+          "losses": 11,
           "goals_for": 21,
-          "goals_against": 28,
-          "goal_difference": -7,
-          "clean_sheet_rate": 0.36,
+          "goals_against": 30,
+          "goal_difference": -9,
+          "clean_sheet_rate": 0.346,
           "rank": 15
         },
         {
@@ -1045,7 +1045,7 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 202,
+      "matches_counted": 207,
       "table": [
         {
           "club_slug": "psg-paris",
@@ -1081,15 +1081,15 @@
           "club_slug": "olympique-lyonnais-lyon",
           "club_name": "Olympique Lyonnais",
           "logo_url": "https://assets.sorare.com/team/42b054fb-1ba3-4547-857b-97b3f229abc7/picture/low_res-abc24a946c4d8a11d9693b10bb43cd9e.png",
-          "played": 22,
+          "played": 23,
           "points": 45,
           "wins": 14,
           "draws": 3,
-          "losses": 5,
-          "goals_for": 36,
-          "goals_against": 20,
-          "goal_difference": 16,
-          "clean_sheet_rate": 0.545,
+          "losses": 6,
+          "goals_for": 37,
+          "goals_against": 23,
+          "goal_difference": 14,
+          "clean_sheet_rate": 0.522,
           "rank": 3
         },
         {
@@ -1111,16 +1111,46 @@
           "club_slug": "lille-villeneuve-d-ascq",
           "club_name": "LOSC Lille",
           "logo_url": "https://assets.sorare.com/team/28ea94bb-9d20-4bf8-b33f-527d5d1a3503/picture/low_res-6b58cd34bae0943385abdd0b96bbb351.png",
-          "played": 22,
+          "played": 23,
+          "points": 37,
+          "wins": 11,
+          "draws": 4,
+          "losses": 8,
+          "goals_for": 36,
+          "goals_against": 31,
+          "goal_difference": 5,
+          "clean_sheet_rate": 0.304,
+          "rank": 5
+        },
+        {
+          "club_slug": "rennes-rennes",
+          "club_name": "Stade Rennais F.C.",
+          "logo_url": "https://assets.sorare.com/team/d45efae3-eb86-4fe0-abcf-87acc4a1b868/picture/low_res-e594a129cc3abfb798390215f8dc7673.png",
+          "played": 23,
+          "points": 37,
+          "wins": 10,
+          "draws": 7,
+          "losses": 6,
+          "goals_for": 37,
+          "goals_against": 35,
+          "goal_difference": 2,
+          "clean_sheet_rate": 0.261,
+          "rank": 6
+        },
+        {
+          "club_slug": "strasbourg-strasbourg",
+          "club_name": "RC Strasbourg Alsace",
+          "logo_url": "https://assets.sorare.com/team/dc9ee554-97e3-4b66-b56f-648a2a063c26/picture/low_res-1c4a105c4165c2e1e6bc6250c910ef2b.png",
+          "played": 23,
           "points": 34,
           "wins": 10,
           "draws": 4,
-          "losses": 8,
-          "goals_for": 35,
-          "goals_against": 31,
-          "goal_difference": 4,
-          "clean_sheet_rate": 0.273,
-          "rank": 5
+          "losses": 9,
+          "goals_for": 39,
+          "goals_against": 30,
+          "goal_difference": 9,
+          "clean_sheet_rate": 0.304,
+          "rank": 7
         },
         {
           "club_slug": "monaco-monaco",
@@ -1135,37 +1165,22 @@
           "goals_against": 36,
           "goal_difference": 2,
           "clean_sheet_rate": 0.217,
-          "rank": 6
-        },
-        {
-          "club_slug": "rennes-rennes",
-          "club_name": "Stade Rennais F.C.",
-          "logo_url": "https://assets.sorare.com/team/d45efae3-eb86-4fe0-abcf-87acc4a1b868/picture/low_res-e594a129cc3abfb798390215f8dc7673.png",
-          "played": 22,
-          "points": 34,
-          "wins": 9,
-          "draws": 7,
-          "losses": 6,
-          "goals_for": 34,
-          "goals_against": 35,
-          "goal_difference": -1,
-          "clean_sheet_rate": 0.227,
-          "rank": 7
-        },
-        {
-          "club_slug": "strasbourg-strasbourg",
-          "club_name": "RC Strasbourg Alsace",
-          "logo_url": "https://assets.sorare.com/team/dc9ee554-97e3-4b66-b56f-648a2a063c26/picture/low_res-1c4a105c4165c2e1e6bc6250c910ef2b.png",
-          "played": 22,
-          "points": 31,
-          "wins": 9,
-          "draws": 4,
-          "losses": 9,
-          "goals_for": 36,
-          "goals_against": 29,
-          "goal_difference": 7,
-          "clean_sheet_rate": 0.318,
           "rank": 8
+        },
+        {
+          "club_slug": "lorient-ploemeur",
+          "club_name": "FC Lorient",
+          "logo_url": "https://assets.sorare.com/team/73dccb34-e67a-4355-9815-dde3573865ed/picture/low_res-51365ec53c4b94398ada1c50fbb9dd9b.png",
+          "played": 23,
+          "points": 32,
+          "wins": 8,
+          "draws": 8,
+          "losses": 7,
+          "goals_for": 32,
+          "goals_against": 36,
+          "goal_difference": -4,
+          "clean_sheet_rate": 0.217,
+          "rank": 9
         },
         {
           "club_slug": "toulouse-toulouse",
@@ -1180,21 +1195,6 @@
           "goals_against": 27,
           "goal_difference": 6,
           "clean_sheet_rate": 0.348,
-          "rank": 9
-        },
-        {
-          "club_slug": "lorient-ploemeur",
-          "club_name": "FC Lorient",
-          "logo_url": "https://assets.sorare.com/team/73dccb34-e67a-4355-9815-dde3573865ed/picture/low_res-51365ec53c4b94398ada1c50fbb9dd9b.png",
-          "played": 22,
-          "points": 31,
-          "wins": 8,
-          "draws": 7,
-          "losses": 7,
-          "goals_for": 29,
-          "goals_against": 33,
-          "goal_difference": -4,
-          "clean_sheet_rate": 0.227,
           "rank": 10
         },
         {
@@ -1216,45 +1216,45 @@
           "club_slug": "angers-sco-angers",
           "club_name": "Angers SCO",
           "logo_url": "https://assets.sorare.com/team/04936cc6-0eec-4a6d-8a1c-b9e2d5cb5761/picture/low_res-e252c74daaa80a4c6fb85aade3c80320.png",
-          "played": 22,
+          "played": 23,
           "points": 29,
           "wins": 8,
           "draws": 5,
-          "losses": 9,
+          "losses": 10,
           "goals_for": 22,
-          "goals_against": 27,
-          "goal_difference": -5,
-          "clean_sheet_rate": 0.364,
+          "goals_against": 28,
+          "goal_difference": -6,
+          "clean_sheet_rate": 0.348,
           "rank": 12
         },
         {
           "club_slug": "le-havre-harfleur",
           "club_name": "Le Havre AC",
           "logo_url": "https://assets.sorare.com/team/bb9fc7e9-eb8f-4d76-8a13-18d9a20d0592/picture/low_res-6bde31ff15a16a78094ff81edb8c4e0a.png",
-          "played": 22,
+          "played": 23,
           "points": 26,
           "wins": 6,
           "draws": 8,
-          "losses": 8,
+          "losses": 9,
           "goals_for": 20,
-          "goals_against": 27,
-          "goal_difference": -7,
-          "clean_sheet_rate": 0.273,
+          "goals_against": 29,
+          "goal_difference": -9,
+          "clean_sheet_rate": 0.261,
           "rank": 13
         },
         {
           "club_slug": "nice-nice",
           "club_name": "OGC Nice",
           "logo_url": "https://assets.sorare.com/team/ac9885b2-a0f3-4730-ac27-819a7e0ac141/picture/low_res-274a53a09c55cf89305b735ab5b62275.png",
-          "played": 22,
-          "points": 23,
+          "played": 23,
+          "points": 24,
           "wins": 6,
-          "draws": 5,
+          "draws": 6,
           "losses": 11,
-          "goals_for": 27,
-          "goals_against": 40,
+          "goals_for": 30,
+          "goals_against": 43,
           "goal_difference": -13,
-          "clean_sheet_rate": 0.136,
+          "clean_sheet_rate": 0.13,
           "rank": 14
         },
         {
@@ -1276,30 +1276,30 @@
           "club_slug": "auxerre-auxerre",
           "club_name": "AJ Auxerre",
           "logo_url": "https://assets.sorare.com/team/860a11fc-4ddd-4e57-be44-436fe970998a/picture/low_res-817a6aff3a3dee371f2c18e4b5a61b09.png",
-          "played": 22,
+          "played": 23,
           "points": 17,
           "wins": 4,
           "draws": 5,
-          "losses": 13,
+          "losses": 14,
           "goals_for": 17,
-          "goals_against": 30,
-          "goal_difference": -13,
-          "clean_sheet_rate": 0.227,
+          "goals_against": 33,
+          "goal_difference": -16,
+          "clean_sheet_rate": 0.217,
           "rank": 16
         },
         {
           "club_slug": "nantes-la-chapelle-sur-erdre",
           "club_name": "FC Nantes",
           "logo_url": "https://assets.sorare.com/team/07da3de7-495f-4386-95d2-fa94f2352852/picture/low_res-9e394e679cf3917d9520e98730f7fdc2.png",
-          "played": 22,
-          "points": 14,
-          "wins": 3,
+          "played": 23,
+          "points": 17,
+          "wins": 4,
           "draws": 5,
           "losses": 14,
-          "goals_for": 20,
+          "goals_for": 22,
           "goals_against": 40,
-          "goal_difference": -20,
-          "clean_sheet_rate": 0.136,
+          "goal_difference": -18,
+          "clean_sheet_rate": 0.174,
           "rank": 17
         },
         {
@@ -1328,21 +1328,21 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 266,
+      "matches_counted": 270,
       "table": [
         {
           "club_slug": "arsenal-london",
           "club_name": "Arsenal FC",
           "logo_url": "https://assets.sorare.com/team/d1368e8a-897b-432c-8247-ab078391921f/picture/low_res-402857a95d68253b9595077dc04e261e.png",
-          "played": 27,
-          "points": 58,
-          "wins": 17,
+          "played": 28,
+          "points": 61,
+          "wins": 18,
           "draws": 7,
           "losses": 3,
-          "goals_for": 52,
-          "goals_against": 20,
-          "goal_difference": 32,
-          "clean_sheet_rate": 0.481,
+          "goals_for": 56,
+          "goals_against": 21,
+          "goal_difference": 35,
+          "clean_sheet_rate": 0.464,
           "rank": 1
         },
         {
@@ -1409,15 +1409,15 @@
           "club_slug": "liverpool-liverpool",
           "club_name": "Liverpool FC",
           "logo_url": "https://assets.sorare.com/team/92683a07-a33a-45cb-9a37-f6c59ab5f53b/picture/low_res-2e1ed44586bcd077bf9a2c333100910b.png",
-          "played": 26,
-          "points": 42,
-          "wins": 12,
+          "played": 27,
+          "points": 45,
+          "wins": 13,
           "draws": 6,
           "losses": 8,
-          "goals_for": 41,
+          "goals_for": 42,
           "goals_against": 35,
-          "goal_difference": 6,
-          "clean_sheet_rate": 0.308,
+          "goal_difference": 7,
+          "clean_sheet_rate": 0.333,
           "rank": 6
         },
         {
@@ -1466,6 +1466,21 @@
           "rank": 9
         },
         {
+          "club_slug": "fulham-london",
+          "club_name": "Fulham FC",
+          "logo_url": "https://assets.sorare.com/team/6b920f98-f981-4442-92fb-88b021bb3095/picture/low_res-e8a037ce1d0730d5d7bc75a4ff61e70b.png",
+          "played": 27,
+          "points": 37,
+          "wins": 11,
+          "draws": 4,
+          "losses": 12,
+          "goals_for": 38,
+          "goals_against": 41,
+          "goal_difference": -3,
+          "clean_sheet_rate": 0.185,
+          "rank": 10
+        },
+        {
           "club_slug": "newcastle-united-newcastle-upon-tyne",
           "club_name": "Newcastle United FC",
           "logo_url": "https://assets.sorare.com/team/f2a4b1c6-002a-41f1-99e6-db0001e51472/picture/low_res-d66ea295b7a161c21973bf8175f33486.png",
@@ -1478,22 +1493,37 @@
           "goals_against": 39,
           "goal_difference": -1,
           "clean_sheet_rate": 0.259,
-          "rank": 10
+          "rank": 11
         },
         {
           "club_slug": "sunderland-sunderland",
           "club_name": "Sunderland AFC",
           "logo_url": "https://assets.sorare.com/club/1405417a-df55-4c1e-9c71-a2ae20b122af/picture/low_res-caf46461d83a30cc634f9754b63ca942.png",
-          "played": 26,
+          "played": 27,
           "points": 36,
           "wins": 9,
           "draws": 9,
-          "losses": 8,
-          "goals_for": 27,
-          "goals_against": 30,
+          "losses": 9,
+          "goals_for": 28,
+          "goals_against": 33,
+          "goal_difference": -5,
+          "clean_sheet_rate": 0.296,
+          "rank": 12
+        },
+        {
+          "club_slug": "crystal-palace-london",
+          "club_name": "Crystal Palace FC",
+          "logo_url": "https://assets.sorare.com/team/b91605c7-3983-4607-9ed8-d965ddd78f6b/picture/low_res-8464de31933b978524af7f4bdb28a7ab.png",
+          "played": 27,
+          "points": 35,
+          "wins": 9,
+          "draws": 8,
+          "losses": 10,
+          "goals_for": 29,
+          "goals_against": 32,
           "goal_difference": -3,
-          "clean_sheet_rate": 0.308,
-          "rank": 11
+          "clean_sheet_rate": 0.37,
+          "rank": 13
         },
         {
           "club_slug": "brighton-hove-albion-brighton-east-sussex",
@@ -1508,36 +1538,6 @@
           "goals_against": 34,
           "goal_difference": 2,
           "clean_sheet_rate": 0.222,
-          "rank": 12
-        },
-        {
-          "club_slug": "fulham-london",
-          "club_name": "Fulham FC",
-          "logo_url": "https://assets.sorare.com/team/6b920f98-f981-4442-92fb-88b021bb3095/picture/low_res-e8a037ce1d0730d5d7bc75a4ff61e70b.png",
-          "played": 26,
-          "points": 34,
-          "wins": 10,
-          "draws": 4,
-          "losses": 12,
-          "goals_for": 35,
-          "goals_against": 40,
-          "goal_difference": -5,
-          "clean_sheet_rate": 0.192,
-          "rank": 13
-        },
-        {
-          "club_slug": "crystal-palace-london",
-          "club_name": "Crystal Palace FC",
-          "logo_url": "https://assets.sorare.com/team/b91605c7-3983-4607-9ed8-d965ddd78f6b/picture/low_res-8464de31933b978524af7f4bdb28a7ab.png",
-          "played": 26,
-          "points": 32,
-          "wins": 8,
-          "draws": 8,
-          "losses": 10,
-          "goals_for": 28,
-          "goals_against": 32,
-          "goal_difference": -4,
-          "clean_sheet_rate": 0.346,
           "rank": 14
         },
         {
@@ -1559,30 +1559,30 @@
           "club_slug": "tottenham-hotspur-london",
           "club_name": "Tottenham Hotspur FC",
           "logo_url": "https://assets.sorare.com/team/dac5c69f-b8a2-4c39-8f3f-c38e02e8e897/picture/low_res-64c3bdbe0bc1050846c4115eead08ed2.png",
-          "played": 26,
+          "played": 27,
           "points": 29,
           "wins": 7,
           "draws": 8,
-          "losses": 11,
-          "goals_for": 36,
-          "goals_against": 37,
-          "goal_difference": -1,
-          "clean_sheet_rate": 0.269,
+          "losses": 12,
+          "goals_for": 37,
+          "goals_against": 41,
+          "goal_difference": -4,
+          "clean_sheet_rate": 0.259,
           "rank": 16
         },
         {
           "club_slug": "nottingham-forest-nottingham",
           "club_name": "Nottingham Forest FC",
           "logo_url": "https://assets.sorare.com/team/a9493c34-ab25-44c8-ab7a-0c947a4cfeeb/picture/low_res-3a3b79ef560c43fbfcd24262565b1040.png",
-          "played": 26,
+          "played": 27,
           "points": 27,
           "wins": 7,
           "draws": 6,
-          "losses": 13,
+          "losses": 14,
           "goals_for": 25,
-          "goals_against": 38,
-          "goal_difference": -13,
-          "clean_sheet_rate": 0.231,
+          "goals_against": 39,
+          "goal_difference": -14,
+          "clean_sheet_rate": 0.222,
           "rank": 17
         },
         {
@@ -1619,15 +1619,15 @@
           "club_slug": "wolverhampton-wanderers-wolverhampton",
           "club_name": "Wolverhampton Wanderers FC",
           "logo_url": "https://assets.sorare.com/team/23538be5-dbe4-4177-a10a-9480727fd5f2/picture/low_res-c64b2ecfe1bf8cea8c04f31a8062c6fc.png",
-          "played": 27,
+          "played": 28,
           "points": 10,
           "wins": 1,
           "draws": 7,
-          "losses": 19,
+          "losses": 20,
           "goals_for": 18,
-          "goals_against": 50,
-          "goal_difference": -32,
-          "clean_sheet_rate": 0.111,
+          "goals_against": 51,
+          "goal_difference": -33,
+          "clean_sheet_rate": 0.107,
           "rank": 20
         }
       ]
@@ -1641,7 +1641,7 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 162,
+      "matches_counted": 164,
       "table": [
         {
           "club_slug": "hearts-edinburgh",
@@ -1662,30 +1662,30 @@
           "club_slug": "rangers-glasgow",
           "club_name": "Rangers FC",
           "logo_url": "https://assets.sorare.com/team/11c32e88-fe2a-4228-862e-70eac7bfc19f/picture/low_res-9438a72a83d234694923ec67fdf8a1b0.png",
-          "played": 27,
-          "points": 55,
+          "played": 28,
+          "points": 56,
           "wins": 15,
-          "draws": 10,
+          "draws": 11,
           "losses": 2,
-          "goals_for": 47,
-          "goals_against": 21,
+          "goals_for": 49,
+          "goals_against": 23,
           "goal_difference": 26,
-          "clean_sheet_rate": 0.407,
+          "clean_sheet_rate": 0.393,
           "rank": 2
         },
         {
           "club_slug": "celtic-glasgow",
           "club_name": "Celtic FC",
           "logo_url": "https://assets.sorare.com/team/22128016-d687-4a84-93e7-8c1c501a0118/picture/low_res-faa83c5c77b4e2ad8221f24986b1b42a.png",
-          "played": 26,
+          "played": 27,
           "points": 54,
           "wins": 17,
           "draws": 3,
-          "losses": 6,
-          "goals_for": 48,
-          "goals_against": 26,
-          "goal_difference": 22,
-          "clean_sheet_rate": 0.462,
+          "losses": 7,
+          "goals_for": 49,
+          "goals_against": 28,
+          "goal_difference": 21,
+          "clean_sheet_rate": 0.444,
           "rank": 3
         },
         {
@@ -1707,15 +1707,15 @@
           "club_slug": "hibernian-edinburgh",
           "club_name": "Hibernian FC",
           "logo_url": "https://assets.sorare.com/team/bce58711-8efb-4e05-9287-7598d013b38b/picture/low_res-48bcf1647bd227507aaeba777f6a3db3.png",
-          "played": 27,
-          "points": 42,
-          "wins": 11,
+          "played": 28,
+          "points": 45,
+          "wins": 12,
           "draws": 9,
           "losses": 7,
-          "goals_for": 43,
-          "goals_against": 31,
-          "goal_difference": 12,
-          "clean_sheet_rate": 0.296,
+          "goals_for": 45,
+          "goals_against": 32,
+          "goal_difference": 13,
+          "clean_sheet_rate": 0.286,
           "rank": 5
         },
         {
@@ -1812,15 +1812,15 @@
           "club_slug": "livingston-livingston",
           "club_name": "Livingston FC",
           "logo_url": "https://assets.sorare.com/team/eb2cab99-d423-4fc9-a642-1170dc9c4554/picture/low_res-7315f2b6ea6d1a8f49ac46e5ee8d112e.png",
-          "played": 27,
-          "points": 12,
+          "played": 28,
+          "points": 13,
           "wins": 1,
-          "draws": 9,
+          "draws": 10,
           "losses": 17,
-          "goals_for": 28,
-          "goals_against": 56,
+          "goals_for": 30,
+          "goals_against": 58,
           "goal_difference": -28,
-          "clean_sheet_rate": 0.037,
+          "clean_sheet_rate": 0.036,
           "rank": 12
         }
       ]
@@ -1834,21 +1834,21 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 101,
+      "matches_counted": 102,
       "table": [
         {
           "club_slug": "porto-porto",
           "club_name": "FC Porto",
           "logo_url": "https://assets.sorare.com/team/30f3c5f6-a623-4d26-b1fb-13e865fa0d65/picture/low_res-f131ea311a13ad8040df8b6240c08ea2.png",
-          "played": 22,
-          "points": 59,
-          "wins": 19,
+          "played": 23,
+          "points": 62,
+          "wins": 20,
           "draws": 2,
           "losses": 1,
-          "goals_for": 43,
+          "goals_for": 44,
           "goals_against": 7,
-          "goal_difference": 36,
-          "clean_sheet_rate": 0.727,
+          "goal_difference": 37,
+          "clean_sheet_rate": 0.739,
           "rank": 1
         },
         {
@@ -2035,14 +2035,14 @@
           "club_slug": "rio-ave-vila-do-conde",
           "club_name": "Rio Ave FC",
           "logo_url": null,
-          "played": 7,
+          "played": 8,
           "points": 2,
           "wins": 0,
           "draws": 2,
-          "losses": 5,
+          "losses": 6,
           "goals_for": 3,
-          "goals_against": 16,
-          "goal_difference": -13,
+          "goals_against": 17,
+          "goal_difference": -14,
           "clean_sheet_rate": 0.0,
           "rank": 14
         },
@@ -2117,8 +2117,23 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 244,
+      "matches_counted": 248,
       "table": [
+        {
+          "club_slug": "barcelona-barcelona",
+          "club_name": "FC Barcelona",
+          "logo_url": "https://assets.sorare.com/team/f115e8de-5e7a-44f6-a03f-1ec44cc02839/picture/low_res-e22e59b0d19b66242e924adc98b199e0.png",
+          "played": 25,
+          "points": 61,
+          "wins": 20,
+          "draws": 1,
+          "losses": 4,
+          "goals_for": 67,
+          "goals_against": 25,
+          "goal_difference": 42,
+          "clean_sheet_rate": 0.4,
+          "rank": 1
+        },
         {
           "club_slug": "real-madrid-madrid",
           "club_name": "Real Madrid",
@@ -2132,36 +2147,21 @@
           "goals_against": 21,
           "goal_difference": 33,
           "clean_sheet_rate": 0.44,
-          "rank": 1
-        },
-        {
-          "club_slug": "barcelona-barcelona",
-          "club_name": "FC Barcelona",
-          "logo_url": "https://assets.sorare.com/team/f115e8de-5e7a-44f6-a03f-1ec44cc02839/picture/low_res-e22e59b0d19b66242e924adc98b199e0.png",
-          "played": 24,
-          "points": 58,
-          "wins": 19,
-          "draws": 1,
-          "losses": 4,
-          "goals_for": 64,
-          "goals_against": 25,
-          "goal_difference": 39,
-          "clean_sheet_rate": 0.375,
           "rank": 2
         },
         {
           "club_slug": "villarreal-villarreal",
           "club_name": "Villarreal CF",
           "logo_url": "https://assets.sorare.com/team/7ff013c4-1f33-44ba-b489-92e350c71fb9/picture/low_res-c32e56989506582075ed44b8c3f20361.png",
-          "played": 24,
-          "points": 48,
-          "wins": 15,
+          "played": 25,
+          "points": 51,
+          "wins": 16,
           "draws": 3,
           "losses": 6,
-          "goals_for": 45,
-          "goals_against": 26,
-          "goal_difference": 19,
-          "clean_sheet_rate": 0.333,
+          "goals_for": 47,
+          "goals_against": 27,
+          "goal_difference": 20,
+          "clean_sheet_rate": 0.32,
           "rank": 3
         },
         {
@@ -2195,6 +2195,21 @@
           "rank": 5
         },
         {
+          "club_slug": "celta-de-vigo-vigo",
+          "club_name": "RC Celta",
+          "logo_url": "https://assets.sorare.com/team/f87c0c19-6d6b-4774-a546-c42b71d898f7/picture/low_res-9385655b2a0d435643756aa4194c32d1.png",
+          "played": 25,
+          "points": 37,
+          "wins": 9,
+          "draws": 10,
+          "losses": 6,
+          "goals_for": 34,
+          "goals_against": 27,
+          "goal_difference": 7,
+          "clean_sheet_rate": 0.32,
+          "rank": 6
+        },
+        {
           "club_slug": "espanyol-barcelona",
           "club_name": "RCD Espanyol de Barcelona",
           "logo_url": "https://assets.sorare.com/team/abcb2624-52c9-4b25-9478-41f67042cd45/picture/low_res-12c83fff99901eb15291738d883e7507.png",
@@ -2207,21 +2222,6 @@
           "goals_against": 37,
           "goal_difference": -6,
           "clean_sheet_rate": 0.28,
-          "rank": 6
-        },
-        {
-          "club_slug": "celta-de-vigo-vigo",
-          "club_name": "RC Celta",
-          "logo_url": "https://assets.sorare.com/team/f87c0c19-6d6b-4774-a546-c42b71d898f7/picture/low_res-9385655b2a0d435643756aa4194c32d1.png",
-          "played": 24,
-          "points": 34,
-          "wins": 8,
-          "draws": 10,
-          "losses": 6,
-          "goals_for": 32,
-          "goals_against": 27,
-          "goal_difference": 5,
-          "clean_sheet_rate": 0.292,
           "rank": 7
         },
         {
@@ -2270,19 +2270,34 @@
           "rank": 10
         },
         {
-          "club_slug": "getafe-getafe-madrid",
-          "club_name": "Getafe CF",
-          "logo_url": "https://assets.sorare.com/team/d81638c2-7379-4246-9523-42cf38425846/picture/low_res-631403fb83c3cc71d9b0f9d4754a8de9.png",
-          "played": 24,
+          "club_slug": "sevilla-sevilla-1890",
+          "club_name": "Sevilla FC",
+          "logo_url": "https://assets.sorare.com/team/4e8b7560-c0f2-4be9-b1a3-51e3fc9e7f3c/picture/low_res-37dd6556efc404e2dbd365c4875cbefa.png",
+          "played": 25,
           "points": 29,
           "wins": 8,
           "draws": 5,
-          "losses": 11,
-          "goals_for": 20,
-          "goals_against": 28,
-          "goal_difference": -8,
-          "clean_sheet_rate": 0.25,
+          "losses": 12,
+          "goals_for": 32,
+          "goals_against": 39,
+          "goal_difference": -7,
+          "clean_sheet_rate": 0.2,
           "rank": 11
+        },
+        {
+          "club_slug": "getafe-getafe-madrid",
+          "club_name": "Getafe CF",
+          "logo_url": "https://assets.sorare.com/team/d81638c2-7379-4246-9523-42cf38425846/picture/low_res-631403fb83c3cc71d9b0f9d4754a8de9.png",
+          "played": 25,
+          "points": 29,
+          "wins": 8,
+          "draws": 5,
+          "losses": 12,
+          "goals_for": 20,
+          "goals_against": 29,
+          "goal_difference": -9,
+          "clean_sheet_rate": 0.24,
+          "rank": 12
         },
         {
           "club_slug": "girona-girona",
@@ -2296,21 +2311,6 @@
           "goals_for": 24,
           "goals_against": 38,
           "goal_difference": -14,
-          "clean_sheet_rate": 0.167,
-          "rank": 12
-        },
-        {
-          "club_slug": "sevilla-sevilla-1890",
-          "club_name": "Sevilla FC",
-          "logo_url": "https://assets.sorare.com/team/4e8b7560-c0f2-4be9-b1a3-51e3fc9e7f3c/picture/low_res-37dd6556efc404e2dbd365c4875cbefa.png",
-          "played": 24,
-          "points": 26,
-          "wins": 7,
-          "draws": 5,
-          "losses": 12,
-          "goals_for": 31,
-          "goals_against": 39,
-          "goal_difference": -8,
           "clean_sheet_rate": 0.167,
           "rank": 13
         },
@@ -2348,15 +2348,15 @@
           "club_slug": "valencia-valencia",
           "club_name": "Valencia CF",
           "logo_url": "https://assets.sorare.com/team/62a69d47-aa21-4c5e-bd84-92c96232cbee/picture/low_res-53dd4121125984686f6f938762b4c7e1.png",
-          "played": 24,
+          "played": 25,
           "points": 26,
           "wins": 6,
           "draws": 8,
-          "losses": 10,
-          "goals_for": 25,
-          "goals_against": 37,
-          "goal_difference": -12,
-          "clean_sheet_rate": 0.25,
+          "losses": 11,
+          "goals_for": 26,
+          "goals_against": 39,
+          "goal_difference": -13,
+          "clean_sheet_rate": 0.24,
           "rank": 16
         },
         {
@@ -2378,30 +2378,30 @@
           "club_slug": "mallorca-palma-de-mallorca",
           "club_name": "RCD Mallorca",
           "logo_url": "https://assets.sorare.com/team/edf50db6-3958-433e-957f-59c2aabf1af7/picture/low_res-20b541ac9937b242ca538c95a3823710.png",
-          "played": 24,
+          "played": 25,
           "points": 24,
           "wins": 6,
           "draws": 6,
-          "losses": 12,
+          "losses": 13,
           "goals_for": 29,
-          "goals_against": 39,
-          "goal_difference": -10,
-          "clean_sheet_rate": 0.125,
+          "goals_against": 41,
+          "goal_difference": -12,
+          "clean_sheet_rate": 0.12,
           "rank": 18
         },
         {
           "club_slug": "levante-valencia",
           "club_name": "Levante UD",
           "logo_url": "https://assets.sorare.com/team/689bed12-1d72-405c-84b3-e051e9580c6b/picture/low_res-e6b38196dab51f0438c57d365d624975.png",
-          "played": 24,
+          "played": 25,
           "points": 18,
           "wins": 4,
           "draws": 6,
-          "losses": 14,
+          "losses": 15,
           "goals_for": 26,
-          "goals_against": 41,
-          "goal_difference": -15,
-          "clean_sheet_rate": 0.167,
+          "goals_against": 44,
+          "goal_difference": -18,
+          "clean_sheet_rate": 0.16,
           "rank": 19
         },
         {
@@ -2430,21 +2430,21 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 56,
+      "matches_counted": 57,
       "table": [
         {
           "club_slug": "midtjylland-herning",
           "club_name": "FC Midtjylland",
           "logo_url": "https://assets.sorare.com/team/678a61f7-c676-436b-b5a7-489d63d93bc0/picture/low_res-435baa9d3150bd8155718a3dd4c04d6d.png",
-          "played": 20,
-          "points": 42,
-          "wins": 12,
+          "played": 21,
+          "points": 45,
+          "wins": 13,
           "draws": 6,
           "losses": 2,
-          "goals_for": 54,
+          "goals_for": 58,
           "goals_against": 23,
-          "goal_difference": 31,
-          "clean_sheet_rate": 0.3,
+          "goal_difference": 35,
+          "clean_sheet_rate": 0.333,
           "rank": 1
         },
         {
@@ -2601,14 +2601,14 @@
           "club_slug": "silkeborg-silkeborg",
           "club_name": "Silkeborg IF",
           "logo_url": null,
-          "played": 5,
+          "played": 6,
           "points": 3,
           "wins": 1,
           "draws": 0,
-          "losses": 4,
+          "losses": 5,
           "goals_for": 6,
-          "goals_against": 16,
-          "goal_difference": -10,
+          "goals_against": 20,
+          "goal_difference": -14,
           "clean_sheet_rate": 0.0,
           "rank": 12
         }
@@ -2623,7 +2623,7 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 82,
+      "matches_counted": 84,
       "table": [
         {
           "club_slug": "galatasaray-istanbul",
@@ -2659,30 +2659,30 @@
           "club_slug": "trabzonspor-trabzon",
           "club_name": "Trabzonspor Kulübü",
           "logo_url": "https://assets.sorare.com/team/00dea78e-f653-4287-8257-0f9671cbd08a/picture/low_res-1fd54b8b843332fd1220098d35873c15.png",
-          "played": 22,
-          "points": 45,
-          "wins": 13,
+          "played": 23,
+          "points": 48,
+          "wins": 14,
           "draws": 6,
           "losses": 3,
-          "goals_for": 43,
-          "goals_against": 26,
-          "goal_difference": 17,
-          "clean_sheet_rate": 0.318,
+          "goals_for": 45,
+          "goals_against": 27,
+          "goal_difference": 18,
+          "clean_sheet_rate": 0.304,
           "rank": 3
         },
         {
           "club_slug": "besiktas-istanbul",
           "club_name": "Beşiktaş Jimnastik Kulübü",
           "logo_url": "https://assets.sorare.com/team/3fcd2234-b356-4339-a65c-24e1f43810ad/picture/low_res-ca4c9a5a4db9f45f6cfa16be206c47fb.png",
-          "played": 22,
-          "points": 40,
-          "wins": 11,
+          "played": 23,
+          "points": 43,
+          "wins": 12,
           "draws": 7,
           "losses": 4,
-          "goals_for": 40,
+          "goals_for": 44,
           "goals_against": 29,
-          "goal_difference": 11,
-          "clean_sheet_rate": 0.227,
+          "goal_difference": 15,
+          "clean_sheet_rate": 0.261,
           "rank": 4
         },
         {
@@ -2719,15 +2719,15 @@
           "club_slug": "goztepe-izmir",
           "club_name": "Göztepe Spor Kulübü",
           "logo_url": null,
-          "played": 5,
+          "played": 6,
           "points": 5,
           "wins": 1,
           "draws": 2,
-          "losses": 2,
+          "losses": 3,
           "goals_for": 6,
-          "goals_against": 6,
-          "goal_difference": 0,
-          "clean_sheet_rate": 0.4,
+          "goals_against": 10,
+          "goal_difference": -4,
+          "clean_sheet_rate": 0.333,
           "rank": 7
         },
         {
@@ -2746,21 +2746,6 @@
           "rank": 8
         },
         {
-          "club_slug": "gazisehir-gaziantep-gaziantep",
-          "club_name": "Gazişehir Gaziantep Futbol Kulübü",
-          "logo_url": null,
-          "played": 5,
-          "points": 3,
-          "wins": 0,
-          "draws": 3,
-          "losses": 2,
-          "goals_for": 4,
-          "goals_against": 11,
-          "goal_difference": -7,
-          "clean_sheet_rate": 0.0,
-          "rank": 9
-        },
-        {
           "club_slug": "kocaelispor-izmet",
           "club_name": "Kocaelispor Kulübü",
           "logo_url": null,
@@ -2773,6 +2758,21 @@
           "goals_against": 11,
           "goal_difference": -7,
           "clean_sheet_rate": 0.167,
+          "rank": 9
+        },
+        {
+          "club_slug": "gazisehir-gaziantep-gaziantep",
+          "club_name": "Gazişehir Gaziantep Futbol Kulübü",
+          "logo_url": null,
+          "played": 6,
+          "points": 3,
+          "wins": 0,
+          "draws": 3,
+          "losses": 3,
+          "goals_for": 5,
+          "goals_against": 13,
+          "goal_difference": -8,
+          "clean_sheet_rate": 0.0,
           "rank": 10
         },
         {
@@ -2985,26 +2985,26 @@
       "name": "RSC Anderlecht",
       "logo_url": "https://assets.sorare.com/team/13c3570d-7bdb-49d4-b61e-8a9c26a73e15/picture/low_res-6b7a6f5e10a1f89bbc23b30acb704a66.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "la-louviere-la-louviere",
-        "score": "0-0",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "zulte-waregem-waregem",
+        "score": "4-2",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 0,
+        "wins": 1,
         "draws": 2,
-        "losses": 3,
-        "points": 2,
-        "goals_for": 2,
-        "goals_against": 8,
-        "goal_difference": -6,
+        "losses": 2,
+        "points": 5,
+        "goals_for": 4,
+        "goals_against": 6,
+        "goal_difference": -2,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "zulte-waregem-waregem",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "oh-leuven-heverlee",
+        "home_away": "home"
       }
     },
     {
@@ -3012,10 +3012,10 @@
       "name": "Angers SCO",
       "logo_url": "https://assets.sorare.com/team/04936cc6-0eec-4a6d-8a1c-b9e2d5cb5761/picture/low_res-e252c74daaa80a4c6fb85aade3c80320.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "lorient-ploemeur",
-        "score": "0-2",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "lille-villeneuve-d-ascq",
+        "score": "0-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -3023,15 +3023,15 @@
         "draws": 1,
         "losses": 2,
         "points": 7,
-        "goals_for": 4,
-        "goals_against": 7,
-        "goal_difference": -3,
+        "goals_for": 2,
+        "goals_against": 3,
+        "goal_difference": -1,
         "clean_sheet_rate": 0.6
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "lille-villeneuve-d-ascq",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "monaco-monaco",
+        "home_away": "away"
       }
     },
     {
@@ -3066,9 +3066,9 @@
       "name": "Arsenal FC",
       "logo_url": "https://assets.sorare.com/team/d1368e8a-897b-432c-8247-ab078391921f/picture/low_res-402857a95d68253b9595077dc04e261e.png",
       "last_match": {
-        "date": "2026-02-18",
-        "opponent_slug": "wolverhampton-wanderers-wolverhampton",
-        "score": "2-2",
+        "date": "2026-02-22",
+        "opponent_slug": "tottenham-hotspur-london",
+        "score": "4-1",
         "home_away": "away"
       },
       "last5_summary": {
@@ -3077,15 +3077,15 @@
         "draws": 2,
         "losses": 0,
         "points": 11,
-        "goals_for": 13,
-        "goals_against": 5,
-        "goal_difference": 8,
+        "goals_for": 14,
+        "goals_against": 4,
+        "goal_difference": 10,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "tottenham-hotspur-london",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "chelsea-london",
+        "home_away": "home"
       }
     },
     {
@@ -3228,10 +3228,10 @@
       "name": "AJ Auxerre",
       "logo_url": "https://assets.sorare.com/team/860a11fc-4ddd-4e57-be44-436fe970998a/picture/low_res-817a6aff3a3dee371f2c18e4b5a61b09.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "metz-metz",
-        "score": "3-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "rennes-rennes",
+        "score": "0-3",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -3240,14 +3240,14 @@
         "losses": 2,
         "points": 5,
         "goals_for": 3,
-        "goals_against": 3,
-        "goal_difference": 0,
+        "goals_against": 5,
+        "goal_difference": -2,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "rennes-rennes",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "lorient-ploemeur",
+        "home_away": "away"
       }
     },
     {
@@ -3255,10 +3255,10 @@
       "name": "AZ",
       "logo_url": "https://assets.sorare.com/team/f22e062a-a455-441d-a1f9-84298eba94ca/picture/low_res-92c4dac8f0572492ef040e37116e78d5.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "artsakh-yerevan",
-        "score": "0-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "sparta-rotterdam-rotterdam",
+        "score": "3-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -3266,14 +3266,14 @@
         "draws": 1,
         "losses": 2,
         "points": 7,
-        "goals_for": 5,
-        "goals_against": 6,
-        "goal_difference": -1,
-        "clean_sheet_rate": 0.2
+        "goals_for": 7,
+        "goals_against": 7,
+        "goal_difference": 0,
+        "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "sparta-rotterdam-rotterdam",
+        "date": "2026-02-26",
+        "opponent_slug": "artsakh-yerevan",
         "home_away": "home"
       }
     },
@@ -3282,10 +3282,10 @@
       "name": "FC Barcelona",
       "logo_url": "https://assets.sorare.com/team/f115e8de-5e7a-44f6-a03f-1ec44cc02839/picture/low_res-e22e59b0d19b66242e924adc98b199e0.png",
       "last_match": {
-        "date": "2026-02-16",
-        "opponent_slug": "girona-girona",
-        "score": "1-2",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "levante-valencia",
+        "score": "3-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -3299,8 +3299,8 @@
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "levante-valencia",
+        "date": "2026-02-28",
+        "opponent_slug": "villarreal-villarreal",
         "home_away": "home"
       }
     },
@@ -3390,10 +3390,10 @@
       "name": "Beşiktaş Jimnastik Kulübü",
       "logo_url": "https://assets.sorare.com/team/3fcd2234-b356-4339-a65c-24e1f43810ad/picture/low_res-ca4c9a5a4db9f45f6cfa16be206c47fb.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "istanbul-basaksehir-istanbul",
-        "score": "3-2",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "goztepe-izmir",
+        "score": "4-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -3401,15 +3401,15 @@
         "draws": 2,
         "losses": 0,
         "points": 11,
-        "goals_for": 10,
+        "goals_for": 13,
         "goals_against": 7,
-        "goal_difference": 3,
+        "goal_difference": 6,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "goztepe-izmir",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "kocaelispor-izmet",
+        "home_away": "away"
       }
     },
     {
@@ -3417,10 +3417,10 @@
       "name": "FC Blau-Weiß Linz",
       "logo_url": "https://assets.sorare.com/team/a4aee177-abe5-4002-a18e-654c8d39fa9e/picture/low_res-823635057ecb8b14eecfb76ced2307d2.jpeg",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "wolfsberger-ac-wolfsberg",
-        "score": "2-1",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "sturm-graz-graz",
+        "score": "0-1",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
@@ -3428,15 +3428,15 @@
         "draws": 1,
         "losses": 3,
         "points": 4,
-        "goals_for": 4,
-        "goals_against": 8,
-        "goal_difference": -4,
+        "goals_for": 3,
+        "goals_against": 6,
+        "goal_difference": -3,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "sturm-graz-graz",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "wattens-wattens",
+        "home_away": "home"
       }
     },
     {
@@ -3471,26 +3471,26 @@
       "name": "Borussia Mönchengladbach",
       "logo_url": "https://assets.sorare.com/team/67715b49-9256-47b3-ade2-444a79131864/picture/low_res-53715c81143b15a7e0f3f0bc43ef72a9.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "eintracht-frankfurt-frankfurt-am-main",
-        "score": "0-3",
+        "date": "2026-02-22",
+        "opponent_slug": "freiburg-freiburg-im-breisgau",
+        "score": "1-2",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 0,
-        "draws": 3,
-        "losses": 2,
-        "points": 3,
-        "goals_for": 2,
-        "goals_against": 8,
-        "goal_difference": -6,
-        "clean_sheet_rate": 0.2
+        "draws": 2,
+        "losses": 3,
+        "points": 2,
+        "goals_for": 3,
+        "goals_against": 10,
+        "goal_difference": -7,
+        "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "freiburg-freiburg-im-breisgau",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "union-berlin-berlin",
+        "home_away": "home"
       }
     },
     {
@@ -3633,25 +3633,25 @@
       "name": "RC Celta",
       "logo_url": "https://assets.sorare.com/team/f87c0c19-6d6b-4774-a546-c42b71d898f7/picture/low_res-9385655b2a0d435643756aa4194c32d1.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "paok-thessaloniki",
-        "score": "2-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "mallorca-palma-de-mallorca",
+        "score": "2-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 3,
+        "wins": 2,
+        "draws": 2,
         "losses": 1,
-        "points": 6,
-        "goals_for": 6,
-        "goals_against": 6,
-        "goal_difference": 0,
-        "clean_sheet_rate": 0.2
+        "points": 8,
+        "goals_for": 7,
+        "goals_against": 5,
+        "goal_difference": 2,
+        "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "mallorca-palma-de-mallorca",
+        "date": "2026-02-26",
+        "opponent_slug": "paok-thessaloniki",
         "home_away": "home"
       }
     },
@@ -3660,26 +3660,26 @@
       "name": "Celtic FC",
       "logo_url": "https://assets.sorare.com/team/22128016-d687-4a84-93e7-8c1c501a0118/picture/low_res-faa83c5c77b4e2ad8221f24986b1b42a.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "stuttgart-stuttgart",
-        "score": "1-4",
+        "date": "2026-02-22",
+        "opponent_slug": "hibernian-edinburgh",
+        "score": "1-2",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 4,
+        "wins": 3,
         "draws": 0,
-        "losses": 1,
-        "points": 12,
-        "goals_for": 12,
+        "losses": 2,
+        "points": 9,
+        "goals_for": 9,
         "goals_against": 9,
-        "goal_difference": 3,
+        "goal_difference": 0,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "hibernian-edinburgh",
-        "home_away": "home"
+        "date": "2026-02-26",
+        "opponent_slug": "stuttgart-stuttgart",
+        "home_away": "away"
       }
     },
     {
@@ -3768,25 +3768,25 @@
       "name": "Crystal Palace FC",
       "logo_url": "https://assets.sorare.com/team/b91605c7-3983-4607-9ed8-d965ddd78f6b/picture/low_res-8464de31933b978524af7f4bdb28a7ab.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "zrinjski-mostar",
-        "score": "1-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "wolverhampton-wanderers-wolverhampton",
+        "score": "1-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
+        "wins": 2,
         "draws": 2,
-        "losses": 2,
-        "points": 5,
+        "losses": 1,
+        "points": 8,
         "goals_for": 6,
-        "goals_against": 8,
-        "goal_difference": -2,
-        "clean_sheet_rate": 0.2
+        "goals_against": 5,
+        "goal_difference": 1,
+        "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "wolverhampton-wanderers-wolverhampton",
+        "date": "2026-02-26",
+        "opponent_slug": "zrinjski-mostar",
         "home_away": "home"
       }
     },
@@ -4092,9 +4092,9 @@
       "name": "Feyenoord Rotterdam",
       "logo_url": "https://assets.sorare.com/team/eb233d96-1765-4ee8-8a72-d90d7d0a3469/picture/low_res-b4948d8a5f17bab61c432e7a9a98a93e.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "go-ahead-eagles-deventer",
-        "score": "1-0",
+        "date": "2026-02-22",
+        "opponent_slug": "telstar-velsen-zuid",
+        "score": "2-1",
         "home_away": "home"
       },
       "last5_summary": {
@@ -4103,15 +4103,15 @@
         "draws": 0,
         "losses": 2,
         "points": 9,
-        "goals_for": 7,
-        "goals_against": 7,
-        "goal_difference": 0,
+        "goals_for": 5,
+        "goals_against": 6,
+        "goal_difference": -1,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "telstar-velsen-zuid",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "twente-enschede",
+        "home_away": "away"
       }
     },
     {
@@ -4146,10 +4146,10 @@
       "name": "Sport-Club Freiburg",
       "logo_url": "https://assets.sorare.com/team/a517d073-900e-40d5-b065-d2d3e015eb4e/picture/low_res-539c03414aed9c153370e496c694d9e9.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "hoffenheim-sinsheim",
-        "score": "0-3",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "borussia-m-gladbach-monchengladbach",
+        "score": "2-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -4163,9 +4163,9 @@
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "borussia-m-gladbach-monchengladbach",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "eintracht-frankfurt-frankfurt-am-main",
+        "home_away": "away"
       }
     },
     {
@@ -4173,26 +4173,26 @@
       "name": "Fulham FC",
       "logo_url": "https://assets.sorare.com/team/6b920f98-f981-4442-92fb-88b021bb3095/picture/low_res-e8a037ce1d0730d5d7bc75a4ff61e70b.png",
       "last_match": {
-        "date": "2026-02-11",
-        "opponent_slug": "manchester-city-manchester",
-        "score": "0-3",
+        "date": "2026-02-22",
+        "opponent_slug": "sunderland-sunderland",
+        "score": "3-1",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
+        "wins": 2,
         "draws": 0,
-        "losses": 4,
-        "points": 3,
-        "goals_for": 5,
+        "losses": 3,
+        "points": 6,
+        "goals_for": 8,
         "goals_against": 10,
-        "goal_difference": -5,
+        "goal_difference": -2,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "sunderland-sunderland",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "tottenham-hotspur-london",
+        "home_away": "home"
       }
     },
     {
@@ -4227,25 +4227,25 @@
       "name": "KRC Genk",
       "logo_url": "https://assets.sorare.com/team/09fbdc8c-82b3-4f36-8a6d-d88ea5e34c27/picture/low_res-8ea3aba5d4b7d6e6d9b126a4711fedc0.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "dinamo-zagreb-zagreb",
-        "score": "3-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "standard-liege-liege-luik",
+        "score": "0-3",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 5,
+        "wins": 4,
         "draws": 0,
-        "losses": 0,
-        "points": 15,
-        "goals_for": 12,
-        "goals_against": 5,
-        "goal_difference": 7,
+        "losses": 1,
+        "points": 12,
+        "goals_for": 10,
+        "goals_against": 7,
+        "goal_difference": 3,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "standard-liege-liege-luik",
+        "date": "2026-02-26",
+        "opponent_slug": "dinamo-zagreb-zagreb",
         "home_away": "home"
       }
     },
@@ -4281,9 +4281,9 @@
       "name": "Getafe CF",
       "logo_url": "https://assets.sorare.com/team/d81638c2-7379-4246-9523-42cf38425846/picture/low_res-631403fb83c3cc71d9b0f9d4754a8de9.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "villarreal-villarreal",
-        "score": "2-1",
+        "date": "2026-02-22",
+        "opponent_slug": "sevilla-sevilla-1890",
+        "score": "0-1",
         "home_away": "home"
       },
       "last5_summary": {
@@ -4298,9 +4298,9 @@
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "sevilla-sevilla-1890",
-        "home_away": "home"
+        "date": "2026-03-02",
+        "opponent_slug": "real-madrid-madrid",
+        "home_away": "away"
       }
     },
     {
@@ -4335,26 +4335,26 @@
       "name": "Go Ahead Eagles",
       "logo_url": "https://assets.sorare.com/team/234cfac1-564f-483d-8158-95cc2764925f/picture/low_res-560e11891c00a26e0af3efe064c548a4.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "feyenoord-rotterdam",
-        "score": "0-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "heracles-almelo",
+        "score": "4-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 0,
-        "draws": 3,
+        "wins": 1,
+        "draws": 2,
         "losses": 2,
-        "points": 3,
-        "goals_for": 3,
+        "points": 5,
+        "goals_for": 7,
         "goals_against": 6,
-        "goal_difference": -3,
+        "goal_difference": 1,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "heracles-almelo",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "excelsior-rotterdam",
+        "home_away": "away"
       }
     },
     {
@@ -4391,18 +4391,18 @@
       "last_match": {
         "date": "2026-02-22",
         "opponent_slug": "twente-enschede",
-        "score": "1-1",
+        "score": "1-2",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 0,
-        "draws": 1,
-        "losses": 4,
-        "points": 1,
+        "draws": 0,
+        "losses": 5,
+        "points": 0,
         "goals_for": 4,
-        "goals_against": 9,
-        "goal_difference": -5,
+        "goals_against": 10,
+        "goal_difference": -6,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
@@ -4524,10 +4524,10 @@
       "name": "1. FC Heidenheim 1846",
       "logo_url": "https://assets.sorare.com/team/a47d1903-ea3e-4e9e-813f-1962782255d9/picture/low_res-16348f2dfc5c829b3e938d42475982d3.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "augsburg-augsburg",
-        "score": "0-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "stuttgart-stuttgart",
+        "score": "3-3",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -4535,15 +4535,15 @@
         "draws": 1,
         "losses": 4,
         "points": 1,
-        "goals_for": 3,
-        "goals_against": 10,
+        "goals_for": 5,
+        "goals_against": 12,
         "goal_difference": -7,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "stuttgart-stuttgart",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "werder-bremen-bremen",
+        "home_away": "away"
       }
     },
     {
@@ -4551,10 +4551,10 @@
       "name": "Heracles Almelo",
       "logo_url": "https://assets.sorare.com/team/addb0bfd-4b7d-4661-9520-966d2edeb225/picture/low_res-a07272276975b75fbde21f0ed12158dd.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "nac-breda-breda",
-        "score": "0-1",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "go-ahead-eagles-deventer",
+        "score": "0-4",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
@@ -4563,14 +4563,14 @@
         "losses": 4,
         "points": 3,
         "goals_for": 5,
-        "goals_against": 12,
-        "goal_difference": -7,
+        "goals_against": 14,
+        "goal_difference": -9,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "go-ahead-eagles-deventer",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "psv-eindhoven",
+        "home_away": "home"
       }
     },
     {
@@ -4578,25 +4578,25 @@
       "name": "Hibernian FC",
       "logo_url": "https://assets.sorare.com/team/bce58711-8efb-4e05-9287-7598d013b38b/picture/low_res-48bcf1647bd227507aaeba777f6a3db3.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "st-mirren-paisley",
-        "score": "2-0",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "celtic-glasgow",
+        "score": "2-1",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 3,
         "draws": 1,
-        "losses": 2,
-        "points": 7,
-        "goals_for": 6,
-        "goals_against": 7,
-        "goal_difference": -1,
+        "losses": 1,
+        "points": 10,
+        "goals_for": 7,
+        "goals_against": 4,
+        "goal_difference": 3,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "celtic-glasgow",
+        "date": "2026-02-28",
+        "opponent_slug": "dundee-dundee",
         "home_away": "away"
       }
     },
@@ -4686,26 +4686,26 @@
       "name": "RAAL La Louvière",
       "logo_url": "https://assets.sorare.com/club/1acb86da-fc79-407e-9ecd-2310d7716866/picture/low_res-8e2a2bee4db8ec90198de811bf443c15.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "anderlecht-bruxelles-brussel",
-        "score": "0-0",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "mechelen-mechelen-malines",
+        "score": "0-2",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
+        "wins": 0,
         "draws": 2,
-        "losses": 2,
-        "points": 5,
-        "goals_for": 6,
+        "losses": 3,
+        "points": 2,
+        "goals_for": 3,
         "goals_against": 7,
-        "goal_difference": -1,
+        "goal_difference": -4,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "mechelen-mechelen-malines",
-        "home_away": "home"
+        "date": "2026-02-27",
+        "opponent_slug": "standard-liege-liege-luik",
+        "home_away": "away"
       }
     },
     {
@@ -4713,36 +4713,9 @@
       "name": "LASK",
       "logo_url": "https://assets.sorare.com/team/6578fe9c-21a4-4879-a322-99044d84d8c5/picture/low_res-06dfe19dc3f52f6bc8255e8d33819c65.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "ried-ried-im-innkreis",
-        "score": "1-1",
-        "home_away": "away"
-      },
-      "last5_summary": {
-        "matches": 5,
-        "wins": 3,
-        "draws": 2,
-        "losses": 0,
-        "points": 11,
-        "goals_for": 9,
-        "goals_against": 4,
-        "goal_difference": 5,
-        "clean_sheet_rate": 0.4
-      },
-      "next_fixture": {
         "date": "2026-02-22",
         "opponent_slug": "salzburg-wals-siezenheim",
-        "home_away": "home"
-      }
-    },
-    {
-      "slug": "le-havre-harfleur",
-      "name": "Le Havre AC",
-      "logo_url": "https://assets.sorare.com/team/bb9fc7e9-eb8f-4d76-8a13-18d9a20d0592/picture/low_res-6bde31ff15a16a78094ff81edb8c4e0a.png",
-      "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "toulouse-toulouse",
-        "score": "2-1",
+        "score": "1-5",
         "home_away": "home"
       },
       "last5_summary": {
@@ -4751,15 +4724,42 @@
         "draws": 2,
         "losses": 1,
         "points": 8,
-        "goals_for": 5,
-        "goals_against": 4,
-        "goal_difference": 1,
+        "goals_for": 7,
+        "goals_against": 9,
+        "goal_difference": -2,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
+        "date": "2026-03-01",
+        "opponent_slug": "austria-wien-wien",
+        "home_away": "away"
+      }
+    },
+    {
+      "slug": "le-havre-harfleur",
+      "name": "Le Havre AC",
+      "logo_url": "https://assets.sorare.com/team/bb9fc7e9-eb8f-4d76-8a13-18d9a20d0592/picture/low_res-6bde31ff15a16a78094ff81edb8c4e0a.png",
+      "last_match": {
         "date": "2026-02-22",
         "opponent_slug": "nantes-la-chapelle-sur-erdre",
+        "score": "0-2",
         "home_away": "away"
+      },
+      "last5_summary": {
+        "matches": 5,
+        "wins": 2,
+        "draws": 1,
+        "losses": 2,
+        "points": 7,
+        "goals_for": 4,
+        "goals_against": 5,
+        "goal_difference": -1,
+        "clean_sheet_rate": 0.2
+      },
+      "next_fixture": {
+        "date": "2026-02-28",
+        "opponent_slug": "psg-paris",
+        "home_away": "home"
       }
     },
     {
@@ -4821,26 +4821,26 @@
       "name": "Levante UD",
       "logo_url": "https://assets.sorare.com/team/689bed12-1d72-405c-84b3-e051e9580c6b/picture/low_res-e6b38196dab51f0438c57d365d624975.png",
       "last_match": {
-        "date": "2026-02-18",
-        "opponent_slug": "villarreal-villarreal",
-        "score": "0-1",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "barcelona-barcelona",
+        "score": "0-3",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
+        "wins": 0,
         "draws": 1,
-        "losses": 3,
-        "points": 4,
-        "goals_for": 5,
-        "goals_against": 9,
-        "goal_difference": -4,
+        "losses": 4,
+        "points": 1,
+        "goals_for": 2,
+        "goals_against": 10,
+        "goal_difference": -8,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "barcelona-barcelona",
-        "home_away": "away"
+        "date": "2026-02-27",
+        "opponent_slug": "deportivo-alaves-vitoria-gasteiz",
+        "home_away": "home"
       }
     },
     {
@@ -4848,10 +4848,10 @@
       "name": "LOSC Lille",
       "logo_url": "https://assets.sorare.com/team/28ea94bb-9d20-4bf8-b33f-527d5d1a3503/picture/low_res-6b58cd34bae0943385abdd0b96bbb351.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "crvena-zvezda-beograd",
-        "score": "0-1",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "angers-sco-angers",
+        "score": "1-0",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
@@ -4865,8 +4865,8 @@
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "angers-sco-angers",
+        "date": "2026-02-26",
+        "opponent_slug": "crvena-zvezda-beograd",
         "home_away": "away"
       }
     },
@@ -4875,26 +4875,26 @@
       "name": "Liverpool FC",
       "logo_url": "https://assets.sorare.com/team/92683a07-a33a-45cb-9a37-f6c59ab5f53b/picture/low_res-2e1ed44586bcd077bf9a2c333100910b.png",
       "last_match": {
-        "date": "2026-02-11",
-        "opponent_slug": "sunderland-sunderland",
+        "date": "2026-02-22",
+        "opponent_slug": "nottingham-forest-nottingham",
         "score": "1-0",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 3,
+        "wins": 4,
         "draws": 0,
-        "losses": 2,
-        "points": 9,
-        "goals_for": 14,
-        "goals_against": 6,
-        "goal_difference": 8,
-        "clean_sheet_rate": 0.4
+        "losses": 1,
+        "points": 12,
+        "goals_for": 13,
+        "goals_against": 3,
+        "goal_difference": 10,
+        "clean_sheet_rate": 0.6
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "nottingham-forest-nottingham",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "west-ham-united-london",
+        "home_away": "home"
       }
     },
     {
@@ -4902,25 +4902,25 @@
       "name": "Livingston FC",
       "logo_url": "https://assets.sorare.com/team/eb2cab99-d423-4fc9-a642-1170dc9c4554/picture/low_res-7315f2b6ea6d1a8f49ac46e5ee8d112e.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "dundee-dundee",
+        "date": "2026-02-22",
+        "opponent_slug": "rangers-glasgow",
         "score": "2-2",
-        "home_away": "away"
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 0,
-        "draws": 1,
-        "losses": 4,
-        "points": 1,
+        "draws": 2,
+        "losses": 3,
+        "points": 2,
         "goals_for": 6,
-        "goals_against": 14,
-        "goal_difference": -8,
+        "goals_against": 10,
+        "goal_difference": -4,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "rangers-glasgow",
+        "date": "2026-02-28",
+        "opponent_slug": "st-mirren-paisley",
         "home_away": "home"
       }
     },
@@ -4929,26 +4929,26 @@
       "name": "FC Lorient",
       "logo_url": "https://assets.sorare.com/team/73dccb34-e67a-4355-9815-dde3573865ed/picture/low_res-51365ec53c4b94398ada1c50fbb9dd9b.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "angers-sco-angers",
-        "score": "2-0",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "nice-nice",
+        "score": "3-3",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 4,
-        "draws": 0,
+        "wins": 3,
+        "draws": 1,
         "losses": 1,
-        "points": 12,
+        "points": 10,
         "goals_for": 9,
-        "goals_against": 4,
-        "goal_difference": 5,
+        "goals_against": 6,
+        "goal_difference": 3,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "nice-nice",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "auxerre-auxerre",
+        "home_away": "home"
       }
     },
     {
@@ -4983,26 +4983,26 @@
       "name": "RCD Mallorca",
       "logo_url": "https://assets.sorare.com/team/edf50db6-3958-433e-957f-59c2aabf1af7/picture/low_res-20b541ac9937b242ca538c95a3823710.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "real-betis-sevilla",
-        "score": "1-2",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "celta-de-vigo-vigo",
+        "score": "0-2",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 1,
         "draws": 0,
-        "losses": 3,
-        "points": 6,
-        "goals_for": 8,
+        "losses": 4,
+        "points": 3,
+        "goals_for": 5,
         "goals_against": 11,
-        "goal_difference": -3,
+        "goal_difference": -6,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "celta-de-vigo-vigo",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "real-sociedad-donostia-san-sebastian",
+        "home_away": "home"
       }
     },
     {
@@ -5064,26 +5064,26 @@
       "name": "YR KV Mechelen",
       "logo_url": "https://assets.sorare.com/team/cdaa8294-28bf-4261-94bd-9f7e657fbb93/picture/low_res-40b50559d585d933296c6cdf3587b9d7.png",
       "last_match": {
-        "date": "2026-02-13",
-        "opponent_slug": "genk-genk",
-        "score": "2-3",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "la-louviere-la-louviere",
+        "score": "2-0",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
+        "wins": 2,
         "draws": 2,
-        "losses": 2,
-        "points": 5,
-        "goals_for": 7,
-        "goals_against": 7,
-        "goal_difference": 0,
-        "clean_sheet_rate": 0.2
+        "losses": 1,
+        "points": 8,
+        "goals_for": 9,
+        "goals_against": 6,
+        "goal_difference": 3,
+        "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "la-louviere-la-louviere",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "zulte-waregem-waregem",
+        "home_away": "home"
       }
     },
     {
@@ -5091,9 +5091,9 @@
       "name": "FC Midtjylland",
       "logo_url": "https://assets.sorare.com/team/678a61f7-c676-436b-b5a7-489d63d93bc0/picture/low_res-435baa9d3150bd8155718a3dd4c04d6d.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "ob-odense",
-        "score": "4-1",
+        "date": "2026-02-22",
+        "opponent_slug": "silkeborg-silkeborg",
+        "score": "4-0",
         "home_away": "away"
       },
       "last5_summary": {
@@ -5102,15 +5102,15 @@
         "draws": 1,
         "losses": 0,
         "points": 13,
-        "goals_for": 12,
+        "goals_for": 15,
         "goals_against": 5,
-        "goal_difference": 7,
+        "goal_difference": 10,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "silkeborg-silkeborg",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "brondby-brondby",
+        "home_away": "home"
       }
     },
     {
@@ -5199,26 +5199,26 @@
       "name": "FC Nantes",
       "logo_url": "https://assets.sorare.com/team/07da3de7-495f-4386-95d2-fa94f2352852/picture/low_res-9e394e679cf3917d9520e98730f7fdc2.png",
       "last_match": {
-        "date": "2026-02-13",
-        "opponent_slug": "monaco-monaco",
-        "score": "1-3",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "le-havre-harfleur",
+        "score": "2-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 0,
+        "wins": 1,
         "draws": 0,
-        "losses": 5,
-        "points": 0,
-        "goals_for": 4,
-        "goals_against": 12,
-        "goal_difference": -8,
-        "clean_sheet_rate": 0.0
+        "losses": 4,
+        "points": 3,
+        "goals_for": 5,
+        "goals_against": 10,
+        "goal_difference": -5,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "le-havre-harfleur",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "lille-villeneuve-d-ascq",
+        "home_away": "away"
       }
     },
     {
@@ -5280,26 +5280,26 @@
       "name": "OGC Nice",
       "logo_url": "https://assets.sorare.com/team/ac9885b2-a0f3-4730-ac27-819a7e0ac141/picture/low_res-274a53a09c55cf89305b735ab5b62275.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "olympique-lyonnais-lyon",
-        "score": "0-2",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "lorient-ploemeur",
+        "score": "3-3",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 2,
+        "wins": 0,
+        "draws": 3,
         "losses": 2,
-        "points": 5,
-        "goals_for": 6,
-        "goals_against": 6,
-        "goal_difference": 0,
+        "points": 3,
+        "goals_for": 5,
+        "goals_against": 8,
+        "goal_difference": -3,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "lorient-ploemeur",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "paris-paris",
+        "home_away": "away"
       }
     },
     {
@@ -5334,25 +5334,25 @@
       "name": "Nottingham Forest FC",
       "logo_url": "https://assets.sorare.com/team/a9493c34-ab25-44c8-ab7a-0c947a4cfeeb/picture/low_res-3a3b79ef560c43fbfcd24262565b1040.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "fenerbahce-istanbul",
-        "score": "3-0",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "liverpool-liverpool",
+        "score": "0-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 1,
         "draws": 2,
-        "losses": 1,
-        "points": 8,
-        "goals_for": 9,
-        "goals_against": 4,
-        "goal_difference": 5,
-        "clean_sheet_rate": 0.6
+        "losses": 2,
+        "points": 5,
+        "goals_for": 5,
+        "goals_against": 5,
+        "goal_difference": 0,
+        "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "liverpool-liverpool",
+        "date": "2026-02-26",
+        "opponent_slug": "fenerbahce-istanbul",
         "home_away": "home"
       }
     },
@@ -5388,25 +5388,25 @@
       "name": "Olympique Lyonnais",
       "logo_url": "https://assets.sorare.com/team/42b054fb-1ba3-4547-857b-97b3f229abc7/picture/low_res-abc24a946c4d8a11d9693b10bb43cd9e.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "nice-nice",
-        "score": "2-0",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "strasbourg-strasbourg",
+        "score": "1-3",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 5,
+        "wins": 4,
         "draws": 0,
-        "losses": 0,
-        "points": 15,
-        "goals_for": 13,
-        "goals_against": 4,
-        "goal_difference": 9,
+        "losses": 1,
+        "points": 12,
+        "goals_for": 9,
+        "goals_against": 5,
+        "goal_difference": 4,
         "clean_sheet_rate": 0.6
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "strasbourg-strasbourg",
+        "date": "2026-03-01",
+        "opponent_slug": "olympique-marseille-marseille",
         "home_away": "away"
       }
     },
@@ -5496,26 +5496,26 @@
       "name": "PEC Zwolle",
       "logo_url": "https://assets.sorare.com/team/b321a88b-b400-4297-9fc5-97e5ff83e3f5/picture/low_res-fb76b08a8d7438961164709f62fb67eb.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "heerenveen-heerenveen-1920",
-        "score": "2-4",
+        "date": "2026-02-22",
+        "opponent_slug": "utrecht-utrecht",
+        "score": "1-1",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
-        "draws": 0,
+        "wins": 1,
+        "draws": 1,
         "losses": 3,
-        "points": 6,
-        "goals_for": 11,
+        "points": 4,
+        "goals_for": 9,
         "goals_against": 10,
-        "goal_difference": 1,
+        "goal_difference": -1,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "utrecht-utrecht",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "ajax-amsterdam",
+        "home_away": "home"
       }
     },
     {
@@ -5523,10 +5523,10 @@
       "name": "FC Porto",
       "logo_url": "https://assets.sorare.com/team/30f3c5f6-a623-4d26-b1fb-13e865fa0d65/picture/low_res-f131ea311a13ad8040df8b6240c08ea2.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "nacional-funchal-ilha-da-madeira",
+        "date": "2026-02-22",
+        "opponent_slug": "rio-ave-vila-do-conde",
         "score": "1-0",
-        "home_away": "away"
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -5534,14 +5534,14 @@
         "draws": 1,
         "losses": 1,
         "points": 10,
-        "goals_for": 9,
+        "goals_for": 7,
         "goals_against": 4,
-        "goal_difference": 5,
+        "goal_difference": 3,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "rio-ave-vila-do-conde",
+        "date": "2026-02-27",
+        "opponent_slug": "arouca-arouca",
         "home_away": "home"
       }
     },
@@ -5604,26 +5604,26 @@
       "name": "Rangers FC",
       "logo_url": "https://assets.sorare.com/team/11c32e88-fe2a-4228-862e-70eac7bfc19f/picture/low_res-9438a72a83d234694923ec67fdf8a1b0.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "hearts-edinburgh",
-        "score": "4-2",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "livingston-livingston",
+        "score": "2-2",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 2,
-        "draws": 2,
-        "losses": 1,
-        "points": 8,
-        "goals_for": 11,
-        "goals_against": 7,
-        "goal_difference": 4,
+        "draws": 3,
+        "losses": 0,
+        "points": 9,
+        "goals_for": 12,
+        "goals_against": 6,
+        "goal_difference": 6,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "livingston-livingston",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "celtic-glasgow",
+        "home_away": "home"
       }
     },
     {
@@ -5820,26 +5820,26 @@
       "name": "Stade Rennais F.C.",
       "logo_url": "https://assets.sorare.com/team/d45efae3-eb86-4fe0-abcf-87acc4a1b868/picture/low_res-e594a129cc3abfb798390215f8dc7673.png",
       "last_match": {
-        "date": "2026-02-13",
-        "opponent_slug": "psg-paris",
-        "score": "3-1",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "auxerre-auxerre",
+        "score": "3-0",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 1,
+        "wins": 2,
+        "draws": 0,
         "losses": 3,
-        "points": 4,
-        "goals_for": 5,
-        "goals_against": 11,
-        "goal_difference": -6,
-        "clean_sheet_rate": 0.0
+        "points": 6,
+        "goals_for": 7,
+        "goals_against": 10,
+        "goal_difference": -3,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "auxerre-auxerre",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "toulouse-toulouse",
+        "home_away": "home"
       }
     },
     {
@@ -5874,25 +5874,25 @@
       "name": "SV Guntamatic Ried",
       "logo_url": "https://assets.sorare.com/team/f3e272e7-1e67-4a51-914a-19381ea88d10/picture/low_res-aaf423b9e8353e633311b329bcf75196.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "lask-linz",
+        "date": "2026-02-22",
+        "opponent_slug": "wattens-wattens",
         "score": "1-1",
-        "home_away": "home"
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 3,
-        "draws": 1,
+        "wins": 2,
+        "draws": 2,
         "losses": 1,
-        "points": 10,
+        "points": 8,
         "goals_for": 7,
-        "goals_against": 3,
-        "goal_difference": 4,
-        "clean_sheet_rate": 0.4
+        "goals_against": 4,
+        "goal_difference": 3,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "wattens-wattens",
+        "date": "2026-03-01",
+        "opponent_slug": "grazer-ak-graz",
         "home_away": "away"
       }
     },
@@ -5901,9 +5901,9 @@
       "name": "FC Red Bull Salzburg",
       "logo_url": "https://assets.sorare.com/team/82f65ec8-6195-44dc-bf94-3e8a0f83100d/picture/low_res-cca3a74c1b7db1d3b2adb532f578a6b8.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "grazer-ak-graz",
-        "score": "1-1",
+        "date": "2026-02-22",
+        "opponent_slug": "lask-linz",
+        "score": "5-1",
         "home_away": "away"
       },
       "last5_summary": {
@@ -5912,15 +5912,15 @@
         "draws": 1,
         "losses": 2,
         "points": 7,
-        "goals_for": 8,
+        "goals_for": 11,
         "goals_against": 8,
-        "goal_difference": 0,
+        "goal_difference": 3,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "lask-linz",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "hartberg-hartberg",
+        "home_away": "home"
       }
     },
     {
@@ -5928,25 +5928,25 @@
       "name": "Sevilla FC",
       "logo_url": "https://assets.sorare.com/team/4e8b7560-c0f2-4be9-b1a3-51e3fc9e7f3c/picture/low_res-37dd6556efc404e2dbd365c4875cbefa.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "deportivo-alaves-vitoria-gasteiz",
-        "score": "1-1",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "getafe-getafe-madrid",
+        "score": "1-0",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 3,
+        "wins": 2,
+        "draws": 2,
         "losses": 1,
-        "points": 6,
-        "goals_for": 7,
-        "goals_against": 9,
-        "goal_difference": -2,
-        "clean_sheet_rate": 0.0
+        "points": 8,
+        "goals_for": 6,
+        "goals_against": 7,
+        "goal_difference": -1,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "getafe-getafe-madrid",
+        "date": "2026-03-01",
+        "opponent_slug": "real-betis-sevilla",
         "home_away": "away"
       }
     },
@@ -5982,25 +5982,25 @@
       "name": "Sparta Rotterdam",
       "logo_url": "https://assets.sorare.com/team/6c5ef6ef-2c36-465b-bb2f-70f0972db3ca/picture/low_res-3bb1c2a1827faf4c216140a5a6752259.png",
       "last_match": {
-        "date": "2026-02-17",
-        "opponent_slug": "nec-nijmegen",
-        "score": "0-0",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "az-alkmaar",
+        "score": "1-3",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 3,
+        "wins": 2,
         "draws": 2,
-        "losses": 0,
-        "points": 11,
-        "goals_for": 9,
+        "losses": 1,
+        "points": 8,
+        "goals_for": 6,
         "goals_against": 5,
-        "goal_difference": 4,
+        "goal_difference": 1,
         "clean_sheet_rate": 0.6
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "az-alkmaar",
+        "date": "2026-02-28",
+        "opponent_slug": "heerenveen-heerenveen-1920",
         "home_away": "away"
       }
     },
@@ -6036,26 +6036,26 @@
       "name": "Royal Charleroi S.C.",
       "logo_url": "https://assets.sorare.com/team/f71ec6e2-a10f-4573-91ac-7834ff0fc22d/picture/low_res-ce2adb91047654d08e4aefa499b57a31.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "gent-gent",
-        "score": "2-3",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "westerlo-westerlo",
+        "score": "1-2",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 3,
+        "wins": 2,
         "draws": 0,
-        "losses": 2,
-        "points": 9,
-        "goals_for": 11,
-        "goals_against": 7,
-        "goal_difference": 4,
-        "clean_sheet_rate": 0.6
+        "losses": 3,
+        "points": 6,
+        "goals_for": 10,
+        "goals_against": 9,
+        "goal_difference": 1,
+        "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "westerlo-westerlo",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "club-brugge-brugge",
+        "home_away": "home"
       }
     },
     {
@@ -6117,26 +6117,26 @@
       "name": "FC St. Pauli",
       "logo_url": "https://assets.sorare.com/team/bdcadfb0-3c49-4d41-ad92-6178d23cd15d/picture/low_res-9323db86ebeac3883b6fa49459cb64e4.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "bayer-leverkusen-leverkusen",
-        "score": "0-4",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "werder-bremen-bremen",
+        "score": "2-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 2,
+        "wins": 2,
+        "draws": 1,
         "losses": 2,
-        "points": 5,
-        "goals_for": 4,
-        "goals_against": 8,
-        "goal_difference": -4,
-        "clean_sheet_rate": 0.2
+        "points": 7,
+        "goals_for": 6,
+        "goals_against": 9,
+        "goal_difference": -3,
+        "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "werder-bremen-bremen",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "hoffenheim-sinsheim",
+        "home_away": "away"
       }
     },
     {
@@ -6144,36 +6144,9 @@
       "name": "Standard de Liège",
       "logo_url": "https://assets.sorare.com/team/1c6512b5-0fac-4a63-b42b-4c565dace350/picture/low_res-5295b3365fcf3c6b3fb6e168ab8f164b.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "union-saint-gilloise-bruxelles-brussels",
-        "score": "1-1",
-        "home_away": "home"
-      },
-      "last5_summary": {
-        "matches": 5,
-        "wins": 1,
-        "draws": 1,
-        "losses": 3,
-        "points": 4,
-        "goals_for": 3,
-        "goals_against": 10,
-        "goal_difference": -7,
-        "clean_sheet_rate": 0.2
-      },
-      "next_fixture": {
         "date": "2026-02-22",
         "opponent_slug": "genk-genk",
-        "home_away": "away"
-      }
-    },
-    {
-      "slug": "strasbourg-strasbourg",
-      "name": "RC Strasbourg Alsace",
-      "logo_url": "https://assets.sorare.com/team/dc9ee554-97e3-4b66-b56f-648a2a063c26/picture/low_res-1c4a105c4165c2e1e6bc6250c910ef2b.png",
-      "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "olympique-marseille-marseille",
-        "score": "2-2",
+        "score": "3-0",
         "home_away": "away"
       },
       "last5_summary": {
@@ -6182,14 +6155,41 @@
         "draws": 1,
         "losses": 2,
         "points": 7,
-        "goals_for": 10,
+        "goals_for": 6,
         "goals_against": 8,
-        "goal_difference": 2,
+        "goal_difference": -2,
+        "clean_sheet_rate": 0.4
+      },
+      "next_fixture": {
+        "date": "2026-02-27",
+        "opponent_slug": "la-louviere-la-louviere",
+        "home_away": "home"
+      }
+    },
+    {
+      "slug": "strasbourg-strasbourg",
+      "name": "RC Strasbourg Alsace",
+      "logo_url": "https://assets.sorare.com/team/dc9ee554-97e3-4b66-b56f-648a2a063c26/picture/low_res-1c4a105c4165c2e1e6bc6250c910ef2b.png",
+      "last_match": {
+        "date": "2026-02-22",
+        "opponent_slug": "olympique-lyonnais-lyon",
+        "score": "3-1",
+        "home_away": "home"
+      },
+      "last5_summary": {
+        "matches": 5,
+        "wins": 2,
+        "draws": 1,
+        "losses": 2,
+        "points": 7,
+        "goals_for": 11,
+        "goals_against": 8,
+        "goal_difference": 3,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "olympique-lyonnais-lyon",
+        "date": "2026-02-27",
+        "opponent_slug": "lens-avion",
         "home_away": "home"
       }
     },
@@ -6198,26 +6198,26 @@
       "name": "SK Puntigamer Sturm Graz",
       "logo_url": "https://assets.sorare.com/team/ebb1fa2b-e745-4399-b3d0-4ae02b563a3b/picture/low_res-72b0f0d220111f18268bb2224eac7702.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "wattens-wattens",
-        "score": "0-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "blau-weiss-linz-linz",
+        "score": "1-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 3,
         "draws": 0,
-        "losses": 3,
-        "points": 6,
+        "losses": 2,
+        "points": 9,
         "goals_for": 3,
-        "goals_against": 7,
-        "goal_difference": -4,
-        "clean_sheet_rate": 0.4
+        "goals_against": 4,
+        "goal_difference": -1,
+        "clean_sheet_rate": 0.6
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "blau-weiss-linz-linz",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "wolfsberger-ac-wolfsberg",
+        "home_away": "away"
       }
     },
     {
@@ -6225,26 +6225,26 @@
       "name": "VfB Stuttgart",
       "logo_url": "https://assets.sorare.com/team/2a59b2bd-3847-4f6d-b5ef-5d89c9347843/picture/low_res-23d13f724b51102ab68e139ad95b0db6.png",
       "last_match": {
-        "date": "2026-02-19",
-        "opponent_slug": "celtic-glasgow",
-        "score": "4-1",
+        "date": "2026-02-22",
+        "opponent_slug": "heidenheim-heidenheim-an-der-brenz",
+        "score": "3-3",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 4,
-        "draws": 0,
+        "wins": 3,
+        "draws": 1,
         "losses": 1,
-        "points": 12,
+        "points": 10,
         "goals_for": 12,
-        "goals_against": 6,
-        "goal_difference": 6,
+        "goals_against": 7,
+        "goal_difference": 5,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "heidenheim-heidenheim-an-der-brenz",
-        "home_away": "away"
+        "date": "2026-02-26",
+        "opponent_slug": "celtic-glasgow",
+        "home_away": "home"
       }
     },
     {
@@ -6252,26 +6252,26 @@
       "name": "Sunderland AFC",
       "logo_url": "https://assets.sorare.com/club/1405417a-df55-4c1e-9c71-a2ae20b122af/picture/low_res-caf46461d83a30cc634f9754b63ca942.png",
       "last_match": {
-        "date": "2026-02-11",
-        "opponent_slug": "liverpool-liverpool",
-        "score": "0-1",
+        "date": "2026-02-22",
+        "opponent_slug": "fulham-london",
+        "score": "1-3",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 1,
         "draws": 0,
-        "losses": 3,
-        "points": 6,
-        "goals_for": 6,
-        "goals_against": 8,
-        "goal_difference": -2,
+        "losses": 4,
+        "points": 3,
+        "goals_for": 5,
+        "goals_against": 10,
+        "goal_difference": -5,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "fulham-london",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "afc-bournemouth-bournemouth-dorset",
+        "home_away": "away"
       }
     },
     {
@@ -6279,26 +6279,26 @@
       "name": "SC Telstar",
       "logo_url": "https://assets.sorare.com/club/60b826cd-2254-4d9a-b519-48109f0d2dd1/picture/low_res-a90257776d5724286818966fec1e520e.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "twente-enschede",
-        "score": "1-1",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "feyenoord-rotterdam",
+        "score": "1-2",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 0,
-        "draws": 3,
-        "losses": 2,
-        "points": 3,
-        "goals_for": 5,
+        "draws": 2,
+        "losses": 3,
+        "points": 2,
+        "goals_for": 4,
         "goals_against": 9,
-        "goal_difference": -4,
+        "goal_difference": -5,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "feyenoord-rotterdam",
-        "home_away": "away"
+        "date": "2026-02-27",
+        "opponent_slug": "nac-breda-breda",
+        "home_away": "home"
       }
     },
     {
@@ -6306,26 +6306,26 @@
       "name": "Tottenham Hotspur FC",
       "logo_url": "https://assets.sorare.com/team/dac5c69f-b8a2-4c39-8f3f-c38e02e8e897/picture/low_res-64c3bdbe0bc1050846c4115eead08ed2.png",
       "last_match": {
-        "date": "2026-02-10",
-        "opponent_slug": "newcastle-united-newcastle-upon-tyne",
-        "score": "1-2",
+        "date": "2026-02-22",
+        "opponent_slug": "arsenal-london",
+        "score": "1-4",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 1,
-        "draws": 2,
-        "losses": 2,
-        "points": 5,
-        "goals_for": 7,
-        "goals_against": 8,
-        "goal_difference": -1,
+        "draws": 1,
+        "losses": 3,
+        "points": 4,
+        "goals_for": 6,
+        "goals_against": 10,
+        "goal_difference": -4,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "arsenal-london",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "fulham-london",
+        "home_away": "away"
       }
     },
     {
@@ -6360,10 +6360,10 @@
       "name": "Trabzonspor Kulübü",
       "logo_url": "https://assets.sorare.com/team/00dea78e-f653-4287-8257-0f9671cbd08a/picture/low_res-1fd54b8b843332fd1220098d35873c15.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "fenerbahce-istanbul",
-        "score": "2-3",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "gazisehir-gaziantep-gaziantep",
+        "score": "2-1",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
@@ -6377,9 +6377,9 @@
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "gazisehir-gaziantep-gaziantep",
-        "home_away": "away"
+        "date": "2026-02-27",
+        "opponent_slug": "fatih-karagumruk-istanbul",
+        "home_away": "home"
       }
     },
     {
@@ -6389,18 +6389,18 @@
       "last_match": {
         "date": "2026-02-22",
         "opponent_slug": "groningen-groningen",
-        "score": "1-1",
+        "score": "2-1",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 4,
+        "wins": 2,
+        "draws": 3,
         "losses": 0,
-        "points": 7,
-        "goals_for": 9,
+        "points": 9,
+        "goals_for": 10,
         "goals_against": 4,
-        "goal_difference": 5,
+        "goal_difference": 6,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
@@ -6468,25 +6468,25 @@
       "name": "FC Utrecht",
       "logo_url": "https://assets.sorare.com/team/649fa616-8dcd-4029-a4df-01774a8a2868/picture/low_res-10efe7520c9430a463fd75d8d8cc17e7.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "groningen-groningen",
-        "score": "2-1",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "pec-zwolle-zwolle",
+        "score": "1-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 2,
-        "draws": 1,
-        "losses": 2,
-        "points": 7,
-        "goals_for": 8,
-        "goals_against": 8,
-        "goal_difference": 0,
+        "draws": 2,
+        "losses": 1,
+        "points": 8,
+        "goals_for": 7,
+        "goals_against": 5,
+        "goal_difference": 2,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "pec-zwolle-zwolle",
+        "date": "2026-03-01",
+        "opponent_slug": "az-alkmaar",
         "home_away": "home"
       }
     },
@@ -6495,26 +6495,26 @@
       "name": "Valencia CF",
       "logo_url": "https://assets.sorare.com/team/62a69d47-aa21-4c5e-bd84-92c96232cbee/picture/low_res-53dd4121125984686f6f938762b4c7e1.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "levante-valencia",
-        "score": "2-0",
+        "date": "2026-02-22",
+        "opponent_slug": "villarreal-villarreal",
+        "score": "1-2",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 3,
+        "wins": 2,
         "draws": 0,
-        "losses": 2,
-        "points": 9,
+        "losses": 3,
+        "points": 6,
         "goals_for": 7,
-        "goals_against": 6,
-        "goal_difference": 1,
-        "clean_sheet_rate": 0.4
+        "goals_against": 8,
+        "goal_difference": -1,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "villarreal-villarreal",
-        "home_away": "away"
+        "date": "2026-03-01",
+        "opponent_slug": "osasuna-pamplona-irunea",
+        "home_away": "home"
       }
     },
     {
@@ -6522,26 +6522,26 @@
       "name": "Villarreal CF",
       "logo_url": "https://assets.sorare.com/team/7ff013c4-1f33-44ba-b489-92e350c71fb9/picture/low_res-c32e56989506582075ed44b8c3f20361.png",
       "last_match": {
-        "date": "2026-02-18",
-        "opponent_slug": "levante-valencia",
-        "score": "1-0",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "valencia-valencia",
+        "score": "2-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 3,
         "draws": 1,
-        "losses": 2,
-        "points": 7,
-        "goals_for": 8,
-        "goals_against": 8,
-        "goal_difference": 0,
+        "losses": 1,
+        "points": 10,
+        "goals_for": 10,
+        "goals_against": 6,
+        "goal_difference": 4,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "valencia-valencia",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "barcelona-barcelona",
+        "home_away": "away"
       }
     },
     {
@@ -6603,26 +6603,26 @@
       "name": "WSG Tirol",
       "logo_url": "https://assets.sorare.com/team/494251c1-b3da-4d21-b653-19b6d94d0c99/picture/low_res-7824b69f9113f2439079b628fbc47f25.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "sturm-graz-graz",
-        "score": "1-0",
+        "date": "2026-02-22",
+        "opponent_slug": "ried-ried-im-innkreis",
+        "score": "1-1",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
-        "draws": 0,
+        "wins": 1,
+        "draws": 1,
         "losses": 3,
-        "points": 6,
-        "goals_for": 5,
+        "points": 4,
+        "goals_for": 3,
         "goals_against": 7,
-        "goal_difference": -2,
+        "goal_difference": -4,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "ried-ried-im-innkreis",
-        "home_away": "home"
+        "date": "2026-03-01",
+        "opponent_slug": "blau-weiss-linz-linz",
+        "home_away": "away"
       }
     },
     {
@@ -6630,10 +6630,10 @@
       "name": "SV Werder Bremen",
       "logo_url": "https://assets.sorare.com/team/ac73eee4-e140-4c96-baf6-e3dae0e41e57/picture/low_res-d455ac94061168d04ed9b95b881a3dec.png",
       "last_match": {
-        "date": "2026-02-14",
-        "opponent_slug": "bayern-munchen-munchen",
-        "score": "0-3",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "st-pauli-hamburg",
+        "score": "1-2",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
@@ -6641,15 +6641,15 @@
         "draws": 1,
         "losses": 4,
         "points": 1,
-        "goals_for": 1,
-        "goals_against": 8,
+        "goals_for": 2,
+        "goals_against": 9,
         "goal_difference": -7,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "st-pauli-hamburg",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "heidenheim-heidenheim-an-der-brenz",
+        "home_away": "home"
       }
     },
     {
@@ -6684,25 +6684,25 @@
       "name": "KVC Westerlo",
       "logo_url": "https://assets.sorare.com/team/d1136e14-6b21-44f6-93e6-92c6d2d774e7/picture/low_res-3781227ff0e16b2eba5141b65ae3a1a9.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "antwerp-deurne",
-        "score": "2-0",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "sporting-charleroi-charleroi",
+        "score": "2-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 3,
         "draws": 1,
-        "losses": 2,
-        "points": 7,
-        "goals_for": 4,
-        "goals_against": 7,
-        "goal_difference": -3,
+        "losses": 1,
+        "points": 10,
+        "goals_for": 6,
+        "goals_against": 6,
+        "goal_difference": 0,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "sporting-charleroi-charleroi",
+        "date": "2026-03-01",
+        "opponent_slug": "union-saint-gilloise-bruxelles-brussels",
         "home_away": "home"
       }
     },
@@ -6765,10 +6765,10 @@
       "name": "Wolverhampton Wanderers FC",
       "logo_url": "https://assets.sorare.com/team/23538be5-dbe4-4177-a10a-9480727fd5f2/picture/low_res-c64b2ecfe1bf8cea8c04f31a8062c6fc.png",
       "last_match": {
-        "date": "2026-02-18",
-        "opponent_slug": "arsenal-london",
-        "score": "2-2",
-        "home_away": "home"
+        "date": "2026-02-22",
+        "opponent_slug": "crystal-palace-london",
+        "score": "0-1",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
@@ -6777,14 +6777,14 @@
         "losses": 3,
         "points": 2,
         "goals_for": 3,
-        "goals_against": 9,
-        "goal_difference": -6,
+        "goals_against": 8,
+        "goal_difference": -5,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "crystal-palace-london",
-        "home_away": "away"
+        "date": "2026-02-27",
+        "opponent_slug": "aston-villa-birmingham",
+        "home_away": "home"
       }
     },
     {
@@ -6792,26 +6792,26 @@
       "name": "SV Zulte-Waregem",
       "logo_url": "https://assets.sorare.com/club/e23ebdb7-61fb-47de-9d1a-68a1bff1fa59/picture/low_res-cac4d67ed932ba28402a71fb10ef1d24.png",
       "last_match": {
-        "date": "2026-02-15",
-        "opponent_slug": "sint-truiden-sint-truiden-st-trond",
-        "score": "2-3",
-        "home_away": "away"
+        "date": "2026-02-22",
+        "opponent_slug": "anderlecht-bruxelles-brussel",
+        "score": "2-4",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 1,
         "draws": 0,
-        "losses": 3,
-        "points": 6,
+        "losses": 4,
+        "points": 3,
         "goals_for": 8,
-        "goals_against": 9,
-        "goal_difference": -1,
+        "goals_against": 12,
+        "goal_difference": -4,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-22",
-        "opponent_slug": "anderlecht-bruxelles-brussel",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "mechelen-mechelen-malines",
+        "home_away": "away"
       }
     }
   ]
