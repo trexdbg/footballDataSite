@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-24T03:37:44.593176+00:00",
+    "generated_at": "2026-02-25T03:37:55.982876+00:00",
     "source": "sorare_api_graphql",
     "teams_count": 145,
     "competitions_filter": [
@@ -1641,7 +1641,7 @@
       "season_start_year": 2025,
       "season_start_date": "2025-07-01T00:00:00Z",
       "season_end_date": "2026-06-30T23:59:59Z",
-      "matches_counted": 164,
+      "matches_counted": 165,
       "table": [
         {
           "club_slug": "hearts-edinburgh",
@@ -1737,30 +1737,30 @@
           "club_slug": "dundee-united-dundee",
           "club_name": "Dundee United FC",
           "logo_url": "https://assets.sorare.com/team/e31aac32-e254-4530-9595-4dc71f10fa15/picture/low_res-e38fd52267e62552cd0f14c38b7ccdd2.png",
-          "played": 26,
-          "points": 29,
+          "played": 27,
+          "points": 30,
           "wins": 6,
-          "draws": 11,
+          "draws": 12,
           "losses": 9,
           "goals_for": 34,
           "goals_against": 43,
           "goal_difference": -9,
-          "clean_sheet_rate": 0.115,
+          "clean_sheet_rate": 0.148,
           "rank": 7
         },
         {
           "club_slug": "aberdeen-aberdeen",
           "club_name": "Aberdeen FC",
           "logo_url": "https://assets.sorare.com/team/cb6c95ca-3a53-4b52-8184-403346e3f101/picture/low_res-f4b89885a5ef41fac04a564fd8e66fe4.png",
-          "played": 26,
-          "points": 28,
+          "played": 27,
+          "points": 29,
           "wins": 8,
-          "draws": 4,
+          "draws": 5,
           "losses": 14,
           "goals_for": 28,
           "goals_against": 38,
           "goal_difference": -10,
-          "clean_sheet_rate": 0.231,
+          "clean_sheet_rate": 0.259,
           "rank": 8
         },
         {
@@ -2904,25 +2904,25 @@
       "name": "Aberdeen FC",
       "logo_url": "https://assets.sorare.com/team/cb6c95ca-3a53-4b52-8184-403346e3f101/picture/low_res-f4b89885a5ef41fac04a564fd8e66fe4.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "dundee-dundee",
-        "score": "2-3",
-        "home_away": "home"
+        "date": "2026-02-24",
+        "opponent_slug": "dundee-united-dundee",
+        "score": "0-0",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 1,
-        "draws": 0,
-        "losses": 4,
-        "points": 3,
+        "draws": 1,
+        "losses": 3,
+        "points": 4,
         "goals_for": 8,
-        "goals_against": 12,
-        "goal_difference": -4,
-        "clean_sheet_rate": 0.0
+        "goals_against": 10,
+        "goal_difference": -2,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-24",
-        "opponent_slug": "dundee-united-dundee",
+        "date": "2026-02-28",
+        "opponent_slug": "hearts-edinburgh",
         "home_away": "away"
       }
     },
@@ -3147,26 +3147,26 @@
       "name": "Atlético de Madrid",
       "logo_url": "https://assets.sorare.com/team/f92833c9-4e18-413e-8a3c-91c06f77abb3/picture/low_res-22f86a30575e4ed332d0f7c6dbbb979d.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "espanyol-barcelona",
-        "score": "4-2",
+        "date": "2026-02-24",
+        "opponent_slug": "club-brugge-brugge",
+        "score": "4-1",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 1,
-        "draws": 2,
+        "wins": 2,
+        "draws": 1,
         "losses": 2,
-        "points": 5,
-        "goals_for": 7,
-        "goals_against": 9,
-        "goal_difference": -2,
-        "clean_sheet_rate": 0.2
+        "points": 7,
+        "goals_for": 11,
+        "goals_against": 10,
+        "goal_difference": 1,
+        "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-24",
-        "opponent_slug": "club-brugge-brugge",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "real-oviedo-oviedo",
+        "home_away": "away"
       }
     },
     {
@@ -3309,25 +3309,25 @@
       "name": "Bayer 04 Leverkusen",
       "logo_url": "https://assets.sorare.com/team/14b2328d-2cd6-4335-837c-76ccbb349bbd/picture/low_res-7bdeb53302209895a2af5fd568373188.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "union-berlin-berlin",
-        "score": "0-1",
-        "home_away": "away"
+        "date": "2026-02-24",
+        "opponent_slug": "olympiakos-piraeus-pireas-piraeus",
+        "score": "0-0",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 3,
-        "draws": 1,
+        "wins": 2,
+        "draws": 2,
         "losses": 1,
-        "points": 10,
-        "goals_for": 10,
-        "goals_against": 3,
-        "goal_difference": 7,
-        "clean_sheet_rate": 0.4
+        "points": 8,
+        "goals_for": 7,
+        "goals_against": 2,
+        "goal_difference": 5,
+        "clean_sheet_rate": 0.6
       },
       "next_fixture": {
-        "date": "2026-02-24",
-        "opponent_slug": "olympiakos-piraeus-pireas-piraeus",
+        "date": "2026-02-28",
+        "opponent_slug": "mainz-05-mainz",
         "home_away": "home"
       }
     },
@@ -3741,10 +3741,10 @@
       "name": "Club Brugge KV",
       "logo_url": "https://assets.sorare.com/team/c3e3c388-31e6-4f77-be21-7fea1bb403ff/picture/low_res-61014ff2aa34572d77c03afd0aa3d7e1.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "oh-leuven-heverlee",
-        "score": "2-1",
-        "home_away": "home"
+        "date": "2026-02-24",
+        "opponent_slug": "atletico-madrid-madrid",
+        "score": "1-4",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
@@ -3752,14 +3752,14 @@
         "draws": 1,
         "losses": 1,
         "points": 10,
-        "goals_for": 10,
-        "goals_against": 6,
-        "goal_difference": 4,
+        "goals_for": 11,
+        "goals_against": 9,
+        "goal_difference": 2,
         "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-24",
-        "opponent_slug": "atletico-madrid-madrid",
+        "date": "2026-03-01",
+        "opponent_slug": "sporting-charleroi-charleroi",
         "home_away": "away"
       }
     },
@@ -3876,26 +3876,26 @@
       "name": "Dundee United FC",
       "logo_url": "https://assets.sorare.com/team/e31aac32-e254-4530-9595-4dc71f10fa15/picture/low_res-e38fd52267e62552cd0f14c38b7ccdd2.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "kilmarnock-kilmarnock",
-        "score": "1-1",
+        "date": "2026-02-24",
+        "opponent_slug": "aberdeen-aberdeen",
+        "score": "0-0",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 1,
-        "draws": 1,
-        "losses": 3,
-        "points": 4,
+        "draws": 2,
+        "losses": 2,
+        "points": 5,
         "goals_for": 6,
-        "goals_against": 13,
-        "goal_difference": -7,
-        "clean_sheet_rate": 0.0
+        "goals_against": 9,
+        "goal_difference": -3,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-24",
-        "opponent_slug": "aberdeen-aberdeen",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "motherwell-motherwell",
+        "home_away": "away"
       }
     },
     {
@@ -5253,25 +5253,25 @@
       "name": "Newcastle United FC",
       "logo_url": "https://assets.sorare.com/team/f2a4b1c6-002a-41f1-99e6-db0001e51472/picture/low_res-d66ea295b7a161c21973bf8175f33486.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "manchester-city-manchester",
-        "score": "1-2",
-        "home_away": "away"
+        "date": "2026-02-24",
+        "opponent_slug": "qarabag-baki-baku",
+        "score": "3-2",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 2,
+        "wins": 3,
         "draws": 0,
-        "losses": 3,
-        "points": 6,
-        "goals_for": 12,
-        "goals_against": 11,
-        "goal_difference": 1,
+        "losses": 2,
+        "points": 9,
+        "goals_for": 14,
+        "goals_against": 9,
+        "goal_difference": 5,
         "clean_sheet_rate": 0.0
       },
       "next_fixture": {
-        "date": "2026-02-24",
-        "opponent_slug": "qarabag-baki-baku",
+        "date": "2026-02-28",
+        "opponent_slug": "everton-liverpool",
         "home_away": "home"
       }
     },
