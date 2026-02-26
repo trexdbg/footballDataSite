@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-02-25T03:37:55.982876+00:00",
+    "generated_at": "2026-02-26T03:34:36.537951+00:00",
     "source": "sorare_api_graphql",
     "teams_count": 145,
     "competitions_filter": [
@@ -3363,25 +3363,25 @@
       "name": "SL Benfica",
       "logo_url": "https://assets.sorare.com/team/b3240d19-8ee6-46f8-b325-f1373fdfa46a/picture/low_res-8128a60bba8b42725b2400653ae2c8a1.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "avs-vila-das-aves",
-        "score": "3-0",
-        "home_away": "home"
+        "date": "2026-02-25",
+        "opponent_slug": "real-madrid-madrid",
+        "score": "1-2",
+        "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
         "wins": 3,
-        "draws": 1,
-        "losses": 1,
-        "points": 10,
-        "goals_for": 7,
-        "goals_against": 3,
-        "goal_difference": 4,
-        "clean_sheet_rate": 0.4
+        "draws": 0,
+        "losses": 2,
+        "points": 9,
+        "goals_for": 8,
+        "goals_against": 5,
+        "goal_difference": 3,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-25",
-        "opponent_slug": "real-madrid-madrid",
+        "date": "2026-03-02",
+        "opponent_slug": "gil-vicente-barcelos",
         "home_away": "away"
       }
     },
@@ -3444,26 +3444,26 @@
       "name": "Borussia Dortmund",
       "logo_url": "https://assets.sorare.com/team/3fb4af92-384e-4432-9e7a-5a16fd09556e/picture/low_res-086b5a42d3cb1b829d391997572918e3.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "rb-leipzig-leipzig",
-        "score": "2-2",
+        "date": "2026-02-25",
+        "opponent_slug": "atalanta-ciserano",
+        "score": "1-4",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 4,
+        "wins": 3,
         "draws": 1,
-        "losses": 0,
-        "points": 13,
-        "goals_for": 13,
-        "goals_against": 5,
-        "goal_difference": 8,
+        "losses": 1,
+        "points": 10,
+        "goals_for": 11,
+        "goals_against": 7,
+        "goal_difference": 4,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-25",
-        "opponent_slug": "atalanta-ciserano",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "bayern-munchen-munchen",
+        "home_away": "home"
       }
     },
     {
@@ -4200,26 +4200,26 @@
       "name": "Galatasaray Spor Kulübü",
       "logo_url": "https://assets.sorare.com/team/999e0bd7-c6cc-4041-a815-cd7dbcc8f281/picture/low_res-efde9c248bb78cb6122282d6cacf4652.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "konyaspor-konya",
-        "score": "0-2",
+        "date": "2026-02-25",
+        "opponent_slug": "juventus-torino",
+        "score": "2-3",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 4,
+        "wins": 3,
         "draws": 0,
-        "losses": 1,
-        "points": 12,
-        "goals_for": 17,
-        "goals_against": 5,
-        "goal_difference": 12,
-        "clean_sheet_rate": 0.4
+        "losses": 2,
+        "points": 9,
+        "goals_for": 15,
+        "goals_against": 8,
+        "goal_difference": 7,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-25",
-        "opponent_slug": "juventus-torino",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "alanyaspor-alanya",
+        "home_away": "home"
       }
     },
     {
@@ -5118,26 +5118,26 @@
       "name": "AS Monaco",
       "logo_url": "https://assets.sorare.com/team/87381993-7ff2-4dc0-859a-3ef8ca50e4a2/picture/low_res-4ae4badbb3bf0a56becb28b9d689534b.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "lens-avion",
-        "score": "3-2",
+        "date": "2026-02-25",
+        "opponent_slug": "psg-paris",
+        "score": "2-2",
         "home_away": "away"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 3,
-        "draws": 1,
+        "wins": 2,
+        "draws": 2,
         "losses": 1,
-        "points": 10,
-        "goals_for": 12,
-        "goals_against": 6,
-        "goal_difference": 6,
-        "clean_sheet_rate": 0.4
+        "points": 8,
+        "goals_for": 10,
+        "goals_against": 8,
+        "goal_difference": 2,
+        "clean_sheet_rate": 0.2
       },
       "next_fixture": {
-        "date": "2026-02-25",
-        "opponent_slug": "psg-paris",
-        "home_away": "away"
+        "date": "2026-02-28",
+        "opponent_slug": "angers-sco-angers",
+        "home_away": "home"
       }
     },
     {
@@ -5550,26 +5550,26 @@
       "name": "Paris Saint-Germain",
       "logo_url": "https://assets.sorare.com/team/8d0bc975-3a87-4623-9086-e57545f8c6df/picture/low_res-eab46b13dac126dac824a481c1e2be1a.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "metz-metz",
-        "score": "3-0",
+        "date": "2026-02-25",
+        "opponent_slug": "monaco-monaco",
+        "score": "2-2",
         "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
-        "wins": 4,
-        "draws": 0,
+        "wins": 3,
+        "draws": 1,
         "losses": 1,
-        "points": 12,
+        "points": 10,
         "goals_for": 14,
-        "goals_against": 6,
-        "goal_difference": 8,
+        "goals_against": 7,
+        "goal_difference": 7,
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-25",
-        "opponent_slug": "monaco-monaco",
-        "home_away": "home"
+        "date": "2026-02-28",
+        "opponent_slug": "le-havre-harfleur",
+        "home_away": "away"
       }
     },
     {
@@ -5739,10 +5739,10 @@
       "name": "Real Madrid",
       "logo_url": "https://assets.sorare.com/team/0b900227-28e6-48ca-a39b-8bab1c5b57ef/picture/low_res-3dc8da72fc15e4bdc16d1dea1a0645f0.png",
       "last_match": {
-        "date": "2026-02-21",
-        "opponent_slug": "osasuna-pamplona-irunea",
-        "score": "1-2",
-        "home_away": "away"
+        "date": "2026-02-25",
+        "opponent_slug": "benfica-lisboa",
+        "score": "2-1",
+        "home_away": "home"
       },
       "last5_summary": {
         "matches": 5,
@@ -5756,8 +5756,8 @@
         "clean_sheet_rate": 0.4
       },
       "next_fixture": {
-        "date": "2026-02-25",
-        "opponent_slug": "benfica-lisboa",
+        "date": "2026-03-02",
+        "opponent_slug": "getafe-getafe-madrid",
         "home_away": "home"
       }
     },
